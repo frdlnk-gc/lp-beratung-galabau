@@ -1550,7 +1550,8 @@
         bereich: document.getElementById('bereich').value,
         zeitpunkt: document.getElementById('zeitpunkt').value,
         quelle: document.getElementById('quelle').value,
-        lead_type: 'beratungstermin',
+        lead_type: 'lead',                       // f\u00fcr Tracking-Dashboard-Kompatibilit\u00e4t
+        lead_subtype: 'beratungstermin',         // konkrete Lead-Art (Sales-Routing)
         retargeting_tag: 'retargeting_whatsapp', // f\u00fcr Make: in Retargeting-Liste schreiben, KEINE Auto-WA an Lead
         source: 'lp-beratungstermin-galabau',
         branche: 'galabau',
