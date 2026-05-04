@@ -1099,6 +1099,41 @@
       border-radius: 0 12px 12px 0;
       padding-left: 14px;
     }
+
+    /* =====================================================
+       STICKY MOBILE-CTA (Recovery für User, die am Quiz vorbeigescrollt sind)
+       ===================================================== */
+    .sticky-cta-mobile {
+      position: fixed;
+      bottom: 14px;
+      left: 14px;
+      right: 14px;
+      z-index: 1001;
+      background: var(--gradient-cta);
+      color: var(--sand-ash);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700; font-size: 0.94rem;
+      padding: 16px 22px; border-radius: 50px;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(0, 210, 97, 0.45), 0 2px 10px rgba(0,0,0,0.2);
+      transform: translateY(140%);
+      opacity: 0;
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+      pointer-events: none;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 54px;
+    }
+    .sticky-cta-mobile.is-visible {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .sticky-cta-mobile:active { transform: translateY(2px) scale(0.98); }
+    /* Nur Mobile (<768px). Desktop hat sowieso die Hero-CTA + Nav-CTA permanent sichtbar. */
+    @media (min-width: 769px) {
+      .sticky-cta-mobile { display: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -1109,7 +1144,7 @@
       <a href="https://www.green-careers.de" target="_blank" rel="noopener" class="nav-logo" aria-label="GreenCareers">
         <img src="logo-white-sm.png" alt="GreenCareers">
       </a>
-      <a href="#formular" class="nav-cta">Termin sichern &rarr;</a>
+      <a href="#formular" class="nav-cta">Quiz starten &rarr;</a>
     </div>
   </nav>
 
@@ -1135,7 +1170,7 @@
           </ul>
         </div>
 
-        <a href="#formular" class="btn-primary">Beratungsgespr&auml;ch buchen &rarr;</a>
+        <a href="#formular" class="btn-primary">Quiz starten &mdash; Antwort in 60&nbsp;Sek. &rarr;</a>
         <div class="hero-trust-chips">
           <span class="hero-trust-chip">&#128274; DSGVO-konform</span>
           <span class="hero-trust-chip">
@@ -1190,6 +1225,154 @@
       <img src="cust-logos/meier.png" alt="Meier">
     </div>
   </div>
+
+  <!-- FORM -->
+  <section class="section-form" id="formular">
+    <div class="container">
+      <div class="form-wrapper reveal-scale">
+
+        <!-- Quiz-Header -->
+        <div class="form-header" id="quiz-header">
+          <div class="section-label" style="justify-content:center;"><span class="section-label-line"></span> Kostenlose Recruiting-Analyse</div>
+          <h2 id="quiz-h2">In &Oslash;&nbsp;45&nbsp;Tagen passende Fachkr&auml;fte &mdash; individuell f&uuml;r Ihren Betrieb.</h2>
+          <p id="quiz-h2-sub">4 Fragen. Keine Verpflichtung. Antwort innerhalb 24&nbsp;Stunden.</p>
+        </div>
+
+        <!-- Progress -->
+        <div class="quiz-progress" id="quiz-progress">
+          <div class="quiz-progress-label" id="quiz-progress-label">Schritt 1 von 8</div>
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quiz-progress-fill" style="width:12.5%"></div></div>
+        </div>
+
+        <form id="lead-form" novalidate autocomplete="on" onsubmit="return false;">
+
+          <!-- ===== STEP 1 / 8 — Rolle ===== -->
+          <div class="quiz-slide is-active" data-slide="1">
+            <h3 class="quiz-question">Welche Rolle haben Sie in Ihrem Betrieb?</h3>
+            <p class="quiz-subtext">So passen wir die Analyse genau auf Ihre Perspektive an.</p>
+            <div class="quiz-options">
+              <button type="button" class="quiz-option" data-field="rolle" data-value="gf">Gesch&auml;ftsf&uuml;hrung / Inhaber</button>
+              <button type="button" class="quiz-option" data-field="rolle" data-value="bauleitung">Bauleitung / Polier</button>
+              <button type="button" class="quiz-option" data-field="rolle" data-value="buero_hr">B&uuml;ro / HR</button>
+            </div>
+          </div>
+
+          <!-- ===== STEP 2 / 8 — Mitarbeiterzahl ===== -->
+          <div class="quiz-slide" data-slide="2">
+            <h3 class="quiz-question">Wie viele Mitarbeiter besch&auml;ftigt Ihr Betrieb?</h3>
+            <p class="quiz-subtext">Damit wir die richtige Gr&ouml;&szlig;enordnung f&uuml;r Ihre Recruiting-Strategie treffen.</p>
+            <div class="quiz-options">
+              <button type="button" class="quiz-option" data-field="mitarbeiter_range" data-value="0-3">0&ndash;3 Mitarbeiter</button>
+              <button type="button" class="quiz-option" data-field="mitarbeiter_range" data-value="4-10">4&ndash;10 Mitarbeiter</button>
+              <button type="button" class="quiz-option" data-field="mitarbeiter_range" data-value="11-30">11&ndash;30 Mitarbeiter</button>
+              <button type="button" class="quiz-option" data-field="mitarbeiter_range" data-value="31-200">31&ndash;200 Mitarbeiter</button>
+              <button type="button" class="quiz-option" data-field="mitarbeiter_range" data-value="200+">&Uuml;ber 200 Mitarbeiter</button>
+            </div>
+            <button type="button" class="quiz-back" data-back="1">&larr; Zur&uuml;ck</button>
+          </div>
+
+          <!-- ===== STEP 3 / 8 — Anzahl Fachkräfte ===== -->
+          <div class="quiz-slide" data-slide="3">
+            <h3 class="quiz-question">Wie viele Fachkr&auml;fte m&ouml;chten Sie einstellen?</h3>
+            <p class="quiz-subtext">Eine Schl&uuml;sselposition verlangt anderes Vorgehen als ein gr&ouml;&szlig;eres Team.</p>
+            <div class="quiz-options">
+              <button type="button" class="quiz-option" data-field="anzahl_fachkraefte" data-value="1">1 Schl&uuml;sselposition</button>
+              <button type="button" class="quiz-option" data-field="anzahl_fachkraefte" data-value="2-4">2&ndash;4 Fachkr&auml;fte</button>
+              <button type="button" class="quiz-option" data-field="anzahl_fachkraefte" data-value="5-20">5&ndash;20 Fachkr&auml;fte</button>
+              <button type="button" class="quiz-option" data-field="anzahl_fachkraefte" data-value="20+">Mehr als 20</button>
+            </div>
+            <button type="button" class="quiz-back" data-back="2">&larr; Zur&uuml;ck</button>
+          </div>
+
+          <!-- ===== STEP 4 / 8 — Dringlichkeit ===== -->
+          <div class="quiz-slide" data-slide="4">
+            <h3 class="quiz-question">Wann sollen die neuen Fachkr&auml;fte starten?</h3>
+            <p class="quiz-subtext">Damit wir Ihnen einen realistischen Zeitplan liefern.</p>
+            <div class="quiz-options">
+              <button type="button" class="quiz-option" data-field="dringlichkeit" data-value="asap">
+                <span>So schnell wie m&ouml;glich</span>
+                <span class="quiz-option-meta">es brennt &middot; Team &uuml;berlastet</span>
+              </button>
+              <button type="button" class="quiz-option" data-field="dringlichkeit" data-value="1-2-monate">Innerhalb 1&ndash;2 Monaten</button>
+              <button type="button" class="quiz-option" data-field="dringlichkeit" data-value="nicht-dringend">Aktuell nicht dringend</button>
+            </div>
+            <button type="button" class="quiz-back" data-back="3">&larr; Zur&uuml;ck</button>
+          </div>
+
+          <!-- ===== STEP 5 / 8 — E-Mail-Gate ===== -->
+          <div class="quiz-slide" data-slide="5">
+            <h3 class="quiz-question" id="quiz-step5-headline">Sehr gut. Wir erstellen jetzt Ihre Recruiting-Analyse.</h3>
+            <p class="quiz-subtext" id="quiz-step5-sub">Tragen Sie kurz Ihre gesch&auml;ftliche E-Mail-Adresse ein &mdash; wir melden uns innerhalb 24&ndash;48&nbsp;Stunden mit Ihrem individuellen Vorgehen.</p>
+            <div class="quiz-input-group">
+              <div class="quiz-input-wrap">
+                <svg class="quiz-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <input type="email" class="quiz-input" id="email" name="email" placeholder="ihre@firma.de" autocomplete="email" autocapitalize="none" spellcheck="false" inputmode="email">
+              </div>
+            </div>
+            <button type="button" class="quiz-cta" data-next-from="5">Recruiting-Analyse anfordern &rarr;</button>
+            <div class="quiz-error-msg" id="quiz-step5-error">Bitte tragen Sie eine g&uuml;ltige E-Mail-Adresse ein.</div>
+            <button type="button" class="quiz-back" data-back="4" style="display:block;">&larr; Zur&uuml;ck</button>
+          </div>
+
+          <!-- ===== STEP 6 / 8 — Name + (progressive) Firma + Telefon ===== -->
+          <div class="quiz-slide" data-slide="6">
+            <h3 class="quiz-question">F&uuml;r welchen Betrieb erstellen wir die Analyse?</h3>
+            <p class="quiz-subtext">Letzter Schritt &mdash; danach melden wir uns innerhalb 24&ndash;48&nbsp;Stunden pers&ouml;nlich.</p>
+
+            <!-- Sub-Step 6a: Name -->
+            <div class="quiz-input-group" data-substep="name">
+              <div class="quiz-input-wrap">
+                <svg class="quiz-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <input type="text" class="quiz-input" id="fullname" placeholder="Vor- und Nachname" autocomplete="name" autocapitalize="words" spellcheck="false">
+              </div>
+            </div>
+
+            <!-- Sub-Step 6b: Unternehmen (initial hidden) -->
+            <div class="quiz-input-group" data-substep="firma" style="display:none;">
+              <div class="quiz-input-wrap">
+                <svg class="quiz-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg>
+                <input type="text" class="quiz-input" id="unternehmen" name="unternehmen" placeholder="Name Ihres Betriebs" autocomplete="organization" autocapitalize="words" spellcheck="false">
+              </div>
+            </div>
+
+            <!-- Sub-Step 6c: Telefon (initial hidden) -->
+            <div class="quiz-input-group" data-substep="phone" style="display:none;">
+              <div class="quiz-phone-wrap">
+                <span class="quiz-phone-flag">🇩🇪 +49</span>
+                <input type="tel" class="quiz-input" id="phone" name="phone" placeholder="170 1234567" autocomplete="tel" inputmode="tel">
+              </div>
+            </div>
+
+            <!-- DSGVO + Submit (immer sichtbar in Step 6) -->
+            <div class="quiz-privacy">
+              <input type="checkbox" id="privacy" name="privacy">
+              <label for="privacy">Ich stimme der <a href="https://www.green-careers.de/datenschutz" target="_blank" rel="noopener">Datenschutzerkl&auml;rung</a> zu und bin einverstanden, von GreenCareers kontaktiert zu werden. Die Einwilligung kann jederzeit widerrufen werden.</label>
+            </div>
+
+            <button type="button" class="quiz-cta" id="quiz-final-submit" disabled>Analyse anfordern &rarr;</button>
+            <div class="quiz-error-msg" id="quiz-step6-error">Bitte f&uuml;llen Sie alle Felder aus und stimmen der Datenschutzerkl&auml;rung zu.</div>
+
+            <div class="quiz-trust-row">
+              <span><span class="quiz-trust-dot"></span> Sichere SSL-Verschl&uuml;sselung</span>
+              <span><span class="quiz-trust-dot"></span> DSGVO-konform</span>
+              <span><span class="quiz-trust-dot"></span> Kein Spam, kein Newsletter</span>
+            </div>
+            <button type="button" class="quiz-back" data-back="5">&larr; Zur&uuml;ck</button>
+          </div>
+
+        </form>
+
+        <!-- Success-State (wird nach Submit gezeigt, kurz vor Redirect) -->
+        <div class="form-success" id="form-success">
+          <div class="form-success-icon">&#9989;</div>
+          <h3>Vielen Dank &ndash; Ihre Anfrage ist da!</h3>
+          <p>Wir melden uns innerhalb von 24&ndash;48&nbsp;Stunden pers&ouml;nlich bei Ihnen mit Ihrer individuellen Recruiting-Analyse.</p>
+          <p style="margin-top:14px;font-size:0.86rem;color:var(--earth);">Sie erhalten in den n&auml;chsten Minuten au&szlig;erdem eine Best&auml;tigung per E-Mail. Pr&uuml;fen Sie ggf. auch Ihren Spam-Ordner.</p>
+          <p style="margin-top:18px;font-size:0.82rem;color:var(--lime-green);font-weight:700;">&#127873; Als Geschenk: der Recruiting-Report 2026 als PDF-Download &ndash; Sie werden gleich weitergeleitet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- PROBLEM -->
   <section class="section-problem">
@@ -1425,154 +1608,6 @@
     </div>
   </section>
 
-  <!-- FORM -->
-  <section class="section-form" id="formular">
-    <div class="container">
-      <div class="form-wrapper reveal-scale">
-
-        <!-- Quiz-Header -->
-        <div class="form-header" id="quiz-header">
-          <div class="section-label" style="justify-content:center;"><span class="section-label-line"></span> Kostenlose Recruiting-Analyse</div>
-          <h2 id="quiz-h2">In &Oslash;&nbsp;45&nbsp;Tagen passende Fachkr&auml;fte &mdash; individuell f&uuml;r Ihren Betrieb.</h2>
-          <p id="quiz-h2-sub">4 kurze Fragen, dann erstellen wir Ihre Recruiting-Analyse. Antwort innerhalb 24&ndash;48&nbsp;Stunden.</p>
-        </div>
-
-        <!-- Progress -->
-        <div class="quiz-progress" id="quiz-progress">
-          <div class="quiz-progress-label" id="quiz-progress-label">Schritt 1 von 8</div>
-          <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quiz-progress-fill" style="width:12.5%"></div></div>
-        </div>
-
-        <form id="lead-form" novalidate autocomplete="on" onsubmit="return false;">
-
-          <!-- ===== STEP 1 / 8 — Rolle ===== -->
-          <div class="quiz-slide is-active" data-slide="1">
-            <h3 class="quiz-question">Welche Rolle haben Sie in Ihrem Betrieb?</h3>
-            <p class="quiz-subtext">So passen wir die Analyse genau auf Ihre Perspektive an.</p>
-            <div class="quiz-options">
-              <button type="button" class="quiz-option" data-field="rolle" data-value="gf">Gesch&auml;ftsf&uuml;hrung / Inhaber</button>
-              <button type="button" class="quiz-option" data-field="rolle" data-value="bauleitung">Bauleitung / Polier</button>
-              <button type="button" class="quiz-option" data-field="rolle" data-value="buero_hr">B&uuml;ro / HR</button>
-            </div>
-          </div>
-
-          <!-- ===== STEP 2 / 8 — Mitarbeiterzahl ===== -->
-          <div class="quiz-slide" data-slide="2">
-            <h3 class="quiz-question">Wie viele Mitarbeiter besch&auml;ftigt Ihr Betrieb?</h3>
-            <p class="quiz-subtext">Damit wir die richtige Gr&ouml;&szlig;enordnung f&uuml;r Ihre Recruiting-Strategie treffen.</p>
-            <div class="quiz-options">
-              <button type="button" class="quiz-option" data-field="mitarbeiter_range" data-value="0-3">0&ndash;3 Mitarbeiter</button>
-              <button type="button" class="quiz-option" data-field="mitarbeiter_range" data-value="4-10">4&ndash;10 Mitarbeiter</button>
-              <button type="button" class="quiz-option" data-field="mitarbeiter_range" data-value="11-30">11&ndash;30 Mitarbeiter</button>
-              <button type="button" class="quiz-option" data-field="mitarbeiter_range" data-value="31-200">31&ndash;200 Mitarbeiter</button>
-              <button type="button" class="quiz-option" data-field="mitarbeiter_range" data-value="200+">&Uuml;ber 200 Mitarbeiter</button>
-            </div>
-            <button type="button" class="quiz-back" data-back="1">&larr; Zur&uuml;ck</button>
-          </div>
-
-          <!-- ===== STEP 3 / 8 — Anzahl Fachkräfte ===== -->
-          <div class="quiz-slide" data-slide="3">
-            <h3 class="quiz-question">Wie viele Fachkr&auml;fte m&ouml;chten Sie einstellen?</h3>
-            <p class="quiz-subtext">Eine Schl&uuml;sselposition verlangt anderes Vorgehen als ein gr&ouml;&szlig;eres Team.</p>
-            <div class="quiz-options">
-              <button type="button" class="quiz-option" data-field="anzahl_fachkraefte" data-value="1">1 Schl&uuml;sselposition</button>
-              <button type="button" class="quiz-option" data-field="anzahl_fachkraefte" data-value="2-4">2&ndash;4 Fachkr&auml;fte</button>
-              <button type="button" class="quiz-option" data-field="anzahl_fachkraefte" data-value="5-20">5&ndash;20 Fachkr&auml;fte</button>
-              <button type="button" class="quiz-option" data-field="anzahl_fachkraefte" data-value="20+">Mehr als 20</button>
-            </div>
-            <button type="button" class="quiz-back" data-back="2">&larr; Zur&uuml;ck</button>
-          </div>
-
-          <!-- ===== STEP 4 / 8 — Dringlichkeit ===== -->
-          <div class="quiz-slide" data-slide="4">
-            <h3 class="quiz-question">Wann sollen die neuen Fachkr&auml;fte starten?</h3>
-            <p class="quiz-subtext">Damit wir Ihnen einen realistischen Zeitplan liefern.</p>
-            <div class="quiz-options">
-              <button type="button" class="quiz-option" data-field="dringlichkeit" data-value="asap">
-                <span>So schnell wie m&ouml;glich</span>
-                <span class="quiz-option-meta">es brennt &middot; Team &uuml;berlastet</span>
-              </button>
-              <button type="button" class="quiz-option" data-field="dringlichkeit" data-value="1-2-monate">Innerhalb 1&ndash;2 Monaten</button>
-              <button type="button" class="quiz-option" data-field="dringlichkeit" data-value="nicht-dringend">Aktuell nicht dringend</button>
-            </div>
-            <button type="button" class="quiz-back" data-back="3">&larr; Zur&uuml;ck</button>
-          </div>
-
-          <!-- ===== STEP 5 / 8 — E-Mail-Gate ===== -->
-          <div class="quiz-slide" data-slide="5">
-            <h3 class="quiz-question" id="quiz-step5-headline">Sehr gut. Wir erstellen jetzt Ihre Recruiting-Analyse.</h3>
-            <p class="quiz-subtext" id="quiz-step5-sub">Tragen Sie kurz Ihre gesch&auml;ftliche E-Mail-Adresse ein &mdash; wir melden uns innerhalb 24&ndash;48&nbsp;Stunden mit Ihrem individuellen Vorgehen.</p>
-            <div class="quiz-input-group">
-              <div class="quiz-input-wrap">
-                <svg class="quiz-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                <input type="email" class="quiz-input" id="email" name="email" placeholder="ihre@firma.de" autocomplete="email" autocapitalize="none" spellcheck="false" inputmode="email">
-              </div>
-            </div>
-            <button type="button" class="quiz-cta" data-next-from="5">Recruiting-Analyse anfordern &rarr;</button>
-            <div class="quiz-error-msg" id="quiz-step5-error">Bitte tragen Sie eine g&uuml;ltige E-Mail-Adresse ein.</div>
-            <button type="button" class="quiz-back" data-back="4" style="display:block;">&larr; Zur&uuml;ck</button>
-          </div>
-
-          <!-- ===== STEP 6 / 8 — Name + (progressive) Firma + Telefon ===== -->
-          <div class="quiz-slide" data-slide="6">
-            <h3 class="quiz-question">F&uuml;r welchen Betrieb erstellen wir die Analyse?</h3>
-            <p class="quiz-subtext">Letzter Schritt &mdash; danach melden wir uns innerhalb 24&ndash;48&nbsp;Stunden pers&ouml;nlich.</p>
-
-            <!-- Sub-Step 6a: Name -->
-            <div class="quiz-input-group" data-substep="name">
-              <div class="quiz-input-wrap">
-                <svg class="quiz-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                <input type="text" class="quiz-input" id="fullname" placeholder="Vor- und Nachname" autocomplete="name" autocapitalize="words" spellcheck="false">
-              </div>
-            </div>
-
-            <!-- Sub-Step 6b: Unternehmen (initial hidden) -->
-            <div class="quiz-input-group" data-substep="firma" style="display:none;">
-              <div class="quiz-input-wrap">
-                <svg class="quiz-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg>
-                <input type="text" class="quiz-input" id="unternehmen" name="unternehmen" placeholder="Name Ihres Betriebs" autocomplete="organization" autocapitalize="words" spellcheck="false">
-              </div>
-            </div>
-
-            <!-- Sub-Step 6c: Telefon (initial hidden) -->
-            <div class="quiz-input-group" data-substep="phone" style="display:none;">
-              <div class="quiz-phone-wrap">
-                <span class="quiz-phone-flag">🇩🇪 +49</span>
-                <input type="tel" class="quiz-input" id="phone" name="phone" placeholder="170 1234567" autocomplete="tel" inputmode="tel">
-              </div>
-            </div>
-
-            <!-- DSGVO + Submit (immer sichtbar in Step 6) -->
-            <div class="quiz-privacy">
-              <input type="checkbox" id="privacy" name="privacy">
-              <label for="privacy">Ich stimme der <a href="https://www.green-careers.de/datenschutz" target="_blank" rel="noopener">Datenschutzerkl&auml;rung</a> zu und bin einverstanden, von GreenCareers kontaktiert zu werden. Die Einwilligung kann jederzeit widerrufen werden.</label>
-            </div>
-
-            <button type="button" class="quiz-cta" id="quiz-final-submit" disabled>Analyse anfordern &rarr;</button>
-            <div class="quiz-error-msg" id="quiz-step6-error">Bitte f&uuml;llen Sie alle Felder aus und stimmen der Datenschutzerkl&auml;rung zu.</div>
-
-            <div class="quiz-trust-row">
-              <span><span class="quiz-trust-dot"></span> Sichere SSL-Verschl&uuml;sselung</span>
-              <span><span class="quiz-trust-dot"></span> DSGVO-konform</span>
-              <span><span class="quiz-trust-dot"></span> Kein Spam, kein Newsletter</span>
-            </div>
-            <button type="button" class="quiz-back" data-back="5">&larr; Zur&uuml;ck</button>
-          </div>
-
-        </form>
-
-        <!-- Success-State (wird nach Submit gezeigt, kurz vor Redirect) -->
-        <div class="form-success" id="form-success">
-          <div class="form-success-icon">&#9989;</div>
-          <h3>Vielen Dank &ndash; Ihre Anfrage ist da!</h3>
-          <p>Wir melden uns innerhalb von 24&ndash;48&nbsp;Stunden pers&ouml;nlich bei Ihnen mit Ihrer individuellen Recruiting-Analyse.</p>
-          <p style="margin-top:14px;font-size:0.86rem;color:var(--earth);">Sie erhalten in den n&auml;chsten Minuten au&szlig;erdem eine Best&auml;tigung per E-Mail. Pr&uuml;fen Sie ggf. auch Ihren Spam-Ordner.</p>
-          <p style="margin-top:18px;font-size:0.82rem;color:var(--lime-green);font-weight:700;">&#127873; Als Geschenk: der Recruiting-Report 2026 als PDF-Download &ndash; Sie werden gleich weitergeleitet.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- FOOTER -->
   <footer>
     <div class="container footer-inner">
@@ -1610,6 +1645,9 @@
 
   </script>
 
+  <!-- Sticky Mobile-CTA: erscheint sobald User am Quiz vorbeigescrollt ist (Recovery) -->
+  <a href="#formular" class="sticky-cta-mobile" id="sticky-cta">&rarr; Quiz starten &mdash; Antwort in 60&nbsp;Sek.</a>
+
   <script>
     // Navbar scroll
     const navbar = document.getElementById('navbar');
@@ -1623,6 +1661,46 @@
         ticking = true;
       }
     });
+
+    // Sticky-CTA: Show wenn User am Quiz vorbeigescrollt ist
+    // (= Quiz komplett oberhalb Viewport).
+    // Combo: IntersectionObserver (für threshold-crossings, schnell) +
+    // scroll-Listener (catches alle anderen Fälle inkl. fast-scroll).
+    const stickyCta = document.getElementById('sticky-cta');
+    const formularEl = document.getElementById('formular');
+    if (stickyCta && formularEl) {
+      function refreshStickyCta() {
+        const r = formularEl.getBoundingClientRect();
+        // Show only when Quiz komplett oberhalb (bottom < 0).
+        // Bei Quiz im Viewport oder darunter → hide.
+        stickyCta.classList.toggle('is-visible', r.bottom < 0);
+      }
+      // IntersectionObserver für instant-Reaktion bei Sichtbarkeitswechsel
+      const formObserver = new IntersectionObserver(refreshStickyCta, { threshold: [0, 0.01] });
+      formObserver.observe(formularEl);
+      // Scroll-Listener als Backup für fast-scroll / programmatic-scroll
+      let stickyTicking = false;
+      window.addEventListener('scroll', () => {
+        if (!stickyTicking) {
+          requestAnimationFrame(() => {
+            refreshStickyCta();
+            stickyTicking = false;
+          });
+          stickyTicking = true;
+        }
+      }, { passive: true });
+      // Initial check
+      refreshStickyCta();
+
+      // Pixel-Tracking für Sticky-CTA-Klicks
+      stickyCta.addEventListener('click', () => {
+        try {
+          if (typeof fbq === 'function') {
+            fbq('trackCustom', 'Sticky_CTA_Clicked', { landingpage: 'lp-beratung-galabau' });
+          }
+        } catch(e) {}
+      });
+    }
 
     // Reveal observer
     const revealObserver = new IntersectionObserver((entries) => {
