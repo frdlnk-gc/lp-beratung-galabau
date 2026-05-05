@@ -2142,21 +2142,24 @@
       answers.plz_bundesland = bundesland || '';
       answers.pool_count = pool;
 
-      // Result-Card anzeigen (realistisch, nicht überschwänglich)
+      // PLZ-Result als ersten Eintrag in den Insights-Stack pushen
+      // (statt Inline-Card, damit alles konsistent in einer wachsenden Liste landet)
       const ortText = ort ? `${ort}${bundesland ? ', ' + bundesland : ''}` : `PLZ ${plz}`;
-      plzResult.innerHTML = `
-        <div class="plz-check-result">
-          <div class="plz-check-status">✓ Ja, wir k&ouml;nnen helfen</div>
-          <div class="plz-check-region">${ortText}</div>
-          <div class="plz-check-pool">In unserem Pool sind aktuell <strong>${pool} Fachkr&auml;fte aus dem GaLaBau</strong> in Ihrer Region. Wir m&uuml;ssen dann nur noch pr&uuml;fen, welche zu Ihrem Betrieb und Ihren Anforderungen wirklich passen.</div>
-        </div>`;
+      const plzInsightHtml = `
+        <strong>${ortText}</strong> &mdash; ja, wir k&ouml;nnen helfen.
+        In unserem Pool sind aktuell <strong>${pool} Fachkr&auml;fte aus dem GaLaBau</strong> in Ihrer Region.
+        Wir m&uuml;ssen dann nur noch pr&uuml;fen, welche zu Ihrem Betrieb und Ihren Anforderungen wirklich passen.
+      `;
+      showInsight(1, plzInsightHtml);
+      // (kein Inline-Result-Card mehr — Info erscheint im Stack unten)
+      plzResult.innerHTML = '';
 
       plzCTA.innerHTML = 'Weiter &rarr;';
       plzCTA.disabled = false;
-      // Auto-advance nach 1.6s (User darf die Card lesen)
+      // Auto-advance nach 800ms (Insight ist permanent im Stack sichtbar)
       setTimeout(() => {
         showSlide(2, 2);
-      }, 1600);
+      }, 800);
     });
 
     plzInput.addEventListener('keydown', (e) => {
@@ -2210,6 +2213,7 @@
     // Jeder neue Step pusht einen neuen Eintrag oben in die Liste.
     // Vorherige bleiben sichtbar (User sieht sein "Profil" wachsen).
     const stepLabels = {
+      1: 'Ihre Region',
       2: 'Ihre Rolle',
       3: 'Betriebsgröße',
       4: 'Anzahl Fachkräfte',
