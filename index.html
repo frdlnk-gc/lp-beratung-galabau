@@ -1086,28 +1086,72 @@
     /* Personalisierungs-Highlight */
     .quiz-perso { color: var(--lime-green); font-weight: 700; }
 
-    /* Mini-Insight-Card nach jedem Step (realistisch, nicht überschwänglich) */
-    .quiz-insight {
-      max-width: 460px;
-      margin: 18px auto 0;
+    /* =====================================================
+       INSIGHTS-STACK: wachsende Liste UNTER dem Quiz
+       — bleibt permanent sichtbar, neue Insights schieben oben rein
+       ===================================================== */
+    .insights-stack {
+      max-width: 480px;
+      margin: 26px auto 0;
+      padding-top: 22px;
+      border-top: 1px dashed rgba(40, 80, 40, 0.18);
+    }
+    .insights-stack:empty { display: none; }
+    .insights-stack-title {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.74rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--lime-green);
+      margin-bottom: 12px;
+    }
+    .insights-stack-title-dot {
+      width: 6px; height: 6px;
+      background: var(--lime-green);
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(0, 210, 97, 0.55);
+    }
+    .insights-list {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .insights-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 14px;
       background: linear-gradient(135deg, #f5fbf6 0%, #e6f5ea 100%);
       border-left: 3px solid var(--lime-green);
       border-radius: 10px;
-      padding: 12px 16px;
-      animation: quizFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      animation: insightSlideIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .quiz-insight-label {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 0.7rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.05em;
+    .insights-list li.is-current {
+      box-shadow: 0 4px 14px rgba(0, 210, 97, 0.18);
+      border-left-width: 4px;
+    }
+    @keyframes insightSlideIn {
+      from { opacity: 0; transform: translateY(-8px); max-height: 0; padding-top: 0; padding-bottom: 0; }
+      to   { opacity: 1; transform: translateY(0); max-height: 200px; padding-top: 12px; padding-bottom: 12px; }
+    }
+    .insights-list-icon {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      background: var(--lime-green);
+      color: #fff;
+      border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 0.78rem; font-weight: 700;
+      margin-top: 1px;
+    }
+    .insights-list-body { flex: 1; min-width: 0; }
+    .insights-list-label {
+      font-size: 0.72rem; font-weight: 700;
       color: var(--lime-green);
-      margin-bottom: 6px;
+      text-transform: uppercase; letter-spacing: 0.04em;
+      margin-bottom: 3px;
     }
-    .quiz-insight-text {
+    .insights-list-text {
       font-size: 0.84rem; line-height: 1.5;
       color: var(--moss-dark);
     }
-    .quiz-insight-text strong { color: var(--lime-green); }
+    .insights-list-text strong { color: var(--lime-green); }
 
     /* PLZ-Check-Result (Step 1, nach gültiger PLZ-Eingabe) */
     .plz-check-result {
@@ -1341,7 +1385,6 @@
               <button type="button" class="quiz-option" data-field="rolle" data-value="bauleitung">Bauleitung / Polier</button>
               <button type="button" class="quiz-option" data-field="rolle" data-value="buero_hr">B&uuml;ro / HR</button>
             </div>
-            <div id="insight-after-2"></div>
             <button type="button" class="quiz-back" data-back="1">&larr; Zur&uuml;ck</button>
           </div>
 
@@ -1356,7 +1399,6 @@
               <button type="button" class="quiz-option" data-field="mitarbeiter_range" data-value="31-200">31&ndash;200 Mitarbeiter</button>
               <button type="button" class="quiz-option" data-field="mitarbeiter_range" data-value="200+">&Uuml;ber 200 Mitarbeiter</button>
             </div>
-            <div id="insight-after-3"></div>
             <button type="button" class="quiz-back" data-back="2">&larr; Zur&uuml;ck</button>
           </div>
 
@@ -1370,7 +1412,6 @@
               <button type="button" class="quiz-option" data-field="anzahl_fachkraefte" data-value="5-20">5&ndash;20 Fachkr&auml;fte</button>
               <button type="button" class="quiz-option" data-field="anzahl_fachkraefte" data-value="20+">Mehr als 20</button>
             </div>
-            <div id="insight-after-4"></div>
             <button type="button" class="quiz-back" data-back="3">&larr; Zur&uuml;ck</button>
           </div>
 
@@ -1386,7 +1427,6 @@
               <button type="button" class="quiz-option" data-field="dringlichkeit" data-value="1-2-monate">Innerhalb 1&ndash;2 Monaten</button>
               <button type="button" class="quiz-option" data-field="dringlichkeit" data-value="nicht-dringend">Aktuell nicht dringend</button>
             </div>
-            <div id="insight-after-5"></div>
             <button type="button" class="quiz-back" data-back="4">&larr; Zur&uuml;ck</button>
           </div>
 
@@ -1452,6 +1492,12 @@
           </div>
 
         </form>
+
+        <!-- Insights-Stack (wächst mit jeder Antwort, bleibt permanent sichtbar) -->
+        <div class="insights-stack" id="insights-stack" hidden>
+          <div class="insights-stack-title"><span class="insights-stack-title-dot"></span>Was wir aus Ihren Antworten lesen</div>
+          <ul class="insights-list" id="insights-list"></ul>
+        </div>
 
         <!-- Success-State (wird nach Submit gezeigt, kurz vor Redirect) -->
         <div class="form-success" id="form-success">
@@ -2160,14 +2206,41 @@
       return null;
     }
 
+    // Wachsende Insights-Liste (bleibt permanent sichtbar unter Quiz)
+    // Jeder neue Step pusht einen neuen Eintrag oben in die Liste.
+    // Vorherige bleiben sichtbar (User sieht sein "Profil" wachsen).
+    const stepLabels = {
+      2: 'Ihre Rolle',
+      3: 'Betriebsgröße',
+      4: 'Anzahl Fachkräfte',
+      5: 'Dringlichkeit'
+    };
     function showInsight(step, html) {
-      const slot = document.getElementById('insight-after-' + step);
-      if (!slot || !html) return;
-      slot.innerHTML = `
-        <div class="quiz-insight">
-          <div class="quiz-insight-label">💡 Was uns das sagt</div>
-          <div class="quiz-insight-text">${html}</div>
+      if (!html) return;
+      const stack = document.getElementById('insights-stack');
+      const list  = document.getElementById('insights-list');
+      if (!stack || !list) return;
+      // Stack einblenden falls noch hidden
+      if (stack.hasAttribute('hidden')) stack.removeAttribute('hidden');
+      // Falls dieser Step schon einen Eintrag hat (z.B. User klickt 2x oder geht zurück)
+      // → alten ersetzen statt zu duplizieren
+      const existing = list.querySelector(`[data-insight-step="${step}"]`);
+      const newItem = document.createElement('li');
+      newItem.dataset.insightStep = String(step);
+      newItem.classList.add('is-current');
+      newItem.innerHTML = `
+        <span class="insights-list-icon">✓</span>
+        <div class="insights-list-body">
+          <div class="insights-list-label">${stepLabels[step] || 'Insight'}</div>
+          <div class="insights-list-text">${html}</div>
         </div>`;
+      // "is-current" von vorherigem Item entfernen
+      list.querySelectorAll('li.is-current').forEach(el => el.classList.remove('is-current'));
+      if (existing) {
+        existing.replaceWith(newItem);
+      } else {
+        list.appendChild(newItem);
+      }
     }
 
     document.querySelectorAll('.quiz-option').forEach(btn => {
@@ -2193,14 +2266,15 @@
           if (insight) showInsight(currentSlide, insight);
         }
 
-        // Auto-advance nach 1500ms damit User Insight lesen kann
+        // Auto-advance schneller (600ms) — Insight bleibt jetzt permanent
+        // im Stack unter dem Quiz stehen, User kann jederzeit lesen.
         setTimeout(() => {
           if (currentSlide >= 2 && currentSlide <= 5) {
             const next = currentSlide + 1;
             showSlide(next, next);
             if (next === 6) personalizeStep6();
           }
-        }, 1500);
+        }, 600);
       });
     });
 
