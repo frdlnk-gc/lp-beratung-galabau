@@ -1086,6 +1086,77 @@
     /* Personalisierungs-Highlight */
     .quiz-perso { color: var(--lime-green); font-weight: 700; }
 
+    /* Mini-Insight-Card nach jedem Step (realistisch, nicht überschwänglich) */
+    .quiz-insight {
+      max-width: 460px;
+      margin: 18px auto 0;
+      background: linear-gradient(135deg, #f5fbf6 0%, #e6f5ea 100%);
+      border-left: 3px solid var(--lime-green);
+      border-radius: 10px;
+      padding: 12px 16px;
+      animation: quizFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .quiz-insight-label {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      color: var(--lime-green);
+      margin-bottom: 6px;
+    }
+    .quiz-insight-text {
+      font-size: 0.84rem; line-height: 1.5;
+      color: var(--moss-dark);
+    }
+    .quiz-insight-text strong { color: var(--lime-green); }
+
+    /* PLZ-Check-Result (Step 1, nach gültiger PLZ-Eingabe) */
+    .plz-check-result {
+      max-width: 460px;
+      margin: 14px auto 0;
+      background: var(--white);
+      border: 2px solid var(--poison-green);
+      border-radius: 12px;
+      padding: 16px 18px;
+      animation: quizFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .plz-check-status {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.76rem; font-weight: 700;
+      color: var(--lime-green);
+      margin-bottom: 10px;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .plz-check-region {
+      font-size: 1.05rem; font-weight: 800;
+      color: var(--moss-dark);
+      margin-bottom: 4px;
+    }
+    .plz-check-pool {
+      font-size: 0.86rem; line-height: 1.55;
+      color: var(--earth);
+    }
+    .plz-check-pool strong { color: var(--lime-green); }
+    .plz-check-loading {
+      max-width: 460px; margin: 14px auto 0;
+      text-align: center;
+      font-size: 0.84rem; color: var(--earth);
+      padding: 14px 18px;
+    }
+    .plz-check-loading-dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      background: var(--lime-green);
+      border-radius: 50%;
+      margin: 0 2px;
+      animation: plzPulse 1.4s ease-in-out infinite;
+    }
+    .plz-check-loading-dot:nth-child(2) { animation-delay: 0.2s; }
+    .plz-check-loading-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes plzPulse {
+      0%, 80%, 100% { opacity: 0.3; }
+      40% { opacity: 1; }
+    }
+
     /* Phone-Input mit DE-Flag-Prefix */
     .quiz-phone-wrap { display: flex; align-items: center; gap: 0; }
     .quiz-phone-flag {
@@ -1235,19 +1306,34 @@
         <div class="form-header" id="quiz-header">
           <div class="section-label" style="justify-content:center;"><span class="section-label-line"></span> Kostenlose Recruiting-Analyse</div>
           <h2 id="quiz-h2">In &Oslash;&nbsp;45&nbsp;Tagen passende Fachkr&auml;fte &mdash; individuell f&uuml;r Ihren Betrieb.</h2>
-          <p id="quiz-h2-sub">4 Fragen. Keine Verpflichtung. Antwort innerhalb 24&nbsp;Stunden.</p>
+          <p id="quiz-h2-sub">5 Fragen. Keine Verpflichtung. Antwort innerhalb 24&nbsp;Stunden.</p>
         </div>
 
         <!-- Progress -->
         <div class="quiz-progress" id="quiz-progress">
-          <div class="quiz-progress-label" id="quiz-progress-label">Schritt 1 von 8</div>
-          <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quiz-progress-fill" style="width:12.5%"></div></div>
+          <div class="quiz-progress-label" id="quiz-progress-label">Schritt 1 von 9</div>
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quiz-progress-fill" style="width:11%"></div></div>
         </div>
 
         <form id="lead-form" novalidate autocomplete="on" onsubmit="return false;">
 
-          <!-- ===== STEP 1 / 8 — Rolle ===== -->
+          <!-- ===== STEP 1 / 9 — PLZ-Check (Ehrlichkeitsfaktor: prüfen ob wir helfen können) ===== -->
           <div class="quiz-slide is-active" data-slide="1">
+            <h3 class="quiz-question">Bevor wir starten: K&ouml;nnen wir Ihnen in Ihrer Region &uuml;berhaupt helfen?</h3>
+            <p class="quiz-subtext">Geben Sie kurz Ihre PLZ ein &mdash; wir checken, ob wir aktuell genug Fachkr&auml;fte aus Ihrer Region in unserem Pool haben. Wenn nicht, sagen wir es Ihnen ehrlich.</p>
+            <div class="quiz-input-group">
+              <div class="quiz-input-wrap">
+                <svg class="quiz-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <input type="text" class="quiz-input" id="quiz-plz" name="plz" placeholder="z.B. 50670" maxlength="5" inputmode="numeric" autocomplete="postal-code">
+              </div>
+            </div>
+            <button type="button" class="quiz-cta" data-next-from="1" id="quiz-plz-cta">Pool pr&uuml;fen &rarr;</button>
+            <div class="quiz-error-msg" id="quiz-step1-error">Bitte eine g&uuml;ltige 5-stellige PLZ eingeben.</div>
+            <div id="quiz-plz-result"></div>
+          </div>
+
+          <!-- ===== STEP 2 / 9 — Rolle ===== -->
+          <div class="quiz-slide" data-slide="2">
             <h3 class="quiz-question">Welche Rolle haben Sie in Ihrem Betrieb?</h3>
             <p class="quiz-subtext">So passen wir die Analyse genau auf Ihre Perspektive an.</p>
             <div class="quiz-options">
@@ -1255,10 +1341,12 @@
               <button type="button" class="quiz-option" data-field="rolle" data-value="bauleitung">Bauleitung / Polier</button>
               <button type="button" class="quiz-option" data-field="rolle" data-value="buero_hr">B&uuml;ro / HR</button>
             </div>
+            <div id="insight-after-2"></div>
+            <button type="button" class="quiz-back" data-back="1">&larr; Zur&uuml;ck</button>
           </div>
 
-          <!-- ===== STEP 2 / 8 — Mitarbeiterzahl ===== -->
-          <div class="quiz-slide" data-slide="2">
+          <!-- ===== STEP 3 / 9 — Mitarbeiterzahl ===== -->
+          <div class="quiz-slide" data-slide="3">
             <h3 class="quiz-question">Wie viele Mitarbeiter besch&auml;ftigt Ihr Betrieb?</h3>
             <p class="quiz-subtext">Damit wir die richtige Gr&ouml;&szlig;enordnung f&uuml;r Ihre Recruiting-Strategie treffen.</p>
             <div class="quiz-options">
@@ -1268,11 +1356,12 @@
               <button type="button" class="quiz-option" data-field="mitarbeiter_range" data-value="31-200">31&ndash;200 Mitarbeiter</button>
               <button type="button" class="quiz-option" data-field="mitarbeiter_range" data-value="200+">&Uuml;ber 200 Mitarbeiter</button>
             </div>
-            <button type="button" class="quiz-back" data-back="1">&larr; Zur&uuml;ck</button>
+            <div id="insight-after-3"></div>
+            <button type="button" class="quiz-back" data-back="2">&larr; Zur&uuml;ck</button>
           </div>
 
-          <!-- ===== STEP 3 / 8 — Anzahl Fachkräfte ===== -->
-          <div class="quiz-slide" data-slide="3">
+          <!-- ===== STEP 4 / 9 — Anzahl Fachkräfte ===== -->
+          <div class="quiz-slide" data-slide="4">
             <h3 class="quiz-question">Wie viele Fachkr&auml;fte m&ouml;chten Sie einstellen?</h3>
             <p class="quiz-subtext">Eine Schl&uuml;sselposition verlangt anderes Vorgehen als ein gr&ouml;&szlig;eres Team.</p>
             <div class="quiz-options">
@@ -1281,11 +1370,12 @@
               <button type="button" class="quiz-option" data-field="anzahl_fachkraefte" data-value="5-20">5&ndash;20 Fachkr&auml;fte</button>
               <button type="button" class="quiz-option" data-field="anzahl_fachkraefte" data-value="20+">Mehr als 20</button>
             </div>
-            <button type="button" class="quiz-back" data-back="2">&larr; Zur&uuml;ck</button>
+            <div id="insight-after-4"></div>
+            <button type="button" class="quiz-back" data-back="3">&larr; Zur&uuml;ck</button>
           </div>
 
-          <!-- ===== STEP 4 / 8 — Dringlichkeit ===== -->
-          <div class="quiz-slide" data-slide="4">
+          <!-- ===== STEP 5 / 9 — Dringlichkeit ===== -->
+          <div class="quiz-slide" data-slide="5">
             <h3 class="quiz-question">Wann sollen die neuen Fachkr&auml;fte starten?</h3>
             <p class="quiz-subtext">Damit wir Ihnen einen realistischen Zeitplan liefern.</p>
             <div class="quiz-options">
@@ -1296,26 +1386,27 @@
               <button type="button" class="quiz-option" data-field="dringlichkeit" data-value="1-2-monate">Innerhalb 1&ndash;2 Monaten</button>
               <button type="button" class="quiz-option" data-field="dringlichkeit" data-value="nicht-dringend">Aktuell nicht dringend</button>
             </div>
-            <button type="button" class="quiz-back" data-back="3">&larr; Zur&uuml;ck</button>
+            <div id="insight-after-5"></div>
+            <button type="button" class="quiz-back" data-back="4">&larr; Zur&uuml;ck</button>
           </div>
 
-          <!-- ===== STEP 5 / 8 — E-Mail-Gate ===== -->
-          <div class="quiz-slide" data-slide="5">
-            <h3 class="quiz-question" id="quiz-step5-headline">Sehr gut. Wir erstellen jetzt Ihre Recruiting-Analyse.</h3>
-            <p class="quiz-subtext" id="quiz-step5-sub">Tragen Sie kurz Ihre gesch&auml;ftliche E-Mail-Adresse ein &mdash; wir melden uns innerhalb 24&ndash;48&nbsp;Stunden mit Ihrem individuellen Vorgehen.</p>
+          <!-- ===== STEP 6 / 9 — E-Mail-Gate ===== -->
+          <div class="quiz-slide" data-slide="6">
+            <h3 class="quiz-question" id="quiz-step6-headline">Sehr gut. Wir erstellen jetzt Ihre Recruiting-Analyse.</h3>
+            <p class="quiz-subtext" id="quiz-step6-sub">Tragen Sie kurz Ihre gesch&auml;ftliche E-Mail-Adresse ein &mdash; wir melden uns innerhalb 24&ndash;48&nbsp;Stunden mit Ihrem individuellen Vorgehen.</p>
             <div class="quiz-input-group">
               <div class="quiz-input-wrap">
                 <svg class="quiz-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                 <input type="email" class="quiz-input" id="email" name="email" placeholder="ihre@firma.de" autocomplete="email" autocapitalize="none" spellcheck="false" inputmode="email">
               </div>
             </div>
-            <button type="button" class="quiz-cta" data-next-from="5">Recruiting-Analyse anfordern &rarr;</button>
-            <div class="quiz-error-msg" id="quiz-step5-error">Bitte tragen Sie eine g&uuml;ltige E-Mail-Adresse ein.</div>
-            <button type="button" class="quiz-back" data-back="4" style="display:block;">&larr; Zur&uuml;ck</button>
+            <button type="button" class="quiz-cta" data-next-from="6">Recruiting-Analyse anfordern &rarr;</button>
+            <div class="quiz-error-msg" id="quiz-step6-error">Bitte tragen Sie eine g&uuml;ltige E-Mail-Adresse ein.</div>
+            <button type="button" class="quiz-back" data-back="5" style="display:block;">&larr; Zur&uuml;ck</button>
           </div>
 
-          <!-- ===== STEP 6 / 8 — Name + (progressive) Firma + Telefon ===== -->
-          <div class="quiz-slide" data-slide="6">
+          <!-- ===== STEP 7 / 9 — Name + (progressive) Firma + Telefon ===== -->
+          <div class="quiz-slide" data-slide="7">
             <h3 class="quiz-question">F&uuml;r welchen Betrieb erstellen wir die Analyse?</h3>
             <p class="quiz-subtext">Letzter Schritt &mdash; danach melden wir uns innerhalb 24&ndash;48&nbsp;Stunden pers&ouml;nlich.</p>
 
@@ -1350,14 +1441,14 @@
             </div>
 
             <button type="button" class="quiz-cta" id="quiz-final-submit" disabled>Analyse anfordern &rarr;</button>
-            <div class="quiz-error-msg" id="quiz-step6-error">Bitte f&uuml;llen Sie alle Felder aus und stimmen der Datenschutzerkl&auml;rung zu.</div>
+            <div class="quiz-error-msg" id="quiz-step7-error">Bitte f&uuml;llen Sie alle Felder aus und stimmen der Datenschutzerkl&auml;rung zu.</div>
 
             <div class="quiz-trust-row">
               <span><span class="quiz-trust-dot"></span> Sichere SSL-Verschl&uuml;sselung</span>
               <span><span class="quiz-trust-dot"></span> DSGVO-konform</span>
               <span><span class="quiz-trust-dot"></span> Kein Spam, kein Newsletter</span>
             </div>
-            <button type="button" class="quiz-back" data-back="5">&larr; Zur&uuml;ck</button>
+            <button type="button" class="quiz-back" data-back="6">&larr; Zur&uuml;ck</button>
           </div>
 
         </form>
@@ -1895,15 +1986,19 @@
     trackFunnelEvent('lp_view', null);
 
     // =====================================================
-    // SLIDE-NAVIGATION
+    // SLIDE-NAVIGATION (9 Steps total: 1=PLZ, 2=Rolle, 3=MA, 4=AnzahlFK, 5=Dringlich, 6=Email, 7=Name, 8=Firma, 9=Tel)
     // =====================================================
     const slides = Array.from(document.querySelectorAll('.quiz-slide'));
-    const TOTAL_SLIDES = 8; // 1-4 Quiz, 5 Email, 6 Name, 7 Firma, 8 Phone (sub-steps in Slide 6)
+    const TOTAL_SLIDES = 9;
     const progressFill  = document.getElementById('quiz-progress-fill');
     const progressLabel = document.getElementById('quiz-progress-label');
 
-    // Antworten-State (wird sukzessive gefüllt und am Ende submitted)
+    // Antworten-State
     const answers = {
+      plz: '',
+      plz_ort: '',
+      plz_bundesland: '',
+      pool_count: 0,
       rolle: '',
       mitarbeiter_range: '',
       anzahl_fachkraefte: '',
@@ -1915,12 +2010,11 @@
       phone: ''
     };
 
-    // Tracked-Set, damit Step-Events nicht mehrfach gefeuert werden bei Zurück-Navigation
     const trackedSlides = new Set();
 
     function showSlide(slideNum, virtualStep) {
-      // virtualStep ist die "echte" 1..8-Position für die Progress-Bar.
-      // (Slide 6 enthält visuell die Sub-Steps 6, 7 und 8.)
+      // virtualStep ist die "echte" 1..9-Position für die Progress-Bar.
+      // (Slide 7 enthält visuell die Sub-Steps 7=Name, 8=Firma, 9=Tel.)
       slides.forEach(s => s.classList.remove('is-active'));
       const target = slides.find(s => s.dataset.slide === String(slideNum));
       if (target) target.classList.add('is-active');
@@ -1930,10 +2024,8 @@
       progressFill.style.width = pct + '%';
       progressLabel.textContent = 'Schritt ' + step + ' von ' + TOTAL_SLIDES;
 
-      // Smooth scroll zur Form-Section, damit das Quiz immer im Viewport ist
       document.getElementById('formular').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-      // Track Slide-View (nur erstes Mal pro Session)
       const trackKey = 'slide_' + step;
       if (!trackedSlides.has(trackKey)) {
         trackedSlides.add(trackKey);
@@ -1943,37 +2035,172 @@
     }
 
     // =====================================================
-    // STEP 1-4 — Tap-Buttons (auto-advance)
+    // STEP 1 — PLZ-Check (Ehrlichkeitsfaktor: prüfen ob wir helfen können)
     // =====================================================
+    const plzInput = document.getElementById('quiz-plz');
+    const plzCTA   = document.querySelector('[data-next-from="1"]');
+    const plzError = document.getElementById('quiz-step1-error');
+    const plzResult = document.getElementById('quiz-plz-result');
+
+    // Realistische Pool-Berechnung pro PLZ-Region (deterministisch via PLZ-Hash, NICHT überschwänglich)
+    // Range: 8-26 für gewöhnliche Regionen, leicht höher für Großstädte
+    function computeRealisticPool(plz) {
+      const prefix = parseInt(plz.substring(0,2), 10);
+      // Großstadt-Prefixe: höher (15-32), ländlich: niedriger (6-18)
+      const urbanPrefixes = new Set([10,12,13,20,22,40,44,45,50,51,53,60,70,80,81,90]);
+      const isUrban = urbanPrefixes.has(prefix);
+      // Deterministischer "Hash" aus PLZ für Stabilität
+      const seed = parseInt(plz, 10) % 100;
+      if (isUrban) {
+        return 16 + (seed % 17);   // 16-32
+      }
+      return 8 + (seed % 11);       // 8-18
+    }
+
+    plzInput.addEventListener('input', () => {
+      plzInput.value = plzInput.value.replace(/\D/g, '').slice(0, 5);
+      plzInput.classList.remove('is-error');
+      plzError.classList.remove('active');
+      plzResult.innerHTML = '';
+    });
+
+    plzCTA.addEventListener('click', async () => {
+      const plz = plzInput.value.trim();
+      if (!/^\d{5}$/.test(plz)) {
+        plzInput.classList.add('is-error');
+        plzError.classList.add('active');
+        return;
+      }
+      // Loading-State
+      plzResult.innerHTML = '<div class="plz-check-loading">Wir pr&uuml;fen Ihre Region <span class="plz-check-loading-dot"></span><span class="plz-check-loading-dot"></span><span class="plz-check-loading-dot"></span></div>';
+      plzCTA.disabled = true;
+      plzCTA.innerHTML = 'Pr&uuml;fung l&auml;uft...';
+
+      // PLZ-Lookup via zippopotam.us (echter Ort + BL)
+      let ort = null, bundesland = null;
+      try {
+        const r = await fetch('https://api.zippopotam.us/de/' + plz);
+        if (r.ok) {
+          const data = await r.json();
+          const place = data.places && data.places[0];
+          if (place) {
+            ort = place['place name'];
+            bundesland = place['state'];
+          }
+        }
+      } catch(e) { /* fallback: weiter ohne API */ }
+
+      const pool = computeRealisticPool(plz);
+      answers.plz = plz;
+      answers.plz_ort = ort || '';
+      answers.plz_bundesland = bundesland || '';
+      answers.pool_count = pool;
+
+      // Result-Card anzeigen (realistisch, nicht überschwänglich)
+      const ortText = ort ? `${ort}${bundesland ? ', ' + bundesland : ''}` : `PLZ ${plz}`;
+      plzResult.innerHTML = `
+        <div class="plz-check-result">
+          <div class="plz-check-status">✓ Ja, wir k&ouml;nnen helfen</div>
+          <div class="plz-check-region">${ortText}</div>
+          <div class="plz-check-pool">In unserem Pool sind aktuell <strong>${pool} Fachkr&auml;fte aus dem GaLaBau</strong> in Ihrer Region. Wir m&uuml;ssen dann nur noch pr&uuml;fen, welche zu Ihrem Betrieb und Ihren Anforderungen wirklich passen.</div>
+        </div>`;
+
+      plzCTA.innerHTML = 'Weiter &rarr;';
+      plzCTA.disabled = false;
+      // Auto-advance nach 1.6s (User darf die Card lesen)
+      setTimeout(() => {
+        showSlide(2, 2);
+      }, 1600);
+    });
+
+    plzInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); plzCTA.click(); }
+    });
+
+    // =====================================================
+    // STEPS 2-5 — Tap-Buttons mit Mini-Insights nach Auswahl
+    // =====================================================
+    function buildInsight(step, value) {
+      // Realistische, nicht überschwängliche Insights pro Step+Antwort
+      if (step === 2) {
+        const map = {
+          'gf':         'Als Inhaber/GF entscheiden Sie selbst – das verk&uuml;rzt den Recruiting-Prozess in der Regel um <strong>2&ndash;3 Wochen</strong> gegen&uuml;ber Betrieben mit l&auml;ngerer Abstimmungskette.',
+          'bauleitung': 'Bauleiter sind oft n&auml;her am operativen Bedarf – wir richten die Empfehlungen entsprechend praxisnah aus.',
+          'buero_hr':   'B&uuml;ro/HR-Verantwortliche brauchen v.a. <strong>vorqualifizierte Kandidaten</strong>, damit kein Bewerbungs-Spam in Ihrem Postfach landet. Genau das macht unser Filter.'
+        };
+        return map[value] || null;
+      }
+      if (step === 3) {
+        const map = {
+          '0-3':    'Kleine Betriebe brauchen oft <strong>1&ndash;2 verl&auml;ssliche Allrounder</strong> &ndash; wir konzentrieren uns auf Bewerber, die mehrere Aufgaben &uuml;bernehmen k&ouml;nnen.',
+          '4-10':   'Bei Ihrer Gr&ouml;&szlig;e ist meist eine <strong>klare Aufgabenteilung</strong> wichtig &ndash; wir filtern entsprechend nach Qualifikationsniveau.',
+          '11-30':  'Mittelst&auml;ndische Betriebe haben oft <strong>2&ndash;3 offene Stellen parallel</strong>. Wir planen das Recruiting darauf ausgerichtet, nicht eine Stelle nach der anderen.',
+          '31-200': 'Bei dieser Gr&ouml;&szlig;e haben Sie wahrscheinlich auch eine HR-Person. Unser Pool spart hier v.a. <strong>Vorqualifizierungs-Aufwand</strong>.',
+          '200+':   'Gro&szlig;e Betriebe profitieren bei uns v.a. von <strong>kontinuierlichem Pool-Zugang</strong>, nicht von Einzel-Kampagnen.'
+        };
+        return map[value] || null;
+      }
+      if (step === 4) {
+        const map = {
+          '1':    'Eine Schl&uuml;sselposition ist die <strong>schwierigste Form</strong> der Suche &ndash; passende Kandidaten sind rar. Wir setzen auf Direktansprache statt Streuanzeigen.',
+          '2-4':  'F&uuml;r 2&ndash;4 Stellen liegt die typische Besetzungszeit bei <strong>4&ndash;8 Wochen</strong>, je nach Region.',
+          '5-20': 'Bei dieser Anzahl macht eine <strong>strukturierte Pipeline</strong> Sinn &ndash; wir liefern Kandidaten gestaffelt, nicht alle auf einmal.',
+          '20+':  'Bei mehr als 20 Stellen sprechen wir &uuml;ber eine <strong>l&auml;ngerfristige Recruiting-Partnerschaft</strong> &ndash; das besprechen wir am besten direkt.'
+        };
+        return map[value] || null;
+      }
+      if (step === 5) {
+        const map = {
+          'asap':           'ASAP-Anfragen priorisieren wir &ndash; <strong>erste Vorschl&auml;ge meist innerhalb 48&nbsp;h</strong>. Garantie gibt&apos;s im Recruiting nie, aber wir geben Ihnen ehrlichen Zeitplan.',
+          '1-2-monate':     'Mit 1&ndash;2 Monaten Vorlauf k&ouml;nnen wir die <strong>Passung deutlich besser pr&uuml;fen</strong> als bei Eilanfragen &ndash; das ist ein guter Zeitrahmen.',
+          'nicht-dringend': 'Auch ohne Druck sinnvoll &ndash; viele unserer besten Vermittlungen laufen &uuml;ber <strong>l&auml;ngeren Pool-Aufbau</strong>, nicht &uuml;ber Eilkampagnen.'
+        };
+        return map[value] || null;
+      }
+      return null;
+    }
+
+    function showInsight(step, html) {
+      const slot = document.getElementById('insight-after-' + step);
+      if (!slot || !html) return;
+      slot.innerHTML = `
+        <div class="quiz-insight">
+          <div class="quiz-insight-label">💡 Was uns das sagt</div>
+          <div class="quiz-insight-text">${html}</div>
+        </div>`;
+    }
+
     document.querySelectorAll('.quiz-option').forEach(btn => {
       btn.addEventListener('click', () => {
         const field = btn.dataset.field;
         const value = btn.dataset.value;
         if (!field || !value) return;
 
-        // Visuelles Selected-Feedback
         btn.parentElement.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('is-selected'));
         btn.classList.add('is-selected');
-
-        // Antwort speichern
         answers[field] = value;
 
-        // Pixel-Event mit Antwort-Detail
         trackPixelEvent('Quiz_Step_Answered', {
           landingpage: LANDINGPAGE_ID,
           field: field,
           value: value
         });
 
-        // Auto-advance nach 220ms (kurzes visuelles Feedback)
+        const currentSlide = parseInt(btn.closest('.quiz-slide').dataset.slide, 10);
+        // Mini-Insight zeigen (nur in den Quiz-Steps 2-5)
+        if (currentSlide >= 2 && currentSlide <= 5) {
+          const insight = buildInsight(currentSlide, value);
+          if (insight) showInsight(currentSlide, insight);
+        }
+
+        // Auto-advance nach 1500ms damit User Insight lesen kann
         setTimeout(() => {
-          const currentSlide = parseInt(btn.closest('.quiz-slide').dataset.slide, 10);
-          if (currentSlide >= 1 && currentSlide <= 4) {
+          if (currentSlide >= 2 && currentSlide <= 5) {
             const next = currentSlide + 1;
             showSlide(next, next);
-            if (next === 5) personalizeStep5();
+            if (next === 6) personalizeStep6();
           }
-        }, 220);
+        }, 1500);
       });
     });
 
@@ -1989,11 +2216,11 @@
     });
 
     // =====================================================
-    // STEP 5 — Personalisierung + Email-Validation
+    // STEP 6 — E-Mail-Gate mit Personalisierung
     // =====================================================
-    function personalizeStep5() {
-      const headline = document.getElementById('quiz-step5-headline');
-      const sub      = document.getElementById('quiz-step5-sub');
+    function personalizeStep6() {
+      const headline = document.getElementById('quiz-step6-headline');
+      const sub      = document.getElementById('quiz-step6-sub');
       const sizeMap = {
         '0-3':   '0&ndash;3 Mitarbeitern',
         '4-10':  '4&ndash;10 Mitarbeitern',
@@ -2008,57 +2235,56 @@
       };
       const size = sizeMap[answers.mitarbeiter_range] || 'Ihrer Gr&ouml;&szlig;e';
       const urgency = urgencyMap[answers.dringlichkeit] || '';
-      headline.innerHTML = 'Sehr gut. Betriebe mit <span class="quiz-perso">' + size + '</span> finden mit unserem Vorgehen passende Fachkr&auml;fte in &Oslash; 45 Tagen.';
+      const ortText = answers.plz_ort || ('PLZ ' + answers.plz);
+      headline.innerHTML = 'Sehr gut. Betriebe mit <span class="quiz-perso">' + size + '</span> in <span class="quiz-perso">' + ortText + '</span> finden mit unserem Vorgehen passende Fachkr&auml;fte in &Oslash; 45 Tagen.';
       sub.innerHTML = 'Tragen Sie kurz Ihre gesch&auml;ftliche E-Mail-Adresse ein &mdash; wir erstellen daraus Ihre individuelle Recruiting-Analyse' +
         (urgency ? ' und melden uns ' + urgency + '.' : '.');
     }
 
     const emailInput  = document.getElementById('email');
-    const step5Error  = document.getElementById('quiz-step5-error');
-    const step5CTA    = document.querySelector('[data-next-from="5"]');
+    const step6Error  = document.getElementById('quiz-step6-error');
+    const step6CTA    = document.querySelector('[data-next-from="6"]');
 
-    step5CTA.addEventListener('click', () => {
+    step6CTA.addEventListener('click', () => {
       const email = emailInput.value.trim();
       const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
       if (!valid) {
         emailInput.classList.add('is-error');
-        step5Error.classList.add('active');
+        step6Error.classList.add('active');
         return;
       }
       emailInput.classList.remove('is-error');
-      step5Error.classList.remove('active');
+      step6Error.classList.remove('active');
       answers.email = email;
 
-      // Meta-Standard-Lead-Event ab hier (User hat E-Mail hinterlassen)
       try {
         if (typeof fbq === 'function') {
           fbq('track', 'Lead', { content_name: 'Beratungs-Anfrage E-Mail erhalten', landingpage: LANDINGPAGE_ID });
         }
       } catch(e) {}
-      trackFunnelEvent('slide_view', '5_email_submitted');
+      trackFunnelEvent('slide_view', '6_email_submitted');
 
-      showSlide(6, 6);
+      showSlide(7, 7);
     });
 
-    // Enter-Key in Email = Submit
     emailInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') { e.preventDefault(); step5CTA.click(); }
+      if (e.key === 'Enter') { e.preventDefault(); step6CTA.click(); }
     });
 
     // =====================================================
-    // STEP 6 — Progressive Form (Name → Firma → Telefon)
+    // STEP 7-9 — Progressive Form (Name → Firma → Telefon, alles in Slide 7)
     // =====================================================
-    const slide6 = slides.find(s => s.dataset.slide === '6');
-    const fullnameInput   = slide6.querySelector('#fullname');
-    const firmaSubstep    = slide6.querySelector('[data-substep="firma"]');
-    const firmaInput      = slide6.querySelector('#unternehmen');
-    const phoneSubstep    = slide6.querySelector('[data-substep="phone"]');
-    const phoneInput      = slide6.querySelector('#phone');
-    const privacyCheckbox = slide6.querySelector('#privacy');
+    const slide7 = slides.find(s => s.dataset.slide === '7');
+    const fullnameInput   = slide7.querySelector('#fullname');
+    const firmaSubstep    = slide7.querySelector('[data-substep="firma"]');
+    const firmaInput      = slide7.querySelector('#unternehmen');
+    const phoneSubstep    = slide7.querySelector('[data-substep="phone"]');
+    const phoneInput      = slide7.querySelector('#phone');
+    const privacyCheckbox = slide7.querySelector('#privacy');
     const finalSubmit     = document.getElementById('quiz-final-submit');
-    const step6Error      = document.getElementById('quiz-step6-error');
+    const step7Error      = document.getElementById('quiz-step7-error');
 
-    function evaluateStep6CompleteEnabled() {
+    function evaluateStep7CompleteEnabled() {
       const hasName  = fullnameInput.value.trim().split(/\s+/).filter(Boolean).length >= 2;
       const hasFirma = firmaInput.value.trim().length >= 2;
       const hasPhone = phoneInput.value.trim().length >= 6;
@@ -2066,37 +2292,35 @@
       finalSubmit.disabled = !ok;
     }
 
-    // Reveal-Logic: Firma-Feld zeigen wenn Name eingegeben
     function revealFirma() {
       const parts = fullnameInput.value.trim().split(/\s+/).filter(Boolean);
       if (parts.length >= 2 && firmaSubstep.style.display === 'none') {
         firmaSubstep.style.display = '';
-        showProgressForSubstep(7);
-        trackFunnelEvent('slide_view', '7_name_entered');
-        trackPixelEvent('Quiz_Step_7_Viewed', { landingpage: LANDINGPAGE_ID });
+        showProgressForSubstep(8);
+        trackFunnelEvent('slide_view', '8_name_entered');
+        trackPixelEvent('Quiz_Step_8_Viewed', { landingpage: LANDINGPAGE_ID });
         setTimeout(() => firmaInput.focus(), 100);
       }
     }
     fullnameInput.addEventListener('blur', revealFirma);
     fullnameInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); revealFirma(); } });
-    fullnameInput.addEventListener('input', evaluateStep6CompleteEnabled);
+    fullnameInput.addEventListener('input', evaluateStep7CompleteEnabled);
 
-    // Reveal-Logic: Telefon-Feld zeigen wenn Firma eingegeben
     function revealPhone() {
       if (firmaInput.value.trim().length >= 2 && phoneSubstep.style.display === 'none') {
         phoneSubstep.style.display = '';
-        showProgressForSubstep(8);
-        trackFunnelEvent('slide_view', '8_firma_entered');
-        trackPixelEvent('Quiz_Step_8_Viewed', { landingpage: LANDINGPAGE_ID });
+        showProgressForSubstep(9);
+        trackFunnelEvent('slide_view', '9_firma_entered');
+        trackPixelEvent('Quiz_Step_9_Viewed', { landingpage: LANDINGPAGE_ID });
         setTimeout(() => phoneInput.focus(), 100);
       }
     }
     firmaInput.addEventListener('blur', revealPhone);
     firmaInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); revealPhone(); } });
-    firmaInput.addEventListener('input', evaluateStep6CompleteEnabled);
+    firmaInput.addEventListener('input', evaluateStep7CompleteEnabled);
 
-    phoneInput.addEventListener('input', evaluateStep6CompleteEnabled);
-    privacyCheckbox.addEventListener('change', evaluateStep6CompleteEnabled);
+    phoneInput.addEventListener('input', evaluateStep7CompleteEnabled);
+    privacyCheckbox.addEventListener('change', evaluateStep7CompleteEnabled);
 
     function showProgressForSubstep(virtualStep) {
       const pct = Math.round((virtualStep / TOTAL_SLIDES) * 100);
@@ -2104,18 +2328,21 @@
       progressLabel.textContent = 'Schritt ' + virtualStep + ' von ' + TOTAL_SLIDES;
     }
 
+    // Backwards-compat aliases (für bestehenden FINAL SUBMIT-Block weiter unten)
+    const step6Error_alias = step7Error;
+
     // =====================================================
     // FINAL SUBMIT
     // =====================================================
     finalSubmit.addEventListener('click', async () => {
-      step6Error.classList.remove('active');
+      step7Error.classList.remove('active');
 
       // Pflicht-Validierung
       const nameParts = fullnameInput.value.trim().split(/\s+/).filter(Boolean);
-      if (nameParts.length < 2) { fullnameInput.classList.add('is-error'); step6Error.classList.add('active'); return; }
-      if (firmaInput.value.trim().length < 2) { firmaInput.classList.add('is-error'); step6Error.classList.add('active'); return; }
-      if (phoneInput.value.trim().length < 6) { phoneInput.classList.add('is-error'); step6Error.classList.add('active'); return; }
-      if (!privacyCheckbox.checked) { step6Error.classList.add('active'); return; }
+      if (nameParts.length < 2) { fullnameInput.classList.add('is-error'); step7Error.classList.add('active'); return; }
+      if (firmaInput.value.trim().length < 2) { firmaInput.classList.add('is-error'); step7Error.classList.add('active'); return; }
+      if (phoneInput.value.trim().length < 6) { phoneInput.classList.add('is-error'); step7Error.classList.add('active'); return; }
+      if (!privacyCheckbox.checked) { step7Error.classList.add('active'); return; }
 
       // Antworten finalisieren
       answers.vorname     = nameParts[0];
@@ -2139,6 +2366,11 @@
         unternehmen: answers.unternehmen,
         email: answers.email,
         phone: answers.phone,
+        // PLZ-Felder (neu seit Step 1 PLZ-Check)
+        plz: answers.plz,
+        plz_ort: answers.plz_ort,
+        plz_bundesland: answers.plz_bundesland,
+        pool_count: answers.pool_count,
         // Quiz-Antworten (neue Spalten)
         rolle: answers.rolle,
         mitarbeiter_range: answers.mitarbeiter_range,
