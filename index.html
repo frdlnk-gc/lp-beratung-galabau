@@ -2049,6 +2049,13 @@
     // ----- LP-View beim ersten Laden tracken
     trackFunnelEvent('lp_view', null);
 
+    // ----- Quiz-Start-Tracking (alle CTA-Buttons, die zum #formular fuehren)
+    document.querySelectorAll('a[href="#formular"], #sticky-cta').forEach(function(el) {
+      el.addEventListener('click', function() {
+        trackPixelEvent('Quiz_Started', { landingpage: 'lp-beratung-galabau', cta_location: el.className || 'unknown' });
+      }, { once: false });
+    });
+
     // =====================================================
     // SLIDE-NAVIGATION (9 Steps total: 1=PLZ, 2=Rolle, 3=MA, 4=AnzahlFK, 5=Dringlich, 6=Email, 7=Name, 8=Firma, 9=Tel)
     // =====================================================
