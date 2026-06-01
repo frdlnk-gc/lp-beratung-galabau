@@ -1795,6 +1795,11 @@
     //    - WICHTIG: KEINE automatische WhatsApp-Nachricht an den Lead!
     const MAKE_WEBHOOK_URL = 'https://hook.eu1.make.com/7stckhs5hvpektr36s554kh1xcosk6jv';
 
+    // Lemlist-Pause-Webhook (Make): pausiert die Nurture-Sequenz des Leads, falls
+    // er aus der Kampagne "GC | Nurture | GalaBau-Report-Downloader" kommt.
+    // Fire-and-forget, non-critical — Email-Match macht Lemlist serverseitig.
+    const MAKE_LEMLIST_PAUSE_WEBHOOK_URL = 'https://hook.eu1.make.com/a91w6fvnj2q8y5vedelxpspolvk6i9w9';
+
     // Thank-you-Page (relativ oder absolut) — wird nach erfolgreichem Submit aufgerufen
     const THANKYOU_URL = '/danke/';
 
@@ -2521,6 +2526,18 @@
         } else {
           console.warn('Make-Webhook noch nicht konfiguriert. Payload:', payload);
           await new Promise(r => setTimeout(r, 800));
+        }
+
+        // Lemlist-Pause: qualifizierte Conversion → Nurture-Sequenz pausieren.
+        // Fire-and-forget (NICHT awaiten), non-critical — blockiert den Redirect nicht.
+        if (MAKE_LEMLIST_PAUSE_WEBHOOK_URL && answers.email) {
+          fetch(MAKE_LEMLIST_PAUSE_WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: answers.email })
+          }).catch((err) => {
+            console.error('[Lemlist-Pause] Webhook failed:', err);
+          });
         }
 
         // Tracking: Submit-Erfolg
