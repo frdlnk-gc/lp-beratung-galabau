@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="robots" content="noindex">
-  <title>Kostenlose Recruiting-Analyse für GaLaBau-Betriebe | GreenCareers</title>
-  <meta name="description" content="Kostenlose Recruiting-Analyse für GaLaBau-Betriebe mit 15–100 Mitarbeitern: Region prüfen, passende Kanäle erhalten, in ø 45 Tagen einstellen. Inkl. Recruiting-Report 2026 als Bonus.">
-  <meta property="og:title" content="Kostenlose Recruiting-Analyse für GaLaBau-Betriebe">
-  <meta property="og:description" content="Region prüfen, konkrete Empfehlung erhalten, in ø 45 Tagen einstellen – 100 % kostenlos, inkl. Recruiting-Report 2026.">
+  <title>Kostenloses Beratungsgespräch für GaLaBau-Betriebe | GreenCareers</title>
+  <meta name="description" content="Beratungstermin für GaLaBau-Geschäftsführer: wechselbereite Fachkräfte aus deiner Region, eingestellt in ø 45 Tagen – ohne Zeitaufwand für dich. 600+ GaLaBau-Betriebe, 4,9 ★ auf Google.">
+  <meta property="og:title" content="Kostenloses Beratungsgespräch für GaLaBau-Betriebe">
+  <meta property="og:description" content="Wechselbereite GaLaBau-Fachkräfte aus deiner Region – in ø 45 Tagen eingestellt. Jetzt Beratungstermin sichern, 100 % kostenlos.">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/png" href="assets/favicon-32.png">
 
@@ -251,13 +251,6 @@
     }
 
 
-    /* Analyse-Stack */
-    .analysis-stack{margin-top:16px;padding-top:14px;border-top:1px solid #EAE7DE;}
-    .analysis-title{font-size:.74rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#15803D;margin-bottom:9px;}
-    .analysis-list{list-style:none;display:grid;gap:7px;}
-    .analysis-list li{font-size:.8rem;line-height:1.5;color:#166534;background:#E8F8EE;border:1px solid #BBEBCE;border-radius:11px;padding:9px 12px;animation:slideIn .3s ease;}
-    .analysis-list li b{color:#0B3D20;}
-
     /* Erfolgs-Marquee */
     .wins{padding:10px 0 26px;}
     .wins .marquee-track{animation-duration:110s;animation-direction:reverse;}
@@ -384,12 +377,12 @@
     </div>
     <div class="container">
       <div class="hero-copy">
-        <span class="hero-badge"><span class="dot"></span> Für GaLaBau-Betriebe mit 15–100 Mitarbeitern</span>
-        <h1>Fachkräfte in ø 45 Tagen. <span class="ital">Planbar statt Zufall.</span></h1>
-        <p class="hero-sub">Die <b>kostenlose Recruiting-Analyse</b> für Ihren Betrieb: Wir prüfen Ihre Region, empfehlen die passenden Kanäle – und Sie erhalten den <b>Recruiting-Report 2026</b> (32 Seiten) als Bonus obendrauf.</p>
+        <span class="hero-badge"><span class="dot"></span> Für GaLaBau-Geschäftsführer</span>
+        <h1>Wechselbereite GaLaBau-Fachkräfte. <span class="ital">In ø 45 Tagen eingestellt.</span></h1>
+        <p class="hero-sub">Dein <b>kostenloses Beratungsgespräch</b>: Fachkräfte aus deiner Region – <b>ohne Zeitaufwand für dich</b>.</p>
         <div class="trust-strip in-copy">
           <span class="trust-item"><span class="stars">★★★★★</span> <b>4,9</b> auf Google</span>
-          <span class="trust-item"><b>500+</b>&nbsp;GaLaBau-Betriebe</span>
+          <span class="trust-item"><b>600+</b>&nbsp;GaLaBau-Betriebe</span>
           <span class="trust-item"><b>30.000+</b>&nbsp;Fachkräfte</span>
         </div>
       </div>
@@ -397,55 +390,63 @@
       <!-- ===== QUIZ CARD ===== -->
       <div class="quiz-card" id="quiz">
         <div class="quiz-head">
-          <img class="quiz-head-cover" src="assets/report-cover-thumb.jpg" alt="Bonus: Recruiting-Report 2026" width="52" height="74">
           <div class="quiz-head-titles">
-            <div class="t1">Kostenlose Recruiting-Analyse</div>
-            <div class="t2">60 Sek. · Rückruf in 24–48 h · Bonus: Report 2026</div>
+            <div class="t1">Beratungsgespräch für deinen Betrieb</div>
+            <div class="t2">60 Sek. Anfrage · Rückruf in 24–48 h</div>
           </div>
-          <span class="quiz-tag">GRATIS</span>
+          <span class="quiz-tag">KOSTENLOS</span>
         </div>
 
         <div class="quiz-progress" id="quiz-progress">
           <div class="quiz-progress-top">
-            <span id="quiz-progress-label">Schritt 1 von 7</span>
+            <span id="quiz-progress-label"></span>
             <span id="quiz-progress-time">≈ 60 Sek. übrig</span>
           </div>
           <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quiz-progress-fill"></div></div>
         </div>
 
         <form id="lead-form" onsubmit="return false;">
-          <!-- STEP 1 — PLZ-Gate -->
+          <!-- STEP 1 — Gesuchte Position (1-Klick-Einstieg) -->
           <div class="quiz-slide is-active" data-slide="1">
-            <h3 class="quiz-question">Können wir Ihnen in Ihrer Region helfen?</h3>
-            <p class="quiz-subtext">PLZ eingeben – wir prüfen, wie viele Fachkräfte aus Ihrer Region aktuell in unserem Pool sind. Wenn es nicht reicht, sagen wir es Ihnen ehrlich.</p>
-            <div class="quiz-input-group">
-              <label class="quiz-label" for="quiz-plz">Ihre Postleitzahl</label>
-              <input type="text" class="quiz-input" id="quiz-plz" name="plz" placeholder="z. B. 50670" maxlength="5" inputmode="numeric" autocomplete="postal-code">
+            <h3 class="quiz-question">Wen willst du einstellen?</h3>
+            <div class="quiz-options">
+              <button type="button" class="quiz-option" data-field="gesuchte_position" data-value="landschaftsgaertner">Landschaftsgärtner</button>
+              <button type="button" class="quiz-option" data-field="gesuchte_position" data-value="vorarbeiter">Vorarbeiter</button>
+              <button type="button" class="quiz-option" data-field="gesuchte_position" data-value="bauleiter">Bauleiter</button>
+              <button type="button" class="quiz-option" data-field="gesuchte_position" data-value="mehrere">Mehrere Positionen</button>
             </div>
-            <button type="button" class="quiz-cta" id="quiz-plz-cta">Pool prüfen →</button>
-            <div class="quiz-error" id="quiz-step1-error">Bitte eine gültige 5-stellige PLZ eingeben.</div>
             <div class="quiz-trustline">
-              <span>⏱ 7 kurze Schritte, ca. 60 Sekunden</span>
+              <span>⏱ Dauert keine 60 Sekunden</span>
               <span>🔒 DSGVO-konform</span>
             </div>
           </div>
 
-          <!-- STEP 2 — Rolle -->
+          <!-- STEP 2 — Anzahl Fachkräfte -->
           <div class="quiz-slide" data-slide="2">
-            <h3 class="quiz-question">Welche Rolle haben Sie im Betrieb?</h3>
-            <p class="quiz-subtext">Damit das Gespräch direkt auf der richtigen Ebene startet.</p>
+            <h3 class="quiz-question">Wie viele Fachkräfte brauchst du?</h3>
             <div class="quiz-options">
-              <button type="button" class="quiz-option" data-field="rolle" data-value="gf">Geschäftsführung / Inhaber</button>
-              <button type="button" class="quiz-option" data-field="rolle" data-value="bauleitung">Bauleitung / Polier</button>
-              <button type="button" class="quiz-option" data-field="rolle" data-value="buero_hr">Büro / HR</button>
+              <button type="button" class="quiz-option" data-field="anzahl_fachkraefte" data-value="1">1 Schlüsselposition</button>
+              <button type="button" class="quiz-option" data-field="anzahl_fachkraefte" data-value="2-4">2–4 Fachkräfte</button>
+              <button type="button" class="quiz-option" data-field="anzahl_fachkraefte" data-value="5-20">5–20 Fachkräfte</button>
+              <button type="button" class="quiz-option" data-field="anzahl_fachkraefte" data-value="20+">Mehr als 20</button>
             </div>
             <button type="button" class="quiz-back" data-back="1">← Zurück</button>
           </div>
 
-          <!-- STEP 3 — Betriebsgröße -->
+          <!-- STEP 3 — Dringlichkeit -->
           <div class="quiz-slide" data-slide="3">
-            <h3 class="quiz-question">Wie viele Mitarbeiter beschäftigt Ihr Betrieb?</h3>
-            <p class="quiz-subtext">Für Empfehlungen, die zu Ihrer Betriebsgröße passen.</p>
+            <h3 class="quiz-question">Wann sollen sie starten?</h3>
+            <div class="quiz-options">
+              <button type="button" class="quiz-option" data-field="dringlichkeit" data-value="asap">So schnell wie möglich – es brennt</button>
+              <button type="button" class="quiz-option" data-field="dringlichkeit" data-value="1-2-monate">Innerhalb von 1–2 Monaten</button>
+              <button type="button" class="quiz-option" data-field="dringlichkeit" data-value="nicht-dringend">Aktuell nicht dringend</button>
+            </div>
+            <button type="button" class="quiz-back" data-back="2">← Zurück</button>
+          </div>
+
+          <!-- STEP 4 — Betriebsgröße -->
+          <div class="quiz-slide" data-slide="4">
+            <h3 class="quiz-question">Wie viele Mitarbeiter hat dein Betrieb?</h3>
             <div class="quiz-options">
               <button type="button" class="quiz-option" data-field="mitarbeiter_range" data-value="unter-15">Unter 15 Mitarbeiter</button>
               <button type="button" class="quiz-option" data-field="mitarbeiter_range" data-value="15-30">15–30 Mitarbeiter</button>
@@ -453,53 +454,40 @@
               <button type="button" class="quiz-option" data-field="mitarbeiter_range" data-value="61-100">61–100 Mitarbeiter</button>
               <button type="button" class="quiz-option" data-field="mitarbeiter_range" data-value="ueber-100">Über 100 Mitarbeiter</button>
             </div>
-            <button type="button" class="quiz-back" data-back="2">← Zurück</button>
-          </div>
-
-          <!-- STEP 4 — Anzahl Fachkräfte -->
-          <div class="quiz-slide" data-slide="4">
-            <h3 class="quiz-question">Wie viele Fachkräfte möchten Sie einstellen?</h3>
-            <p class="quiz-subtext">Eine Schlüsselposition oder gleich mehrere Stellen?</p>
-            <div class="quiz-options">
-              <button type="button" class="quiz-option" data-field="anzahl_fachkraefte" data-value="1">1 Schlüsselposition</button>
-              <button type="button" class="quiz-option" data-field="anzahl_fachkraefte" data-value="2-4">2–4 Fachkräfte</button>
-              <button type="button" class="quiz-option" data-field="anzahl_fachkraefte" data-value="5-20">5–20 Fachkräfte</button>
-              <button type="button" class="quiz-option" data-field="anzahl_fachkraefte" data-value="20+">Mehr als 20</button>
-            </div>
             <button type="button" class="quiz-back" data-back="3">← Zurück</button>
           </div>
 
-          <!-- STEP 5 — Dringlichkeit -->
+          <!-- STEP 5 — PLZ -->
           <div class="quiz-slide" data-slide="5">
-            <h3 class="quiz-question">Wann sollen die neuen Fachkräfte starten?</h3>
-            <p class="quiz-subtext">Damit wir Ihren Rückruf richtig priorisieren können.</p>
-            <div class="quiz-options">
-              <button type="button" class="quiz-option" data-field="dringlichkeit" data-value="asap">So schnell wie möglich – es brennt</button>
-              <button type="button" class="quiz-option" data-field="dringlichkeit" data-value="1-2-monate">Innerhalb 1–2 Monaten</button>
-              <button type="button" class="quiz-option" data-field="dringlichkeit" data-value="nicht-dringend">Aktuell nicht dringend</button>
+            <h3 class="quiz-question">Wo sollen die neuen Leute arbeiten?</h3>
+            <p class="quiz-subtext">PLZ reicht – deinen Umkreis prüfen wir im Gespräch konkret.</p>
+            <div class="quiz-input-group">
+              <label class="quiz-label" for="quiz-plz">Postleitzahl deines Betriebs</label>
+              <input type="text" class="quiz-input" id="quiz-plz" name="plz" placeholder="z. B. 50670" maxlength="5" inputmode="numeric" autocomplete="postal-code">
             </div>
+            <button type="button" class="quiz-cta" id="quiz-plz-cta">Weiter →</button>
+            <div class="quiz-error" id="quiz-step1-error">Bitte eine gültige 5-stellige PLZ eingeben.</div>
             <button type="button" class="quiz-back" data-back="4">← Zurück</button>
           </div>
 
           <!-- STEP 6 — E-Mail -->
           <div class="quiz-slide" data-slide="6">
             <div class="quiz-confirm" id="quiz-confirm"></div>
-            <h3 class="quiz-question">Sehr gut – wir erstellen jetzt Ihre Recruiting-Analyse.</h3>
-            <p class="quiz-subtext">Wohin dürfen wir die Analyse senden? <b>Als Bonus erhalten Sie direkt den Recruiting-Report 2026</b> (32 Seiten) dazu.</p>
+            <h3 class="quiz-question">Fast geschafft – wohin dürfen wir deine Terminbestätigung schicken?</h3>
             <div class="quiz-input-group">
               <label class="quiz-label" for="email">Geschäftliche E-Mail</label>
-              <input type="email" class="quiz-input" id="email" name="email" placeholder="ihre@firma.de" autocomplete="email" autocapitalize="none" spellcheck="false" inputmode="email">
+              <input type="email" class="quiz-input" id="email" name="email" placeholder="name@firma.de" autocomplete="email" autocapitalize="none" spellcheck="false" inputmode="email">
             </div>
-            <button type="button" class="quiz-cta" data-next-from="6">Analyse anfordern →</button>
-            <div class="quiz-error" id="quiz-step6-error">Bitte tragen Sie eine gültige E-Mail-Adresse ein.</div>
+            <button type="button" class="quiz-cta" data-next-from="6">Weiter →</button>
+            <div class="quiz-error" id="quiz-step6-error">Bitte trag eine gültige E-Mail-Adresse ein.</div>
             <button type="button" class="quiz-back" data-back="5">← Zurück</button>
-            <div class="quiz-trustline"><span>🔒 Keine Weitergabe an Dritte, jederzeit abbestellbar.</span></div>
+            <div class="quiz-trustline"><span>🔒 Keine Weitergabe an Dritte.</span></div>
           </div>
 
           <!-- STEP 7 — Name + Firma + Handynummer -->
           <div class="quiz-slide" data-slide="7">
-            <h3 class="quiz-question">Für welchen Betrieb erstellen wir die Analyse?</h3>
-            <p class="quiz-subtext">Letzter Schritt – danach meldet sich unser Team innerhalb 24–48 h persönlich.</p>
+            <h3 class="quiz-question">An wen richtet sich das Beratungsgespräch?</h3>
+            <p class="quiz-subtext">Letzter Schritt – danach melden wir uns innerhalb von 24–48 h persönlich bei dir.</p>
             <div class="quiz-input-group" data-substep="name">
               <label class="quiz-label" for="fullname">Vor- und Nachname</label>
               <input type="text" class="quiz-input" id="fullname" placeholder="z. B. Max Müller" autocomplete="name" autocapitalize="words" spellcheck="false">
@@ -509,7 +497,7 @@
               <input type="text" class="quiz-input" id="unternehmen" name="unternehmen" placeholder="z. B. Müller GaLaBau GmbH" autocomplete="organization" autocapitalize="words" spellcheck="false">
             </div>
             <div class="quiz-input-group" data-substep="phone" style="display:none;">
-              <label class="quiz-label" for="phone">Ihre Handynummer</label>
+              <label class="quiz-label" for="phone">Deine Handynummer</label>
               <div class="phone-row">
                 <select class="phone-prefix" id="phone-country" aria-label="Ländervorwahl">
                   <option value="49" selected>DE +49</option>
@@ -526,33 +514,27 @@
             </div>
             <label class="quiz-privacy">
               <input type="checkbox" id="privacy" name="privacy">
-              <span>Ich stimme der <a href="https://www.green-careers.de/datenschutz" target="_blank" rel="noopener">Datenschutzerklärung</a> zu und bin einverstanden, von GreenCareers kontaktiert zu werden. Die Einwilligung kann jederzeit widerrufen werden.</span>
+              <span>Ich stimme der <a href="https://www.green-careers.de/datenschutz" target="_blank" rel="noopener">Datenschutzerklärung</a> zu und bin einverstanden, dass GreenCareers mich zu meiner Anfrage kontaktiert. Die Einwilligung kann ich jederzeit widerrufen.</span>
             </label>
-            <button type="button" class="quiz-cta" id="quiz-final-submit" disabled>Analyse anfordern →</button>
-            <div class="quiz-error" id="quiz-step7-error">Bitte füllen Sie alle Felder aus und bestätigen den Datenschutz.</div>
+            <button type="button" class="quiz-cta" id="quiz-final-submit" disabled>Jetzt Beratungstermin sichern →</button>
+            <div class="quiz-error" id="quiz-step7-error">Bitte fülle alle Felder aus und bestätige den Datenschutz.</div>
             <button type="button" class="quiz-back" data-back="6">← Zurück</button>
-            <div class="quiz-trustline"><span>🔒 Kein Spam · Rückruf nur zu Ihrer Anfrage · DSGVO-konform</span></div>
+            <div class="quiz-trustline"><span>📱 Deine Bestätigung kommt per WhatsApp · 🔒 DSGVO-konform</span></div>
           </div>
         </form>
-
-        <!-- Analyse-Stack: wächst mit jeder Antwort -->
-        <div class="analysis-stack" id="analysis-stack" hidden>
-          <div class="analysis-title">✓ Was wir aus Ihren Antworten lesen</div>
-          <ul class="analysis-list" id="analysis-list"></ul>
-        </div>
 
         <!-- SUCCESS -->
         <div class="quiz-success" id="form-success">
           <div class="success-check">✓</div>
           <h3>Anfrage eingegangen.</h3>
-          <p>Unser Team meldet sich innerhalb von <b>24–48 Stunden</b> persönlich bei Ihnen mit Ihrer Recruiting-Analyse.</p>
-          <p class="success-mailnote">Sie werden gleich weitergeleitet – dort wartet Ihr <b>Bonus: der Recruiting-Report 2026</b>.</p>
+          <p>Wir melden uns innerhalb von <b>24–48 Stunden</b> persönlich bei dir und machen deinen Beratungstermin aus.</p>
+          <p class="success-mailnote">Einen Moment – du wirst weitergeleitet.</p>
         </div>
       </div>
 
       <div class="trust-strip under-card">
         <span class="trust-item"><span class="stars">★★★★★</span> <b>4,9</b> auf Google</span>
-        <span class="trust-item"><b>500+</b>&nbsp;Betriebe</span>
+        <span class="trust-item"><b>600+</b>&nbsp;GaLaBau-Betriebe</span>
         <span class="trust-item"><b>30.000+</b>&nbsp;Fachkräfte</span>
       </div>
     </div>
@@ -579,7 +561,7 @@
 
   <!-- ===== ERFOLGSMELDUNGEN ===== -->
   <div class="wins">
-    <div class="logos-label">Erfolgsmeldungen aus dem Netzwerk – laufend aktualisiert</div>
+    <div class="logos-label">Erfolgsmeldungen aus dem Netzwerk</div>
     <div class="marquee">
       <div class="marquee-track" id="wins-track">
         <div class="win-chip"><span class="win-dot"></span><span><b>1 Landschaftsgärtner eingestellt</b><span class="w-sub">Goldblume Garten und Landschaftsbau</span></span></div>
@@ -599,16 +581,16 @@
   <!-- ===== PROBLEM ===== -->
   <section id="probleme" style="padding-top:30px;">
     <div class="container">
-      <div class="section-label reveal">Kommt Ihnen das bekannt vor?</div>
+      <div class="section-label reveal">Kommt dir das bekannt vor?</div>
       <h2 class="section-title reveal">Vier Recruiting-Realitäten, die Geld <em class="accent">und Nerven kosten.</em></h2>
-      <p class="section-sub reveal">Wenn auch nur eine davon auf Ihren Betrieb zutrifft, lohnt sich die Analyse:</p>
+      <p class="section-sub reveal">Wenn auch nur eine davon auf deinen Betrieb zutrifft, lohnt sich das Gespräch:</p>
       <div class="problem-grid">
         <div class="problem-card reveal"><h3>Viele Bewerber – aber keiner kann auf die Baustelle</h3><p>Ohne Führerschein C/CE, ohne Ausbildung, ohne Praxis. Jede Vorauswahl frisst Stunden – und am Ende bleibt selten jemand übrig, der morgen eine Kolonne führen kann.</p></div>
         <div class="problem-card reveal"><h3>Saisonstart vor der Tür – und keine Bewerbungen</h3><p>Anzeigen, Aushänge, Indeed: viel Aufwand, kaum Rücklauf. Vorarbeiter- und Bauleiterstellen bleiben monatelang offen, das Team fährt auf Anschlag.</p></div>
         <div class="problem-card reveal"><h3>Recruiting-Kosten außer Kontrolle</h3><p>Vermittler verlangen 25–30 % des Jahresgehalts – beim Vorarbeiter schnell 15.000 €+. Portale kosten monatlich, ohne Garantie und ohne messbare Wirkung.</p></div>
-        <div class="problem-card reveal"><h3>Vorstellungsgespräche, die nie stattfinden</h3><p>Termin vereinbart, Bewerber taucht nicht auf. Ein halber Arbeitstag verloren, der auf der Baustelle gebraucht wurde – und Sie stehen wieder am Anfang.</p></div>
+        <div class="problem-card reveal"><h3>Vorstellungsgespräche, die nie stattfinden</h3><p>Termin vereinbart, Bewerber taucht nicht auf. Ein halber Arbeitstag verloren, der auf der Baustelle gebraucht wurde – und du stehst wieder am Anfang.</p></div>
       </div>
-      <p class="section-sub reveal" style="margin-top:22px;">Wir kennen diese vier Punkte aus über <b style="color:var(--ink);">540 Gesprächen</b> mit GaLaBau- und Baumpflege-Inhabern – und zeigen Ihnen in der Analyse den konkreten Weg raus.</p>
+      <p class="section-sub reveal" style="margin-top:22px;">Wir kennen diese vier Punkte aus über <b style="color:var(--ink);">540 Gesprächen</b> mit GaLaBau- und Baumpflege-Inhabern – und zeigen dir im Gespräch den konkreten Weg raus.</p>
     </div>
   </section>
 
@@ -616,17 +598,16 @@
   <section id="ablauf" style="padding-top:20px;">
     <div class="container">
       <div class="section-label reveal">So läuft es ab</div>
-      <h2 class="section-title reveal">In drei Schritten zur <em class="accent">planbaren Strategie.</em></h2>
+      <h2 class="section-title reveal">In drei Schritten zu <em class="accent">deinen nächsten Fachkräften.</em></h2>
       <div class="steps-grid">
-        <div class="step-card reveal"><span class="step-num">01</span><b>60 Sekunden Formular</b><p>Region, Betriebsgröße, gesuchte Positionen – danach wissen wir, worum es bei Ihnen geht.</p></div>
-        <div class="step-card reveal"><span class="step-num">02</span><b>Rückruf in 24–48 Stunden</b><p>Unser Team meldet sich persönlich, hört zu und vereinbart einen Termin, der in Ihren Alltag passt.</p></div>
-        <div class="step-card reveal"><span class="step-num">03</span><b>30 Minuten Analyse-Gespräch</b><p>Ehrliche Ist-Analyse und konkrete Empfehlung: Kanäle, Budget, Zeitrahmen – mit oder ohne uns.</p></div>
+        <div class="step-card reveal"><span class="step-num">01</span><b>60 Sekunden Anfrage</b><p>Vier Klicks, PLZ, Kontakt – danach wissen wir, wen du suchst.</p></div>
+        <div class="step-card reveal"><span class="step-num">02</span><b>Rückruf in 24–48 Stunden</b><p>Wir melden uns persönlich und machen einen Termin aus, der in deinen Alltag passt.</p></div>
+        <div class="step-card reveal"><span class="step-num">03</span><b>30 Minuten Beratungsgespräch</b><p>Ehrliche Einschätzung für deine Region und ein konkreter Plan: Positionen, Zeitrahmen, nächste Schritte – mit oder ohne uns.</p></div>
       </div>
       <ul class="promise-list reveal">
-        <li><b>Ehrlich:</b> Wenn wir in Ihrer Region nicht helfen können, sagen wir es direkt.</li>
-        <li><b>Konkret:</b> Empfehlung für Ihre Positionen – Landschaftsgärtner, Vorarbeiter, Bauleiter.</li>
+        <li><b>Ehrlich:</b> Wenn wir dir in deiner Region nicht helfen können, sagen wir es dir direkt.</li>
+        <li><b>Konkret:</b> Empfehlung für deine Positionen – Landschaftsgärtner, Vorarbeiter, Bauleiter.</li>
         <li><b>Planbar:</b> Der realistische Weg zu passenden Kandidaten in ø 45 Tagen.</li>
-        <li><b>Bonus:</b> Der Recruiting-Report 2026 (32 Seiten Benchmarks) – gratis dazu.</li>
       </ul>
     </div>
   </section>
@@ -638,12 +619,12 @@
     <div class="container">
       <div class="network-grid">
         <div>
-          <div class="section-label reveal">Der Pool hinter Ihrer Analyse</div>
+          <div class="section-label reveal">Der Pool hinter deinem Gespräch</div>
           <h2 class="section-title reveal">30.000+ Fachkräfte, <em class="accent">live im DACH-Raum.</em></h2>
-          <p class="section-sub reveal">Jeden Tag kommen im GreenCareers-Netzwerk neue Bewerbungen, Wechselwünsche und Einstellungen zusammen. Genau diesen Pool prüfen wir in Ihrer Analyse – für Ihre Region und Ihre Positionen.</p>
+          <p class="section-sub reveal">Jeden Tag kommen im GreenCareers-Netzwerk neue Bewerbungen, Wechselwünsche und Einstellungen zusammen. Genau diesen Pool prüfen wir für deine Region und deine Positionen.</p>
           <div class="network-stats reveal">
             <div class="network-stat"><b>30.000+</b><span>Fachkräfte im Netzwerk</span></div>
-            <div class="network-stat"><b>500+</b><span>GaLaBau-Betriebe</span></div>
+            <div class="network-stat"><b>600+</b><span>GaLaBau-Betriebe</span></div>
             <div class="network-stat"><b>900+</b><span>Platzierungen</span></div>
             <div class="network-stat"><b>ø 45</b><span>Tage bis zur Einstellung</span></div>
           </div>
@@ -676,31 +657,12 @@
   </section>
 
   <div class="band-light">
-  <!-- ===== FÜR BETRIEBE WIE IHREN ===== -->
-  <section id="zielgruppe" style="padding-top:20px;">
-    <div class="container">
-      <div class="audience-card reveal">
-        <div class="audience-img"><img src="assets/team-galabau.jpg" alt="GaLaBau-Inhaber mit seinem Team auf der Baustelle" loading="lazy" decoding="async"></div>
-        <div class="audience-copy">
-          <div class="section-label">Für wen die Analyse ist</div>
-          <h2 class="section-title" style="font-size:clamp(1.5rem,4.6vw,2.1rem);">Geschrieben für Betriebe <em class="accent">wie Ihren.</em></h2>
-          <p style="color:var(--ink-dim);font-size:.95rem;margin-top:12px;">Sie führen 15 bis 100 Leute, die Auftragsbücher sind voll – und jede unbesetzte Stelle bremst das Wachstum. Genau für diese Betriebe machen wir die Recruiting-Analyse: konkret, ehrlich, auf Ihre Region gerechnet.</p>
-          <ul class="audience-list">
-            <li>Inhaber &amp; Geschäftsführer im GaLaBau</li>
-            <li>15–100 Mitarbeiter, wachstumsorientiert</li>
-            <li>Bereit, Mitarbeitergewinnung wie eine Baustelle zu planen: mit Zahlen statt Bauchgefühl</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ===== TESTIMONIALS ===== -->
-  <section id="stimmen" style="padding-top:20px;">
+  <section id="stimmen" style="padding-top:30px;">
     <div class="container">
-      <div class="section-label reveal">Wer hinter dem Report steht</div>
+      <div class="section-label reveal">Echte Stimmen aus der Branche</div>
       <h2 class="section-title reveal">Das sagen GaLaBau-Inhaber <em class="accent">über die Zusammenarbeit.</em></h2>
-      <p class="section-sub reveal">GreenCareers ist das spezialisierte Karrierenetzwerk der grünen Branche – das sagen Inhaber über die Zusammenarbeit.</p>
+      <p class="section-sub reveal">GreenCareers ist das spezialisierte Karrierenetzwerk der grünen Branche – 600+ GaLaBau-Betriebe nutzen es bereits.</p>
       <div class="testi-grid">
         <div class="testi reveal">
           <div class="testi-result">20+ Bewerber auf eine Stelle</div>
@@ -721,7 +683,7 @@
           <div class="testi-foot"><span class="testi-avatar">BD</span><div><div class="testi-name">Boas Diehl</div><div class="testi-verified">✓ Verifizierte Google-Bewertung</div></div></div>
         </div>
       </div>
-      <div style="text-align:center;"><span class="google-badge reveal">Google <b>4,9 / 5</b> <span style="color:#FBBF24;letter-spacing:1px;">★★★★★</span> · 500+ Betriebe · 900+ Platzierungen</span></div>
+      <div style="text-align:center;"><span class="google-badge reveal">Google <b>4,9 / 5</b> <span style="color:#FBBF24;letter-spacing:1px;">★★★★★</span> · 600+ GaLaBau-Betriebe · 900+ Platzierungen</span></div>
     </div>
   </section>
 
@@ -731,10 +693,10 @@
   <section id="abschluss" style="padding-top:10px;">
     <div class="container">
       <div class="final-cta reveal">
-        <h2>Ihre nächste Einstellung – <span class="ital">in ø 45 Tagen.</span></h2>
-        <p>Kostenlose Recruiting-Analyse für Ihren Betrieb: Region prüfen, konkrete Empfehlung erhalten – und den Recruiting-Report 2026 gibt es als Bonus dazu.</p>
-        <a class="btn-primary" href="#quiz" data-scroll-quiz>Jetzt Analyse starten →</a>
-        <div class="final-note">100 % kostenlos · 30 Minuten Gespräch · Keine Verpflichtung</div>
+        <h2>Deine nächste Einstellung – <span class="ital">in ø 45 Tagen.</span></h2>
+        <p>Kostenloses Beratungsgespräch für deinen Betrieb: ehrliche Einschätzung für deine Region und ein konkreter Plan für deine offenen Stellen.</p>
+        <a class="btn-primary" href="#quiz" data-scroll-quiz>Jetzt Beratungstermin sichern →</a>
+        <div class="final-note">100 % kostenlos · 30 Minuten · Keine Verpflichtung</div>
       </div>
     </div>
   </section>
@@ -755,7 +717,7 @@
   </footer>
 
   <!-- ===== STICKY CTA (mobile) ===== -->
-  <div class="sticky-cta" id="sticky-cta"><a href="#quiz" data-scroll-quiz id="sticky-cta-link">Kostenlose Analyse starten →</a></div>
+  <div class="sticky-cta" id="sticky-cta"><a href="#quiz" data-scroll-quiz id="sticky-cta-link">Jetzt Beratungstermin sichern →</a></div>
 
   <script>
   (function(){
@@ -776,6 +738,26 @@
     // Live nur auf *.green-careers.de — auf der Vercel-Test-URL werden
     // weder Pixel noch Webhook noch Tracking-Endpoints angesprochen.
     var IS_LIVE = /(^|\.)green-careers\.de$/.test(location.hostname);
+
+    /* --- Meta-Crawler-Guard (Muster der Report-LPs) ---------------
+       Meta klickt nach jeder neuen Ad die LP durch und betätigt dabei
+       alle Buttons (~15 s, Meta-IPs). Send-Pfade nur an validierten
+       State koppeln: gcRealUser() ist erst true nach einer echten,
+       vertrauenswürdigen Nutzer-Geste UND plausibler Verweildauer. */
+    var GC_FIRST_PAINT = Date.now();
+    var GC_HAS_GESTURE = false;
+    var GC_MIN_DWELL_MS = 4000;
+    ['pointerdown','touchstart','keydown','wheel'].forEach(function(ev){
+      window.addEventListener(ev, function(e){
+        if (e && e.isTrusted) GC_HAS_GESTURE = true;
+      }, { passive: true, capture: true });
+    });
+    window.gcRealUser = function(){
+      return GC_HAS_GESTURE && (Date.now() - GC_FIRST_PAINT) >= GC_MIN_DWELL_MS;
+    };
+    window.gcGuardInfo = function(){
+      return { gesture: GC_HAS_GESTURE, dwell_ms: Date.now() - GC_FIRST_PAINT };
+    };
 
     /* =====================================================
        PIXEL + CLARITY (nur live)
@@ -888,7 +870,7 @@
         nachname: answers.nachname || '',
         unternehmen: answers.unternehmen || '',
         phone: answers.phone || '',
-        position: answers.position || '',
+        position: answers.gesuchte_position || '',
         mitarbeiter_range: answers.mitarbeiter_range || '',
         fbp: getFbp(),
         fbc: getFbc(),
@@ -913,7 +895,7 @@
     /* =====================================================
        QUIZ (7 Steps, Vertrag identisch zur bisherigen LP)
        ===================================================== */
-    var answers = { plz:'', plz_ort:'', plz_bundesland:'', pool_count:'', rolle:'', mitarbeiter_range:'', anzahl_fachkraefte:'', dringlichkeit:'', email:'', vorname:'', nachname:'', unternehmen:'', phone:'' };
+    var answers = { plz:'', plz_ort:'', plz_bundesland:'', gesuchte_position:'', mitarbeiter_range:'', anzahl_fachkraefte:'', dringlichkeit:'', email:'', vorname:'', nachname:'', unternehmen:'', phone:'' };
     var slides = Array.prototype.slice.call(document.querySelectorAll('.quiz-slide'));
     var progress = document.getElementById('quiz-progress');
     var progressFill = document.getElementById('quiz-progress-fill');
@@ -923,25 +905,13 @@
     var quizStarted = false;
     var TIME_LEFT = {1:'≈ 60 Sek.',2:'≈ 50 Sek.',3:'≈ 40 Sek.',4:'≈ 35 Sek.',5:'≈ 25 Sek.',6:'≈ 15 Sek.',7:'≈ 10 Sek.'};
 
-    var stackEl = document.getElementById('analysis-stack');
-    var stackList = document.getElementById('analysis-list');
-    var stackItems = {};
-    function showInsight(step, html){
-      stackEl.hidden = false;
-      if (!stackItems[step]) {
-        stackItems[step] = document.createElement('li');
-        stackList.appendChild(stackItems[step]);
-      }
-      stackItems[step].innerHTML = html;
-    }
-
-    var RANGE_LABELS = { 'unter-15':'unter 15', '15-30':'15–30', '31-60':'31–60', '61-100':'61–100', 'ueber-100':'über 100' };
+    var POSITION_LABELS = { 'landschaftsgaertner':'Landschaftsgärtner', 'vorarbeiter':'Vorarbeiter', 'bauleiter':'Bauleiter', 'mehrere':'mehrere Positionen' };
 
     function showSlide(n){
       slides.forEach(function(sl){ sl.classList.toggle('is-active', sl.dataset.slide === String(n)); });
       if (n > 1) {
         progress.classList.add('visible');
-        progressLabel.textContent = 'Schritt ' + n + ' von 7';
+        progressLabel.textContent = '';
         progressTime.textContent = TIME_LEFT[n] + ' übrig';
         progressFill.style.width = (n/7*100) + '%';
       } else {
@@ -949,9 +919,9 @@
       }
       if (n === 6) {
         var el = document.getElementById('quiz-confirm');
-        if (answers.plz && answers.mitarbeiter_range) {
+        if (answers.plz && answers.gesuchte_position) {
           var ort = answers.plz_ort || ('PLZ ' + answers.plz);
-          el.innerHTML = '✓ <b>' + ort + '</b>: ' + answers.pool_count + ' Fachkräfte im Pool · Betrieb mit <b>' + (RANGE_LABELS[answers.mitarbeiter_range] || answers.mitarbeiter_range) + ' Mitarbeitern</b> – Ihre Analyse ist startklar.';
+          el.innerHTML = '✓ <b>Raum ' + ort + '</b> · gesucht: <b>' + (POSITION_LABELS[answers.gesuchte_position] || answers.gesuchte_position) + '</b> – passt, dafür machen wir den Termin.';
           el.classList.add('visible');
         }
       }
@@ -966,19 +936,10 @@
     trackFunnelEvent('slide_view', '1');
     trackPixelEvent('Quiz_Step_1_Viewed', { landingpage: LANDINGPAGE_ID });
 
-    /* ---- STEP 1: PLZ-Gate (Logik 1:1 von der bisherigen LP) ---- */
+    /* ---- STEP 5: PLZ (Ort-Lookup nur für Bestätigung + Sales-Kontext) ---- */
     var plzInput = document.getElementById('quiz-plz');
     var plzCTA = document.getElementById('quiz-plz-cta');
     var plzError = document.getElementById('quiz-step1-error');
-
-    function computeRealisticPool(plz){
-      var prefix = parseInt(plz.substring(0,2), 10);
-      var urbanPrefixes = [10,12,13,20,22,40,44,45,50,51,53,60,70,80,81,90];
-      var isUrban = urbanPrefixes.indexOf(prefix) !== -1;
-      var seed = parseInt(plz, 10) % 100;
-      if (isUrban) return 16 + (seed % 17);
-      return 8 + (seed % 11);
-    }
 
     plzInput.addEventListener('input', function(){
       plzInput.value = plzInput.value.replace(/[^0-9]/g, '').slice(0, 5);
@@ -994,23 +955,15 @@
         plzError.classList.add('active');
         return;
       }
-      if (!quizStarted) {
-        quizStarted = true;
-        trackPixelEvent('Quiz_Started', { landingpage: LANDINGPAGE_ID, cta_location: 'plz_gate' });
-      }
       plzCTA.disabled = true;
-      plzCTA.textContent = 'Prüfung läuft…';
+      plzCTA.textContent = 'Einen Moment…';
       var finish = function(ort, bundesland){
-        var pool = computeRealisticPool(plz);
         answers.plz = plz;
         answers.plz_ort = ort || '';
         answers.plz_bundesland = bundesland || '';
-        answers.pool_count = pool;
-        var ortText = ort ? (ort + (bundesland ? ', ' + bundesland : '')) : ('PLZ ' + plz);
-        showInsight(1, '<b>' + ortText + '</b> – ja, wir können helfen. Aktuell <b>' + pool + ' Fachkräfte aus dem GaLaBau</b> in Ihrer Region im Pool. Im Gespräch prüfen wir, welche wirklich zu Ihrem Betrieb passen.');
         plzCTA.disabled = false;
-        plzCTA.textContent = 'Pool prüfen →';
-        showSlide(2);
+        plzCTA.textContent = 'Weiter →';
+        showSlide(6);
       };
       fetch('https://api.zippopotam.us/de/' + plz)
         .then(function(r){ return r.ok ? r.json() : null; })
@@ -1021,30 +974,18 @@
         .catch(function(){ finish(null, null); });
     });
 
-    /* ---- STEPS 2–5: Options-Buttons + Insights ---- */
-    var INSIGHTS = {
-      rolle: {
-        gf: 'Sie entscheiden selbst – im Gespräch klären wir direkt die nächsten Schritte.',
-        bauleitung: 'Sie kennen die Baustellen-Realität – genau dafür ist die Analyse gedacht.',
-        buero_hr: 'Wir bereiten alles so auf, dass Sie es intern direkt weitergeben können.'
-      },
-      dringlichkeit: {
-        'asap': 'Verstanden – <b>wir priorisieren Ihren Rückruf</b>.',
-        '1-2-monate': 'Guter Zeitpunkt: 1–2 Monate Vorlauf sind ideal für eine saubere Besetzung.',
-        'nicht-dringend': 'Perfekt für einen Plan ohne Druck – so entsteht die beste Passung.'
-      }
-    };
+    /* ---- STEPS 1–4: Options-Buttons ---- */
     document.querySelectorAll('.quiz-option').forEach(function(btn){
       btn.addEventListener('click', function(){
         var field = btn.dataset.field, value = btn.dataset.value;
         answers[field] = value;
         btn.parentElement.querySelectorAll('.quiz-option').forEach(function(b){ b.classList.remove('picked'); });
         btn.classList.add('picked');
-        if (field === 'rolle') showInsight(2, INSIGHTS.rolle[value] || '');
-        if (field === 'mitarbeiter_range') showInsight(3, 'Betriebe mit <b>' + (RANGE_LABELS[value] || value) + ' Mitarbeitern</b> besetzen über das Netzwerk in <b>ø 45 Tagen</b>.');
-        if (field === 'anzahl_fachkraefte') showInsight(4, value === '1' ? 'Eine <b>Schlüsselposition</b> – hier zählt Passung vor Masse.' : '<b>' + btn.textContent.trim() + '</b> – wir priorisieren die Reihenfolge im Gespräch.');
-        if (field === 'dringlichkeit') showInsight(5, INSIGHTS.dringlichkeit[value] || '');
-        var next = { rolle:3, mitarbeiter_range:4, anzahl_fachkraefte:5, dringlichkeit:6 }[field];
+        if (!quizStarted) {
+          quizStarted = true;
+          trackPixelEvent('Quiz_Started', { landingpage: LANDINGPAGE_ID, cta_location: 'hero_tiles' });
+        }
+        var next = { gesuchte_position:2, anzahl_fachkraefte:3, dringlichkeit:4, mitarbeiter_range:5 }[field];
         setTimeout(function(){ showSlide(next); }, 180);
       });
     });
@@ -1144,8 +1085,8 @@
         plz: answers.plz,
         plz_ort: answers.plz_ort,
         plz_bundesland: answers.plz_bundesland,
-        pool_count: answers.pool_count,
-        rolle: answers.rolle,
+        gesuchte_position: answers.gesuchte_position,
+        rolle: '',
         mitarbeiter_range: answers.mitarbeiter_range,
         anzahl_fachkraefte: answers.anzahl_fachkraefte,
         dringlichkeit: answers.dringlichkeit,
@@ -1153,7 +1094,7 @@
           answers.dringlichkeit === 'asap'           ? 'Sofort' :
           answers.dringlichkeit === '1-2-monate'     ? '1–2 Monate' :
           answers.dringlichkeit === 'nicht-dringend' ? 'Nicht dringend' : '',
-        bereich: '',
+        bereich: answers.gesuchte_position,
         quelle: '',
         source: LANDINGPAGE_ID,
         landingpage_id: LANDINGPAGE_ID,
@@ -1164,6 +1105,15 @@
         referrer: document.referrer || '',
         user_agent: navigator.userAgent
       }, trackingParams);
+
+      // Crawler-Guard: ohne echte Nutzer-Geste + Verweildauer wird KEIN Lead erzeugt
+      // (Meta klickt nach jeder neuen Ad die LP durch und betätigt alle Buttons).
+      if (!window.gcRealUser || !window.gcRealUser()) {
+        console.warn('[GC Guard] Submit ohne echte Nutzer-Interaktion verworfen.', window.gcGuardInfo ? window.gcGuardInfo() : {});
+        finalSubmit.textContent = originalText;
+        finalSubmit.disabled = false;
+        return;
+      }
 
       var send;
       if (IS_LIVE) {
@@ -1204,7 +1154,6 @@
         } catch(e){}
         document.getElementById('lead-form').style.display = 'none';
         progress.style.display = 'none';
-        document.getElementById('analysis-stack').hidden = true;
         document.getElementById('form-success').classList.add('active');
         document.getElementById('sticky-cta').classList.remove('visible');
         window.__gcSubmitted = true;
@@ -1213,7 +1162,7 @@
       }).catch(function(err){
         console.error('Form submit error:', err);
         trackFunnelEvent('submit_failed', null);
-        step7Error.textContent = 'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.';
+        step7Error.textContent = 'Etwas ist schiefgelaufen. Bitte versuch es erneut.';
         step7Error.classList.add('active');
         finalSubmit.textContent = originalText;
         finalSubmit.disabled = false;
