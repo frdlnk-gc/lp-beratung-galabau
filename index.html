@@ -144,8 +144,6 @@
     .phone-prefix{flex:none;display:flex;align-items:center;font-family:var(--font-sans);font-size:16px;font-weight:600;color:var(--q-ink);background:#F1EFE8;border:1.5px solid #E5E1D6;border-radius:12px;padding:0 10px;cursor:pointer;}
     select.phone-prefix{-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%234B5A50' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;background-size:11px;padding-right:26px;}
     select.phone-prefix:focus{outline:none;border-color:var(--green);}
-    .quiz-confirm{display:none;font-size:.8rem;font-weight:600;line-height:1.5;color:#166534;background:#E8F8EE;border:1px solid #BBEBCE;border-radius:11px;padding:10px 13px;margin-bottom:13px;}
-    .quiz-confirm.visible{display:block;}
 
     .quiz-cta{width:100%;font-family:var(--font-sans);font-size:1.02rem;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--green-bright),var(--green) 55%,var(--green-deep));border:none;border-radius:13px;padding:16px 18px;cursor:pointer;box-shadow:0 10px 24px -8px rgba(22,163,74,.55);transition:transform .12s,box-shadow .15s,opacity .15s;margin-top:4px;}
     .quiz-cta:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 14px 28px -8px rgba(22,163,74,.6);}
@@ -470,10 +468,10 @@
             <button type="button" class="quiz-back" data-back="4">← Zurück</button>
           </div>
 
-          <!-- STEP 6 — E-Mail -->
+          <!-- STEP 6 — E-Mail (Headline wird aus den Quiz-Antworten personalisiert) -->
           <div class="quiz-slide" data-slide="6">
-            <div class="quiz-confirm" id="quiz-confirm"></div>
-            <h3 class="quiz-question">Fast geschafft – wohin dürfen wir deine Terminbestätigung schicken?</h3>
+            <h3 class="quiz-question" id="quiz-email-headline">Sehr gut – dein Betrieb kann in ø 45 Tagen einstellen.</h3>
+            <p class="quiz-subtext">E-Mail eintragen – dahin bekommst du deine Termin-Details.</p>
             <div class="quiz-input-group">
               <label class="quiz-label" for="email">Geschäftliche E-Mail</label>
               <input type="email" class="quiz-input" id="email" name="email" placeholder="name@firma.de" autocomplete="email" autocapitalize="none" spellcheck="false" inputmode="email">
@@ -486,7 +484,7 @@
 
           <!-- STEP 7 — Name + Firma + Handynummer -->
           <div class="quiz-slide" data-slide="7">
-            <h3 class="quiz-question">An wen richtet sich das Beratungsgespräch?</h3>
+            <h3 class="quiz-question">Für welchen Betrieb sollen wir das kostenlose Beratungsgespräch vorbereiten?</h3>
             <p class="quiz-subtext">Letzter Schritt – danach melden wir uns innerhalb von 24–48 h persönlich bei dir.</p>
             <div class="quiz-input-group" data-substep="name">
               <label class="quiz-label" for="fullname">Vor- und Nachname</label>
@@ -905,7 +903,8 @@
     var quizStarted = false;
     var TIME_LEFT = {1:'≈ 60 Sek.',2:'≈ 50 Sek.',3:'≈ 40 Sek.',4:'≈ 35 Sek.',5:'≈ 25 Sek.',6:'≈ 15 Sek.',7:'≈ 10 Sek.'};
 
-    var POSITION_LABELS = { 'landschaftsgaertner':'Landschaftsgärtner', 'vorarbeiter':'Vorarbeiter', 'bauleiter':'Bauleiter', 'mehrere':'mehrere Positionen' };
+    var POSITION_LABELS = { 'landschaftsgaertner':'Landschaftsgärtner', 'vorarbeiter':'Vorarbeiter', 'bauleiter':'Bauleiter', 'mehrere':'mehrere Fachkräfte' };
+    var RANGE_LABELS = { 'unter-15':'unter 15', '15-30':'15–30', '31-60':'31–60', '61-100':'61–100', 'ueber-100':'über 100' };
 
     function showSlide(n){
       slides.forEach(function(sl){ sl.classList.toggle('is-active', sl.dataset.slide === String(n)); });
@@ -918,11 +917,11 @@
         progress.classList.remove('visible');
       }
       if (n === 6) {
-        var el = document.getElementById('quiz-confirm');
-        if (answers.plz && answers.gesuchte_position) {
-          var ort = answers.plz_ort || ('PLZ ' + answers.plz);
-          el.innerHTML = '✓ <b>Raum ' + ort + '</b> · gesucht: <b>' + (POSITION_LABELS[answers.gesuchte_position] || answers.gesuchte_position) + '</b> – passt, dafür machen wir den Termin.';
-          el.classList.add('visible');
+        var hl = document.getElementById('quiz-email-headline');
+        var pos = POSITION_LABELS[answers.gesuchte_position] || '';
+        var range = RANGE_LABELS[answers.mitarbeiter_range] || '';
+        if (hl && pos && range) {
+          hl.textContent = 'Sehr gut – dein Betrieb mit ' + range + ' Mitarbeitern kann ' + pos + ' in ø 45 Tagen einstellen.';
         }
       }
       trackFunnelEvent('slide_view', String(n));
