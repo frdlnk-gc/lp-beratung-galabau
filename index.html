@@ -377,6 +377,23 @@
     @media (prefers-reduced-motion: reduce){.deck-item.deck-in{animation:none;}}
     .marquee-track.rev{animation-direction:reverse;animation-duration:135s;}
     .logos .marquee + .marquee{margin-top:12px;}
+
+    /* ===== Runde 2 (Mobile-Check 12.09.) ===== */
+    .quiz-head-titles .t2 b{font-weight:600;white-space:nowrap;}
+    .quiz-back{min-height:44px;display:inline-flex;align-items:center;padding:8px 6px 0 0;font-size:.85rem;}
+    .quiz-trustline{font-size:.8rem;}
+    .quiz-privacy{font-size:.82rem;}
+    .quiz-input.is-error,.quiz-input.is-error:focus{border-color:#DC2626;box-shadow:0 0 0 3px rgba(220,38,38,.12);}
+    .quiz-privacy.is-error span{color:#B91C1C;}
+    /* Deck: Karte selbst ist der Schalter */
+    .deck.is-collapsed .deck-stack{cursor:pointer;margin-bottom:48px;}
+    .deck.is-collapsed .deck-item:first-child::after{content:attr(data-hint);display:block;margin-top:14px;padding-top:12px;border-top:1px dashed #D5DDD7;color:#15803D;font-weight:700;font-size:.86rem;}
+    .deck-toggle{display:none;}
+    .deck-less{display:inline-block;margin-top:14px;background:none;border:none;color:#15803D;font-family:inherit;font-weight:700;font-size:.86rem;cursor:pointer;padding:10px 0;}
+    .deck.is-collapsed .deck-less{display:none;}
+    .marquee-track.r3{animation-duration:150s;}
+    .quiz-cta{font-size:clamp(.9rem,4.3vw,1.02rem);white-space:nowrap;}
+    .sticky-cta a{white-space:nowrap;}
   </style>
 </head>
 <body>
@@ -413,10 +430,9 @@
       <div class="quiz-card" id="quiz">
         <div class="quiz-head">
           <div class="quiz-head-titles">
-            <div class="t1">Beratungsgespräch für deinen Betrieb</div>
-            <div class="t2">60 Sek. Anfrage · Rückruf in 24–48 h</div>
+            <div class="t1">Kostenloses Beratungsgespräch</div>
+            <div class="t2">60 Sekunden Anfrage · <b>Rückruf in 24–48&nbsp;h</b></div>
           </div>
-          <span class="quiz-tag">KOSTENLOS</span>
         </div>
 
         <div class="quiz-progress" id="quiz-progress">
@@ -507,11 +523,11 @@
               <label class="quiz-label" for="fullname">Vor- und Nachname</label>
               <input type="text" class="quiz-input" id="fullname" placeholder="z. B. Max Müller" autocomplete="name" autocapitalize="words" spellcheck="false">
             </div>
-            <div class="quiz-input-group" data-substep="firma" style="display:none;">
+            <div class="quiz-input-group" data-substep="firma">
               <label class="quiz-label" for="unternehmen">Betrieb</label>
               <input type="text" class="quiz-input" id="unternehmen" name="unternehmen" placeholder="z. B. Müller GaLaBau GmbH" autocomplete="organization" autocapitalize="words" spellcheck="false">
             </div>
-            <div class="quiz-input-group" data-substep="phone" style="display:none;">
+            <div class="quiz-input-group" data-substep="phone">
               <label class="quiz-label" for="phone">Handynummer</label>
               <div class="phone-row">
                 <select class="phone-prefix" id="phone-country" aria-label="Ländervorwahl">
@@ -531,7 +547,7 @@
               <input type="checkbox" id="privacy" name="privacy">
               <span>Ich stimme der <a href="https://www.green-careers.de/datenschutz" target="_blank" rel="noopener">Datenschutzerklärung</a> zu und bin einverstanden, dass GreenCareers mich zu meiner Anfrage kontaktiert. Die Einwilligung kann ich jederzeit widerrufen.</span>
             </label>
-            <button type="button" class="quiz-cta" id="quiz-final-submit" disabled>Jetzt Beratungstermin sichern →</button>
+            <button type="button" class="quiz-cta" id="quiz-final-submit">Jetzt Beratungstermin sichern&nbsp;→</button>
             <div class="quiz-error" id="quiz-step7-error">Bitte fülle alle Felder aus und bestätige den Datenschutz.</div>
             <button type="button" class="quiz-back" data-back="6">← Zurück</button>
             <div class="quiz-trustline"><span>Die Bestätigung kommt per WhatsApp.</span></div>
@@ -558,84 +574,87 @@
   <!-- ===== LOGOS ===== -->
   <div class="logos">
     <div class="logos-label">Diese Betriebe vertrauen GreenCareers</div>
-    <div class="marquee">
-      <div class="marquee-track" id="marquee-track">
+    <div class="marquee"><div class="marquee-track" id="marquee-track">
         <div class="logo-chip"><img src="assets/logos/kunden/knappmann-rheinland.webp" alt="Knappmann Rheinland" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/jacobs.webp" alt="Jacobs Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/schernthaner.webp" alt="Schernthaner" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/idh-innovative-dienstleistungen-habers.webp" alt="IDH-Innovative Dienstleistungen Habers" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/aks.webp" alt="AKS Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/wragge-g-rten.webp" alt="Wragge Gärten" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/baum-landschaftspflege-gruber.webp" alt="Baum- und Landschaftspflege GRUBER" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/hermann-trautmann.webp" alt="Hermann Trautmann Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/garten-bosman.webp" alt="Garten Bosman" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/gerber.webp" alt="Gerber Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/feind.webp" alt="Feind" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/eckhard-k-psel.webp" alt="Eckhard Köpsel" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/gerd-linneweber.webp" alt="Gerd Linneweber Landschaftsbau" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/josef-p-tter.webp" alt="Josef Pötter" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/r-ssmann.webp" alt="Rüssmann" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/georg-franz.webp" alt="Georg Franz" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/majuntke-professionelles-gr-n.webp" alt="Majuntke, Professionelles Grün" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/kupka.webp" alt="Kupka" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/helmich-helmich.webp" alt="Helmich & Helmich" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/mathias-schulz.webp" alt="Mathias Schulz Gartenbau" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/fischer.webp" alt="Fischer Landschaftsbau" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/baum-erde.webp" alt="Baum und Erde" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/reiss-erd-gartenbaugesellschaft-mbh.webp" alt="Reiss Erd- und Gartenbaugesellschaft mbH" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/gr-nkonzept.webp" alt="Grünkonzept" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/gpl-ingo-kunde.webp" alt="GPL - Ingo Kunde" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/epp.webp" alt="Epp Gartenbau" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/gartencenter-josef-ziegltrum.webp" alt="Gartencenter Josef Ziegltrum" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/gr-fe.webp" alt="Gräfe Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/prager.webp" alt="Prager Landschaftsbau" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/rekowski.webp" alt="Rekowski Gartenbau" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/biermann.webp" alt="Garten und Landschaftsbau Biermann" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/fa-naturwerk.webp" alt="Fa. Naturwerk" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/sp-th-sche-handel.webp" alt="Späth’sche Baumschulen Handel" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/roring.webp" alt="Roring Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/bloemen-gartenpflege.webp" alt="Bloemen Landschaftsbau und Gartenpflege" loading="lazy" decoding="async"></div>
-      </div>
-    </div>
-    <div class="marquee">
-      <div class="marquee-track rev" id="marquee-track-2">
-        <div class="logo-chip"><img src="assets/logos/kunden/august-fichter-stra-enbau-sportst-ttenba.webp" alt="August Fichter GaLaBau-Straßenbau-Sportstättenbau" loading="lazy" decoding="async"></div>
         <div class="logo-chip"><img src="assets/logos/kunden/jakober-garten-landschafts-sportplatzbau.webp" alt="Jakober Garten-, Landschafts- und Sportplatzbau" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/lukas-schwarz.webp" alt="Lukas & Schwarz" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/rudolf-schrader.webp" alt="Rudolf Schrader Baumschulen KG" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/idh-innovative-dienstleistungen-habers.webp" alt="IDH-Innovative Dienstleistungen Habers" loading="lazy" decoding="async"></div>
         <div class="logo-chip"><img src="assets/logos/kunden/junicke.webp" alt="Junicke" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/schmitz-gartencenter-floristik.webp" alt="Schmitz Gartencenter & Floristik" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/scheidtmann.webp" alt="Scheidtmann" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/baum-landschaftspflege-gruber.webp" alt="Baum- und Landschaftspflege GRUBER" loading="lazy" decoding="async"></div>
         <div class="logo-chip"><img src="assets/logos/kunden/georg-albrecht.webp" alt="Georg Albrecht Garten und Landschaftsbau" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/gr-n-team.webp" alt="Grün Team" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/ing-reischl.webp" alt="Ing. Reischl" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/gerber.webp" alt="Gerber Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
         <div class="logo-chip"><img src="assets/logos/kunden/garten-richter.webp" alt="Garten-Richter" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/brucker.webp" alt="Brucker Landschaftsbau" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/cornelia-biegert-landschaftsarchitektur.webp" alt="cornelia biegert landschaftsarchitektur gmbh" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/gerd-linneweber.webp" alt="Gerd Linneweber Landschaftsbau" loading="lazy" decoding="async"></div>
         <div class="logo-chip"><img src="assets/logos/kunden/georg-buck.webp" alt="Georg Buck Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/gramenz.webp" alt="Gramenz" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/bernd-gerlach.webp" alt="Bernd Gerlach Gartengestaltung" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/georg-franz.webp" alt="Georg Franz" loading="lazy" decoding="async"></div>
         <div class="logo-chip"><img src="assets/logos/kunden/grewe.webp" alt="Grewe" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/mund-garten-landschaftsgestaltung.webp" alt="Mund Garten- und Landschaftsgestaltung" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/werth-gr-npflege.webp" alt="Werth Grünpflege und Gartengestaltung" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/helmich-helmich.webp" alt="Helmich & Helmich" loading="lazy" decoding="async"></div>
         <div class="logo-chip"><img src="assets/logos/kunden/borgmeier.webp" alt="Borgmeier Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/hans-g-hellebusch.webp" alt="Hans-G. Hellebusch Gartenbau" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/drewes.webp" alt="Gartenbau Drewes" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/baum-erde.webp" alt="Baum und Erde" loading="lazy" decoding="async"></div>
         <div class="logo-chip"><img src="assets/logos/kunden/klaus-kruhs.webp" alt="Klaus Kruhs" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/lentzen.webp" alt="Lentzen" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/g-rten-von-g-rtner.webp" alt="Gärten von Gärtner" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/gpl-ingo-kunde.webp" alt="GPL - Ingo Kunde" loading="lazy" decoding="async"></div>
         <div class="logo-chip"><img src="assets/logos/kunden/ingo-schiller.webp" alt="Garten- und Landschaftsbau Ingo Schiller" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/hugenschmidt.webp" alt="Hugenschmidt Gartenbau" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/semmler.webp" alt="Semmler" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/gr-fe.webp" alt="Gräfe Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
         <div class="logo-chip"><img src="assets/logos/kunden/gtl-landschaftsarchitektur-triebswetter.webp" alt="GTL Landschaftsarchitektur Triebswetter, Mauer, Bruns Partner mbB" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/kremer.webp" alt="kremer gartenbau" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/mauer.webp" alt="Mauer" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/biermann.webp" alt="Garten und Landschaftsbau Biermann" loading="lazy" decoding="async"></div>
         <div class="logo-chip"><img src="assets/logos/kunden/schr-der.webp" alt="Schröder Baumschulen" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/regener.webp" alt="Regener" loading="lazy" decoding="async"></div>
-        <div class="logo-chip"><img src="assets/logos/kunden/mika-gala-bau.webp" alt="MIKA GALA Bau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/roring.webp" alt="Roring Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
         <div class="logo-chip"><img src="assets/logos/kunden/englhardt.webp" alt="ENGLHARDT Galabau" loading="lazy" decoding="async"></div>
-      </div>
-    </div>
+        <div class="logo-chip"><img src="assets/logos/kunden/schr-der-wagner.webp" alt="Schröder & Wagner" loading="lazy" decoding="async"></div>
+    </div></div>
+    <div class="marquee"><div class="marquee-track rev" id="marquee-track-2">
+        <div class="logo-chip"><img src="assets/logos/kunden/august-fichter-stra-enbau-sportst-ttenba.webp" alt="August Fichter GalaBau-Straßenbau-Sportstättenbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/schernthaner.webp" alt="Schernthaner" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/rudolf-schrader.webp" alt="Rudolf Schrader Baumschulen KG" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/wragge-g-rten.webp" alt="Wragge Gärten" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/scheidtmann.webp" alt="Scheidtmann" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/garten-bosman.webp" alt="Garten Bosman" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/ing-reischl.webp" alt="Ing. Reischl" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/eckhard-k-psel.webp" alt="Eckhard Köpsel" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/cornelia-biegert-landschaftsarchitektur.webp" alt="cornelia biegert landschaftsarchitektur gmbh" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/r-ssmann.webp" alt="Rüssmann" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/bernd-gerlach.webp" alt="Bernd Gerlach Gartengestaltung" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/kupka.webp" alt="Kupka" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/werth-gr-npflege.webp" alt="Werth Grünpflege und Gartengestaltung" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/fischer.webp" alt="Fischer Landschaftsbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/drewes.webp" alt="Gartenbau Drewes" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/gr-nkonzept.webp" alt="Grünkonzept" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/g-rten-von-g-rtner.webp" alt="Gärten von Gärtner" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/gartencenter-josef-ziegltrum.webp" alt="Gartencenter Josef Ziegltrum" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/semmler.webp" alt="Semmler" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/rekowski.webp" alt="Rekowski Gartenbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/mauer.webp" alt="Mauer" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/sp-th-sche-handel.webp" alt="Späth’sche Baumschulen Handel" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/mika-gala-bau.webp" alt="MIKA GALA Bau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/bruns-schild.webp" alt="Bruns & Schild" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/braun.webp" alt="Braun Garten- & Landschaftsbau" loading="lazy" decoding="async"></div>
+    </div></div>
+    <div class="marquee"><div class="marquee-track r3" id="marquee-track-3">
+        <div class="logo-chip"><img src="assets/logos/kunden/jacobs.webp" alt="Jacobs Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/lukas-schwarz.webp" alt="Lukas & Schwarz" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/aks.webp" alt="AKS Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/schmitz-gartencenter-floristik.webp" alt="Schmitz Gartencenter & Floristik" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/hermann-trautmann.webp" alt="Hermann Trautmann Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/gr-n-team.webp" alt="Grün Team" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/feind.webp" alt="Feind" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/brucker.webp" alt="Brucker Landschaftsbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/josef-p-tter.webp" alt="Josef Pötter" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/gramenz.webp" alt="Gramenz" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/majuntke-professionelles-gr-n.webp" alt="Majuntke , Professionelles Grün" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/mund-garten-landschaftsgestaltung.webp" alt="Mund Garten- und Landschaftsgestaltung" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/mathias-schulz.webp" alt="Mathias Schulz Gartenbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/hans-g-hellebusch.webp" alt="Hans-G. Hellebusch Gartenbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/reiss-erd-gartenbaugesellschaft-mbh.webp" alt="Reiss Erd- und Gartenbaugesellschaft mbH" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/lentzen.webp" alt="Lentzen" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/epp.webp" alt="Epp Gartenbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/hugenschmidt.webp" alt="Hugenschmidt Gartenbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/prager.webp" alt="Prager Landschaftsbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/kremer.webp" alt="kremer gartenbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/fa-naturwerk.webp" alt="Fa. Naturwerk" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/regener.webp" alt="Regener" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/bloemen-gartenpflege.webp" alt="Bloemen Landschaftsbau und Gartenpflege" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/harms.webp" alt="Harms Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/l-ders-l-ders.webp" alt="Lüders & Lüders" loading="lazy" decoding="async"></div>
+    </div></div>
   </div>
 
   <!-- ===== ERFOLGSMELDUNGEN ===== -->
@@ -663,15 +682,14 @@
       <div class="section-label reveal">Kommt dir das bekannt vor?</div>
       <h2 class="section-title reveal">Vier Recruiting-Realitäten, die Geld <em class="accent">und Nerven kosten.</em></h2>
       <p class="section-sub reveal">Wenn auch nur eine davon auf deinen Betrieb zutrifft, lohnt sich das Gespräch:</p>
-      <div class="deck is-collapsed" id="deck-realitaeten" data-more="Alle vier Punkte ansehen" data-less="Einklappen">
+      <div class="deck is-collapsed" id="deck-realitaeten" data-hint="Noch 3 Punkte">
       <div class="problem-grid deck-stack">
         <div class="problem-card deck-item"><h3>Viele Bewerber – aber keiner kann auf die Baustelle</h3><p>Ohne Führerschein C/CE, ohne Ausbildung, ohne Praxis. Jede Vorauswahl frisst Stunden – und am Ende bleibt selten jemand übrig, der morgen eine Kolonne führen kann.</p></div>
         <div class="problem-card deck-item"><h3>Saisonstart vor der Tür – und keine Bewerbungen</h3><p>Anzeigen, Aushänge, Indeed: viel Aufwand, kaum Rücklauf. Vorarbeiter- und Bauleiterstellen bleiben monatelang offen, das Team fährt auf Anschlag.</p></div>
         <div class="problem-card deck-item"><h3>Recruiting-Kosten außer Kontrolle</h3><p>Vermittler verlangen 25–30 % des Jahresgehalts – beim Vorarbeiter schnell 15.000 €+. Portale kosten monatlich, ohne Garantie und ohne messbare Wirkung.</p></div>
         <div class="problem-card deck-item"><h3>Vorstellungsgespräche, die nie stattfinden</h3><p>Termin vereinbart, Bewerber taucht nicht auf. Ein halber Arbeitstag verloren, der auf der Baustelle gebraucht wurde – und du stehst wieder am Anfang.</p></div>
       </div>
-      <button type="button" class="deck-toggle" aria-expanded="false" aria-controls="deck-realitaeten"><span class="lbl">Alle vier Punkte ansehen</span><span class="chev">↓</span></button>
-      </div>
+            </div>
       <p class="section-sub reveal" style="margin-top:22px;">Wir kennen diese vier Punkte aus über <b style="color:var(--ink);">540 Gesprächen</b> mit GaLaBau- und Baumpflege-Inhabern – und zeigen dir im Gespräch den konkreten Weg raus.</p>
     </div>
   </section>
@@ -681,7 +699,7 @@
     <div class="container">
       <div class="section-label reveal">So läuft es ab</div>
       <h2 class="section-title reveal">In drei Schritten zu <em class="accent">deinen nächsten Fachkräften.</em></h2>
-      <div class="deck is-collapsed" id="deck-ablauf" data-more="Alle drei Schritte ansehen" data-less="Einklappen">
+      <div class="deck is-collapsed" id="deck-ablauf" data-hint="Schritt 2 und 3">
       <div class="steps-grid deck-stack">
         <div class="step-card deck-item"><span class="step-num">01</span><b>60 Sekunden Anfrage</b><p>Vier Klicks, PLZ, Kontakt – danach wissen wir, wen du suchst.</p></div>
         <div class="step-card deck-item"><span class="step-num">02</span><b>Rückruf in 24–48 Stunden</b><p>Wir melden uns persönlich und machen einen Termin aus, der in deinen Alltag passt.</p></div>
@@ -692,8 +710,7 @@
         <li><b>Konkret:</b> Empfehlung für deine Positionen – Landschaftsgärtner, Vorarbeiter, Bauleiter.</li>
         <li><b>Planbar:</b> Der realistische Weg zu passenden Kandidaten in ø 45 Tagen.</li>
       </ul>
-      <button type="button" class="deck-toggle" aria-expanded="false" aria-controls="deck-ablauf"><span class="lbl">Alle drei Schritte ansehen</span><span class="chev">↓</span></button>
-      </div>
+            </div>
     </div>
   </section>
 
@@ -900,7 +917,7 @@
       try {
         if (!IS_MESSE) return;
         var badge = document.querySelector('.hero-badge');
-        if (badge) badge.innerHTML = '<span class="dot"></span> Für GaLaBau-Geschäftsführer auf der GaLaBau 2026';
+        if (badge) badge.innerHTML = '<span class="dot"></span> Für Geschäftsführer auf der GaLaBau 2026';
         var sub = document.querySelector('.hero-sub');
         if (sub) sub.innerHTML = 'Du bist gerade in Nürnberg? Dein <b>kostenloses Beratungsgespräch</b>: wechselbereite Fachkräfte aus deiner Region – <b>ohne Zeitaufwand für dich</b>.';
       } catch(e){}
@@ -1126,18 +1143,10 @@
       var parts = fullnameInput.value.trim().split(/\s+/).filter(Boolean);
       var hasName = parts.length >= 2;
       var hasFirma = firmaInput.value.trim().length >= 2;
-      var digits = phoneInput.value.replace(/[^0-9]/g,'');
-      if (hasName && firmaSub.style.display === 'none') {
-        firmaSub.style.display = '';
-        setTimeout(function(){ firmaInput.focus({ preventScroll:true }); }, 120);
-      }
       if (hasName && !nameMarkFired) { nameMarkFired = true; trackFunnelEvent('slide_view', '8_name_entered'); }
-      if (hasName && hasFirma && phoneSub.style.display === 'none') {
-        phoneSub.style.display = '';
-        setTimeout(function(){ phoneInput.focus({ preventScroll:true }); }, 120);
-      }
       if (hasName && hasFirma && !firmaMarkFired) { firmaMarkFired = true; trackFunnelEvent('slide_view', '9_firma_entered'); }
-      finalSubmit.disabled = !(hasName && hasFirma && digits.length >= 6 && privacyCheck.checked);
+      document.querySelector('.quiz-privacy').classList.toggle('is-error', false);
+      if (privacyCheck.checked) step7Error.classList.remove('active');
     }
     [fullnameInput, firmaInput, phoneInput].forEach(function(el){
       el.addEventListener('input', function(){ el.classList.remove('is-error'); step7Error.classList.remove('active'); evaluateStep7(); });
@@ -1147,8 +1156,16 @@
     finalSubmit.addEventListener('click', function(){
       var parts = fullnameInput.value.trim().split(/\s+/).filter(Boolean);
       var digits = phoneInput.value.replace(/[^0-9]/g,'');
-      if (parts.length < 2 || firmaInput.value.trim().length < 2 || digits.length < 6 || !privacyCheck.checked) {
+      var missName = parts.length < 2, missFirma = firmaInput.value.trim().length < 2, missPhone = digits.length < 6, missPrivacy = !privacyCheck.checked;
+      fullnameInput.classList.toggle('is-error', missName);
+      firmaInput.classList.toggle('is-error', missFirma);
+      phoneInput.classList.toggle('is-error', missPhone);
+      document.querySelector('.quiz-privacy').classList.toggle('is-error', missPrivacy);
+      if (missName || missFirma || missPhone || missPrivacy) {
+        step7Error.textContent = missName ? 'Bitte Vor- und Nachname eintragen.' : missFirma ? 'Bitte deinen Betrieb eintragen.' : missPhone ? 'Bitte deine Handynummer eintragen.' : 'Bitte den Datenschutz bestätigen.';
         step7Error.classList.add('active');
+        var first = missName ? fullnameInput : missFirma ? firmaInput : missPhone ? phoneInput : privacyCheck;
+        try { first.focus({ preventScroll:false }); } catch(e){}
         return;
       }
       answers.vorname = parts[0];
@@ -1321,14 +1338,20 @@
     track.innerHTML += track.innerHTML;
     var track2 = document.getElementById('marquee-track-2');
     if (track2) track2.innerHTML += track2.innerHTML;
+    var track3 = document.getElementById('marquee-track-3');
+    if (track3) track3.innerHTML += track3.innerHTML;
 
-    // Decks: Karten eingeklappt (übereinander), per Klick ausklappen
+    // Decks: Karten eingeklappt (übereinander), Tipp auf die Karte klappt aus (Freddy 12.09.)
     Array.prototype.forEach.call(document.querySelectorAll('.deck'), function(deck){
       var stack = deck.querySelector('.deck-stack');
       var items = stack ? Array.prototype.slice.call(stack.children) : [];
-      var btn = deck.querySelector('.deck-toggle');
-      if (!stack || !items.length || !btn) return;
+      if (!stack || !items.length) return;
       deck.setAttribute('data-count', String(items.length));
+      var rest = items.length - 1;
+      items[0].setAttribute('data-hint', (deck.getAttribute('data-hint') || ('Noch ' + rest + ' Punkte')) + ' · antippen zum Aufklappen ▾');
+      stack.setAttribute('role', 'button'); stack.setAttribute('tabindex', '0'); stack.setAttribute('aria-expanded', 'false');
+      var less = document.createElement('button'); less.type = 'button'; less.className = 'deck-less'; less.textContent = 'Einklappen ▴';
+      deck.appendChild(less);
       function measure(){
         if (!deck.classList.contains('is-collapsed')) return;
         var h = items[0].offsetHeight;
@@ -1338,19 +1361,21 @@
       window.addEventListener('resize', measure);
       window.addEventListener('load', measure);
       setTimeout(measure, 400);
-      btn.addEventListener('click', function(){
-        var open = !deck.classList.contains('is-collapsed') ? false : true;
-        deck.classList.toggle('is-collapsed', !open);
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-        btn.querySelector('.lbl').textContent = open ? (deck.getAttribute('data-less') || 'Einklappen') : (deck.getAttribute('data-more') || 'Mehr anzeigen');
-        if (open) {
-          items.forEach(function(it, i){ it.classList.remove('deck-in'); void it.offsetWidth; it.style.animationDelay = (i * 70) + 'ms'; it.classList.add('deck-in'); });
-          trackFunnelEvent('deck_open', deck.id);
-        } else {
-          items.forEach(function(it){ it.classList.remove('deck-in'); it.style.animationDelay = ''; });
-          measure();
-          deck.scrollIntoView({ behavior:'smooth', block:'start' });
-        }
+      function open(){
+        if (!deck.classList.contains('is-collapsed')) return;
+        deck.classList.remove('is-collapsed');
+        stack.setAttribute('aria-expanded', 'true'); stack.removeAttribute('role'); stack.removeAttribute('tabindex');
+        items.forEach(function(it, i){ it.classList.remove('deck-in'); void it.offsetWidth; it.style.animationDelay = (i * 70) + 'ms'; it.classList.add('deck-in'); });
+        trackFunnelEvent('deck_open', deck.id);
+      }
+      stack.addEventListener('click', open);
+      stack.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+      less.addEventListener('click', function(){
+        deck.classList.add('is-collapsed');
+        stack.setAttribute('aria-expanded', 'false'); stack.setAttribute('role', 'button'); stack.setAttribute('tabindex', '0');
+        items.forEach(function(it){ it.classList.remove('deck-in'); it.style.animationDelay = ''; });
+        measure();
+        deck.scrollIntoView({ behavior:'smooth', block:'start' });
       });
     });
 
