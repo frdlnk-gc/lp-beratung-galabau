@@ -806,6 +806,19 @@
       return out;
     })();
 
+    // Messe-Variante (Meta-Geofence GaLaBau 2026, 16.–18.09.): utm_campaign enthält "messe" → Hero spricht den Messebesucher an.
+    // Nur Texte im Hero, kein Eingriff in Quiz, Tracking oder Webhook.
+    (function(){
+      try {
+        var camp = String(trackingParams.utm_campaign || '').toLowerCase();
+        if (camp.indexOf('messe') === -1) return;
+        var badge = document.querySelector('.hero-badge');
+        if (badge) badge.innerHTML = '<span class="dot"></span> Für GaLaBau-Geschäftsführer auf der GaLaBau 2026';
+        var sub = document.querySelector('.hero-sub');
+        if (sub) sub.innerHTML = 'Du bist gerade in Nürnberg? Dein <b>kostenloses Beratungsgespräch</b>: wechselbereite Fachkräfte aus deiner Region – <b>ohne Zeitaufwand für dich</b>.';
+      } catch(e){}
+    })();
+
     function getCookie(name){
       try {
         var m = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
