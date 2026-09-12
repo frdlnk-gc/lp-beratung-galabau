@@ -182,7 +182,7 @@
     .logos{padding:34px 0 10px;}
     .logos-label{text-align:center;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:20px;}
     .marquee{overflow:hidden;position:relative;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);}
-    .marquee-track{display:flex;gap:12px;width:max-content;animation:marquee 36s linear infinite;}
+    .marquee-track{display:flex;gap:12px;width:max-content;animation:marquee 120s linear infinite;}
     @keyframes marquee{to{transform:translateX(-50%);}}
     .logo-chip{flex:none;background:#fff;border-radius:12px;padding:10px 18px;display:flex;align-items:center;justify-content:center;height:58px;}
     .logo-chip img{height:36px;width:auto;max-width:120px;object-fit:contain;}
@@ -353,6 +353,30 @@
     .sticky-cta.visible{transform:none;}
     .sticky-cta a{display:block;text-align:center;text-decoration:none;font-size:1rem;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--green-bright),var(--green) 55%,var(--green-deep));border-radius:13px;padding:15px;box-shadow:0 10px 24px -8px rgba(22,163,74,.55);}
     @media(min-width:1024px){.sticky-cta{display:none;}}
+
+    /* ===== Deck: eingeklappte Karten (Freddy 12.09.: Seite kürzer, Karten übereinander, ausklappbar) ===== */
+    .deck{position:relative;margin-top:30px;}
+    .deck .deck-stack{margin-top:0;}
+    .deck.is-collapsed .deck-stack{display:block;position:relative;height:var(--deck-h,240px);}
+    .deck.is-collapsed .deck-item{position:absolute;left:0;right:0;top:0;transition:transform .35s ease;}
+    .deck.is-collapsed .deck-item:first-child{z-index:4;height:auto;}
+    .deck.is-collapsed .deck-item:nth-child(n+2){height:var(--deck-h,240px);overflow:hidden;box-shadow:0 -6px 18px rgba(18,40,26,.06);}
+    .deck.is-collapsed .deck-item:nth-child(2){z-index:3;transform:translateY(14px) scale(.965);}
+    .deck.is-collapsed .deck-item:nth-child(3){z-index:2;transform:translateY(28px) scale(.93);}
+    .deck.is-collapsed .deck-item:nth-child(4){z-index:1;transform:translateY(42px) scale(.895);}
+    .deck.is-collapsed .deck-item:nth-child(n+2) > *{visibility:hidden;}
+    .deck.is-collapsed .deck-extra{display:none;}
+    .deck-toggle{display:inline-flex;align-items:center;gap:9px;margin-top:20px;background:transparent;border:1.5px solid #15803D;color:#15803D;border-radius:999px;padding:11px 18px;font-weight:700;font-size:.9rem;cursor:pointer;font-family:inherit;line-height:1;}
+    .deck-toggle:hover{background:rgba(21,128,61,.08);}
+    .deck.is-collapsed .deck-toggle{margin-top:62px;}
+    .deck.is-collapsed[data-count="3"] .deck-toggle{margin-top:48px;}
+    .deck-toggle .chev{display:inline-block;transition:transform .3s ease;font-size:1rem;}
+    .deck:not(.is-collapsed) .deck-toggle .chev{transform:rotate(180deg);}
+    .deck-item.deck-in{animation:deckIn .45s ease both;}
+    @keyframes deckIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+    @media (prefers-reduced-motion: reduce){.deck-item.deck-in{animation:none;}}
+    .marquee-track.rev{animation-direction:reverse;animation-duration:135s;}
+    .logos .marquee + .marquee{margin-top:12px;}
   </style>
 </head>
 <body>
@@ -413,10 +437,6 @@
               <button type="button" class="quiz-option" data-field="gesuchte_position" data-value="bauleiter">Bauleiter</button>
               <button type="button" class="quiz-option" data-field="gesuchte_position" data-value="mehrere">Mehrere Positionen</button>
             </div>
-            <div class="quiz-trustline">
-              <span>⏱ Dauert keine 60 Sekunden</span>
-              <span>🔒 DSGVO-konform</span>
-            </div>
           </div>
 
           <!-- STEP 2 — Anzahl Fachkräfte -->
@@ -435,7 +455,7 @@
           <div class="quiz-slide" data-slide="3">
             <h3 class="quiz-question">Wann sollen sie starten?</h3>
             <div class="quiz-options">
-              <button type="button" class="quiz-option" data-field="dringlichkeit" data-value="asap">So schnell wie möglich – es brennt</button>
+              <button type="button" class="quiz-option" data-field="dringlichkeit" data-value="asap">So schnell wie möglich</button>
               <button type="button" class="quiz-option" data-field="dringlichkeit" data-value="1-2-monate">Innerhalb von 1–2 Monaten</button>
               <button type="button" class="quiz-option" data-field="dringlichkeit" data-value="nicht-dringend">Aktuell nicht dringend</button>
             </div>
@@ -457,10 +477,9 @@
 
           <!-- STEP 5 — PLZ -->
           <div class="quiz-slide" data-slide="5">
-            <h3 class="quiz-question">Wo sollen die neuen Leute arbeiten?</h3>
-            <p class="quiz-subtext">PLZ reicht – deinen Umkreis prüfen wir im Gespräch konkret.</p>
+            <h3 class="quiz-question">Wo sitzt dein Betrieb?</h3>
             <div class="quiz-input-group">
-              <label class="quiz-label" for="quiz-plz">Postleitzahl deines Betriebs</label>
+              <label class="quiz-label" for="quiz-plz">Postleitzahl</label>
               <input type="text" class="quiz-input" id="quiz-plz" name="plz" placeholder="z. B. 50670" maxlength="5" inputmode="numeric" autocomplete="postal-code">
             </div>
             <button type="button" class="quiz-cta" id="quiz-plz-cta">Weiter →</button>
@@ -470,8 +489,7 @@
 
           <!-- STEP 6 — E-Mail (Headline wird aus den Quiz-Antworten personalisiert) -->
           <div class="quiz-slide" data-slide="6">
-            <h3 class="quiz-question" id="quiz-email-headline">Sehr gut – dein Betrieb kann in ø 45 Tagen einstellen.</h3>
-            <p class="quiz-subtext">E-Mail eintragen – dahin bekommst du deine Termin-Details.</p>
+            <h3 class="quiz-question" id="quiz-email-headline">An welche E-Mail sollen die Termin-Details?</h3>
             <div class="quiz-input-group">
               <label class="quiz-label" for="email">Geschäftliche E-Mail</label>
               <input type="email" class="quiz-input" id="email" name="email" placeholder="name@firma.de" autocomplete="email" autocapitalize="none" spellcheck="false" inputmode="email">
@@ -484,18 +502,17 @@
 
           <!-- STEP 7 — Name + Firma + Handynummer -->
           <div class="quiz-slide" data-slide="7">
-            <h3 class="quiz-question">Für welchen Betrieb sollen wir das kostenlose Beratungsgespräch vorbereiten?</h3>
-            <p class="quiz-subtext">Letzter Schritt – danach melden wir uns innerhalb von 24–48 h persönlich bei dir.</p>
+            <h3 class="quiz-question">Wen rufen wir zurück?</h3>
             <div class="quiz-input-group" data-substep="name">
               <label class="quiz-label" for="fullname">Vor- und Nachname</label>
               <input type="text" class="quiz-input" id="fullname" placeholder="z. B. Max Müller" autocomplete="name" autocapitalize="words" spellcheck="false">
             </div>
             <div class="quiz-input-group" data-substep="firma" style="display:none;">
-              <label class="quiz-label" for="unternehmen">Firmenname</label>
+              <label class="quiz-label" for="unternehmen">Betrieb</label>
               <input type="text" class="quiz-input" id="unternehmen" name="unternehmen" placeholder="z. B. Müller GaLaBau GmbH" autocomplete="organization" autocapitalize="words" spellcheck="false">
             </div>
             <div class="quiz-input-group" data-substep="phone" style="display:none;">
-              <label class="quiz-label" for="phone">Deine Handynummer</label>
+              <label class="quiz-label" for="phone">Handynummer</label>
               <div class="phone-row">
                 <select class="phone-prefix" id="phone-country" aria-label="Ländervorwahl">
                   <option value="49" selected>DE +49</option>
@@ -517,7 +534,7 @@
             <button type="button" class="quiz-cta" id="quiz-final-submit" disabled>Jetzt Beratungstermin sichern →</button>
             <div class="quiz-error" id="quiz-step7-error">Bitte fülle alle Felder aus und bestätige den Datenschutz.</div>
             <button type="button" class="quiz-back" data-back="6">← Zurück</button>
-            <div class="quiz-trustline"><span>📱 Deine Bestätigung kommt per WhatsApp · 🔒 DSGVO-konform</span></div>
+            <div class="quiz-trustline"><span>Die Bestätigung kommt per WhatsApp.</span></div>
           </div>
         </form>
 
@@ -543,16 +560,80 @@
     <div class="logos-label">Diese Betriebe vertrauen GreenCareers</div>
     <div class="marquee">
       <div class="marquee-track" id="marquee-track">
-        <div class="logo-chip"><img src="assets/logos/hugenschmidt.png" alt="Hugenschmidt Gartenbau" loading="lazy"></div>
-        <div class="logo-chip"><img src="assets/logos/falz.png" alt="Gartenbau Falz" loading="lazy"></div>
-        <div class="logo-chip"><img src="assets/logos/jensen.png" alt="Jensen Landschaftsarchitekten" loading="lazy"></div>
-        <div class="logo-chip"><img src="assets/logos/epp.png" alt="EPP Gartenbau" loading="lazy"></div>
-        <div class="logo-chip"><img src="assets/logos/huben.png" alt="Huben" loading="lazy"></div>
-        <div class="logo-chip"><img src="assets/logos/feth.png" alt="Florian Feth Gartengestaltung" loading="lazy"></div>
-        <div class="logo-chip"><img src="assets/logos/bechstein.png" alt="Bechstein" loading="lazy"></div>
-        <div class="logo-chip"><img src="assets/logos/hiedl.png" alt="Hiedl" loading="lazy"></div>
-        <div class="logo-chip"><img src="assets/logos/jakober.png" alt="Jakober" loading="lazy"></div>
-        <div class="logo-chip"><img src="assets/logos/vogt.png" alt="Vogt" loading="lazy"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/knappmann-rheinland.webp" alt="Knappmann Rheinland" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/jacobs.webp" alt="Jacobs Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/schernthaner.webp" alt="Schernthaner" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/idh-innovative-dienstleistungen-habers.webp" alt="IDH-Innovative Dienstleistungen Habers" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/aks.webp" alt="AKS Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/wragge-g-rten.webp" alt="Wragge Gärten" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/baum-landschaftspflege-gruber.webp" alt="Baum- und Landschaftspflege GRUBER" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/hermann-trautmann.webp" alt="Hermann Trautmann Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/garten-bosman.webp" alt="Garten Bosman" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/gerber.webp" alt="Gerber Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/feind.webp" alt="Feind" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/eckhard-k-psel.webp" alt="Eckhard Köpsel" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/gerd-linneweber.webp" alt="Gerd Linneweber Landschaftsbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/josef-p-tter.webp" alt="Josef Pötter" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/r-ssmann.webp" alt="Rüssmann" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/georg-franz.webp" alt="Georg Franz" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/majuntke-professionelles-gr-n.webp" alt="Majuntke, Professionelles Grün" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/kupka.webp" alt="Kupka" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/helmich-helmich.webp" alt="Helmich & Helmich" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/mathias-schulz.webp" alt="Mathias Schulz Gartenbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/fischer.webp" alt="Fischer Landschaftsbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/baum-erde.webp" alt="Baum und Erde" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/reiss-erd-gartenbaugesellschaft-mbh.webp" alt="Reiss Erd- und Gartenbaugesellschaft mbH" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/gr-nkonzept.webp" alt="Grünkonzept" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/gpl-ingo-kunde.webp" alt="GPL - Ingo Kunde" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/epp.webp" alt="Epp Gartenbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/gartencenter-josef-ziegltrum.webp" alt="Gartencenter Josef Ziegltrum" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/gr-fe.webp" alt="Gräfe Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/prager.webp" alt="Prager Landschaftsbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/rekowski.webp" alt="Rekowski Gartenbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/biermann.webp" alt="Garten und Landschaftsbau Biermann" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/fa-naturwerk.webp" alt="Fa. Naturwerk" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/sp-th-sche-handel.webp" alt="Späth’sche Baumschulen Handel" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/roring.webp" alt="Roring Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/bloemen-gartenpflege.webp" alt="Bloemen Landschaftsbau und Gartenpflege" loading="lazy" decoding="async"></div>
+      </div>
+    </div>
+    <div class="marquee">
+      <div class="marquee-track rev" id="marquee-track-2">
+        <div class="logo-chip"><img src="assets/logos/kunden/august-fichter-stra-enbau-sportst-ttenba.webp" alt="August Fichter GaLaBau-Straßenbau-Sportstättenbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/jakober-garten-landschafts-sportplatzbau.webp" alt="Jakober Garten-, Landschafts- und Sportplatzbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/lukas-schwarz.webp" alt="Lukas & Schwarz" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/rudolf-schrader.webp" alt="Rudolf Schrader Baumschulen KG" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/junicke.webp" alt="Junicke" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/schmitz-gartencenter-floristik.webp" alt="Schmitz Gartencenter & Floristik" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/scheidtmann.webp" alt="Scheidtmann" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/georg-albrecht.webp" alt="Georg Albrecht Garten und Landschaftsbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/gr-n-team.webp" alt="Grün Team" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/ing-reischl.webp" alt="Ing. Reischl" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/garten-richter.webp" alt="Garten-Richter" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/brucker.webp" alt="Brucker Landschaftsbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/cornelia-biegert-landschaftsarchitektur.webp" alt="cornelia biegert landschaftsarchitektur gmbh" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/georg-buck.webp" alt="Georg Buck Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/gramenz.webp" alt="Gramenz" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/bernd-gerlach.webp" alt="Bernd Gerlach Gartengestaltung" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/grewe.webp" alt="Grewe" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/mund-garten-landschaftsgestaltung.webp" alt="Mund Garten- und Landschaftsgestaltung" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/werth-gr-npflege.webp" alt="Werth Grünpflege und Gartengestaltung" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/borgmeier.webp" alt="Borgmeier Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/hans-g-hellebusch.webp" alt="Hans-G. Hellebusch Gartenbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/drewes.webp" alt="Gartenbau Drewes" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/klaus-kruhs.webp" alt="Klaus Kruhs" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/lentzen.webp" alt="Lentzen" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/g-rten-von-g-rtner.webp" alt="Gärten von Gärtner" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/ingo-schiller.webp" alt="Garten- und Landschaftsbau Ingo Schiller" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/hugenschmidt.webp" alt="Hugenschmidt Gartenbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/semmler.webp" alt="Semmler" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/gtl-landschaftsarchitektur-triebswetter.webp" alt="GTL Landschaftsarchitektur Triebswetter, Mauer, Bruns Partner mbB" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/kremer.webp" alt="kremer gartenbau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/mauer.webp" alt="Mauer" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/schr-der.webp" alt="Schröder Baumschulen" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/regener.webp" alt="Regener" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/mika-gala-bau.webp" alt="MIKA GALA Bau" loading="lazy" decoding="async"></div>
+        <div class="logo-chip"><img src="assets/logos/kunden/englhardt.webp" alt="ENGLHARDT Galabau" loading="lazy" decoding="async"></div>
       </div>
     </div>
   </div>
@@ -582,11 +663,14 @@
       <div class="section-label reveal">Kommt dir das bekannt vor?</div>
       <h2 class="section-title reveal">Vier Recruiting-Realitäten, die Geld <em class="accent">und Nerven kosten.</em></h2>
       <p class="section-sub reveal">Wenn auch nur eine davon auf deinen Betrieb zutrifft, lohnt sich das Gespräch:</p>
-      <div class="problem-grid">
-        <div class="problem-card reveal"><h3>Viele Bewerber – aber keiner kann auf die Baustelle</h3><p>Ohne Führerschein C/CE, ohne Ausbildung, ohne Praxis. Jede Vorauswahl frisst Stunden – und am Ende bleibt selten jemand übrig, der morgen eine Kolonne führen kann.</p></div>
-        <div class="problem-card reveal"><h3>Saisonstart vor der Tür – und keine Bewerbungen</h3><p>Anzeigen, Aushänge, Indeed: viel Aufwand, kaum Rücklauf. Vorarbeiter- und Bauleiterstellen bleiben monatelang offen, das Team fährt auf Anschlag.</p></div>
-        <div class="problem-card reveal"><h3>Recruiting-Kosten außer Kontrolle</h3><p>Vermittler verlangen 25–30 % des Jahresgehalts – beim Vorarbeiter schnell 15.000 €+. Portale kosten monatlich, ohne Garantie und ohne messbare Wirkung.</p></div>
-        <div class="problem-card reveal"><h3>Vorstellungsgespräche, die nie stattfinden</h3><p>Termin vereinbart, Bewerber taucht nicht auf. Ein halber Arbeitstag verloren, der auf der Baustelle gebraucht wurde – und du stehst wieder am Anfang.</p></div>
+      <div class="deck is-collapsed" id="deck-realitaeten" data-more="Alle vier Punkte ansehen" data-less="Einklappen">
+      <div class="problem-grid deck-stack">
+        <div class="problem-card deck-item"><h3>Viele Bewerber – aber keiner kann auf die Baustelle</h3><p>Ohne Führerschein C/CE, ohne Ausbildung, ohne Praxis. Jede Vorauswahl frisst Stunden – und am Ende bleibt selten jemand übrig, der morgen eine Kolonne führen kann.</p></div>
+        <div class="problem-card deck-item"><h3>Saisonstart vor der Tür – und keine Bewerbungen</h3><p>Anzeigen, Aushänge, Indeed: viel Aufwand, kaum Rücklauf. Vorarbeiter- und Bauleiterstellen bleiben monatelang offen, das Team fährt auf Anschlag.</p></div>
+        <div class="problem-card deck-item"><h3>Recruiting-Kosten außer Kontrolle</h3><p>Vermittler verlangen 25–30 % des Jahresgehalts – beim Vorarbeiter schnell 15.000 €+. Portale kosten monatlich, ohne Garantie und ohne messbare Wirkung.</p></div>
+        <div class="problem-card deck-item"><h3>Vorstellungsgespräche, die nie stattfinden</h3><p>Termin vereinbart, Bewerber taucht nicht auf. Ein halber Arbeitstag verloren, der auf der Baustelle gebraucht wurde – und du stehst wieder am Anfang.</p></div>
+      </div>
+      <button type="button" class="deck-toggle" aria-expanded="false" aria-controls="deck-realitaeten"><span class="lbl">Alle vier Punkte ansehen</span><span class="chev">↓</span></button>
       </div>
       <p class="section-sub reveal" style="margin-top:22px;">Wir kennen diese vier Punkte aus über <b style="color:var(--ink);">540 Gesprächen</b> mit GaLaBau- und Baumpflege-Inhabern – und zeigen dir im Gespräch den konkreten Weg raus.</p>
     </div>
@@ -597,16 +681,19 @@
     <div class="container">
       <div class="section-label reveal">So läuft es ab</div>
       <h2 class="section-title reveal">In drei Schritten zu <em class="accent">deinen nächsten Fachkräften.</em></h2>
-      <div class="steps-grid">
-        <div class="step-card reveal"><span class="step-num">01</span><b>60 Sekunden Anfrage</b><p>Vier Klicks, PLZ, Kontakt – danach wissen wir, wen du suchst.</p></div>
-        <div class="step-card reveal"><span class="step-num">02</span><b>Rückruf in 24–48 Stunden</b><p>Wir melden uns persönlich und machen einen Termin aus, der in deinen Alltag passt.</p></div>
-        <div class="step-card reveal"><span class="step-num">03</span><b>30 Minuten Beratungsgespräch</b><p>Ehrliche Einschätzung für deine Region und ein konkreter Plan: Positionen, Zeitrahmen, nächste Schritte – mit oder ohne uns.</p></div>
+      <div class="deck is-collapsed" id="deck-ablauf" data-more="Alle drei Schritte ansehen" data-less="Einklappen">
+      <div class="steps-grid deck-stack">
+        <div class="step-card deck-item"><span class="step-num">01</span><b>60 Sekunden Anfrage</b><p>Vier Klicks, PLZ, Kontakt – danach wissen wir, wen du suchst.</p></div>
+        <div class="step-card deck-item"><span class="step-num">02</span><b>Rückruf in 24–48 Stunden</b><p>Wir melden uns persönlich und machen einen Termin aus, der in deinen Alltag passt.</p></div>
+        <div class="step-card deck-item"><span class="step-num">03</span><b>30 Minuten Beratungsgespräch</b><p>Ehrliche Einschätzung für deine Region und ein konkreter Plan: Positionen, Zeitrahmen, nächste Schritte – mit oder ohne uns.</p></div>
       </div>
-      <ul class="promise-list reveal">
+      <ul class="promise-list deck-extra">
         <li><b>Ehrlich:</b> Wenn wir dir in deiner Region nicht helfen können, sagen wir es dir direkt.</li>
         <li><b>Konkret:</b> Empfehlung für deine Positionen – Landschaftsgärtner, Vorarbeiter, Bauleiter.</li>
         <li><b>Planbar:</b> Der realistische Weg zu passenden Kandidaten in ø 45 Tagen.</li>
       </ul>
+      <button type="button" class="deck-toggle" aria-expanded="false" aria-controls="deck-ablauf"><span class="lbl">Alle drei Schritte ansehen</span><span class="chev">↓</span></button>
+      </div>
     </div>
   </section>
 
@@ -808,10 +895,10 @@
 
     // Messe-Variante (Meta-Geofence GaLaBau 2026, 16.–18.09.): utm_campaign enthält "messe" → Hero spricht den Messebesucher an.
     // Nur Texte im Hero, kein Eingriff in Quiz, Tracking oder Webhook.
+    var IS_MESSE = /messe/i.test(String(trackingParams.utm_campaign || ''));
     (function(){
       try {
-        var camp = String(trackingParams.utm_campaign || '').toLowerCase();
-        if (camp.indexOf('messe') === -1) return;
+        if (!IS_MESSE) return;
         var badge = document.querySelector('.hero-badge');
         if (badge) badge.innerHTML = '<span class="dot"></span> Für GaLaBau-Geschäftsführer auf der GaLaBau 2026';
         var sub = document.querySelector('.hero-sub');
@@ -914,28 +1001,17 @@
     var progressTime = document.getElementById('quiz-progress-time');
     var quizCard = document.getElementById('quiz');
     var quizStarted = false;
-    var TIME_LEFT = {1:'≈ 60 Sek.',2:'≈ 50 Sek.',3:'≈ 40 Sek.',4:'≈ 35 Sek.',5:'≈ 25 Sek.',6:'≈ 15 Sek.',7:'≈ 10 Sek.'};
 
-    var POSITION_LABELS = { 'landschaftsgaertner':'Landschaftsgärtner', 'vorarbeiter':'Vorarbeiter', 'bauleiter':'Bauleiter', 'mehrere':'mehrere Fachkräfte' };
-    var RANGE_LABELS = { 'unter-15':'unter 15', '15-30':'15–30', '31-60':'31–60', '61-100':'61–100', 'ueber-100':'über 100' };
 
     function showSlide(n){
       slides.forEach(function(sl){ sl.classList.toggle('is-active', sl.dataset.slide === String(n)); });
       if (n > 1) {
         progress.classList.add('visible');
-        progressLabel.textContent = '';
-        progressTime.textContent = TIME_LEFT[n] + ' übrig';
+        progressLabel.textContent = 'Schritt ' + n + ' von 7';
+        progressTime.textContent = '';
         progressFill.style.width = (n/7*100) + '%';
       } else {
         progress.classList.remove('visible');
-      }
-      if (n === 6) {
-        var hl = document.getElementById('quiz-email-headline');
-        var pos = POSITION_LABELS[answers.gesuchte_position] || '';
-        var range = RANGE_LABELS[answers.mitarbeiter_range] || '';
-        if (hl && pos && range) {
-          hl.textContent = 'Sehr gut – dein Betrieb mit ' + range + ' Mitarbeitern kann ' + pos + ' in ø 45 Tagen einstellen.';
-        }
       }
       trackFunnelEvent('slide_view', String(n));
       trackPixelEvent('Quiz_Step_' + n + '_Viewed', { landingpage: LANDINGPAGE_ID });
@@ -1107,7 +1183,7 @@
           answers.dringlichkeit === '1-2-monate'     ? '1–2 Monate' :
           answers.dringlichkeit === 'nicht-dringend' ? 'Nicht dringend' : '',
         bereich: answers.gesuchte_position,
-        quelle: '',
+        quelle: IS_MESSE ? 'MESSE-LEAD · GaLaBau 2026 Nürnberg (Meta-Geofence 1 km)' : '',
         source: LANDINGPAGE_ID,
         landingpage_id: LANDINGPAGE_ID,
         retargeting_tag: 'retargeting_whatsapp',
@@ -1243,6 +1319,40 @@
     // Marquee: Inhalt duplizieren für nahtlosen Loop
     var track = document.getElementById('marquee-track');
     track.innerHTML += track.innerHTML;
+    var track2 = document.getElementById('marquee-track-2');
+    if (track2) track2.innerHTML += track2.innerHTML;
+
+    // Decks: Karten eingeklappt (übereinander), per Klick ausklappen
+    Array.prototype.forEach.call(document.querySelectorAll('.deck'), function(deck){
+      var stack = deck.querySelector('.deck-stack');
+      var items = stack ? Array.prototype.slice.call(stack.children) : [];
+      var btn = deck.querySelector('.deck-toggle');
+      if (!stack || !items.length || !btn) return;
+      deck.setAttribute('data-count', String(items.length));
+      function measure(){
+        if (!deck.classList.contains('is-collapsed')) return;
+        var h = items[0].offsetHeight;
+        if (h) deck.style.setProperty('--deck-h', h + 'px');
+      }
+      measure();
+      window.addEventListener('resize', measure);
+      window.addEventListener('load', measure);
+      setTimeout(measure, 400);
+      btn.addEventListener('click', function(){
+        var open = !deck.classList.contains('is-collapsed') ? false : true;
+        deck.classList.toggle('is-collapsed', !open);
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.querySelector('.lbl').textContent = open ? (deck.getAttribute('data-less') || 'Einklappen') : (deck.getAttribute('data-more') || 'Mehr anzeigen');
+        if (open) {
+          items.forEach(function(it, i){ it.classList.remove('deck-in'); void it.offsetWidth; it.style.animationDelay = (i * 70) + 'ms'; it.classList.add('deck-in'); });
+          trackFunnelEvent('deck_open', deck.id);
+        } else {
+          items.forEach(function(it){ it.classList.remove('deck-in'); it.style.animationDelay = ''; });
+          measure();
+          deck.scrollIntoView({ behavior:'smooth', block:'start' });
+        }
+      });
+    });
 
     /* =====================================================
        NETZWERK-MAP: Live-Feed (Chips ortskorrekt am Punkt)
