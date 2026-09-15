@@ -99,10 +99,7 @@
     .trust-strip .stars{color:#FBBF24;letter-spacing:1.5px;}
     .trust-strip b{color:var(--ink);font-weight:700;}
     .trust-item{display:flex;align-items:center;gap:7px;}
-    .trust-strip.under-card{margin-top:20px;justify-content:center;}
-    @media(min-width:1024px){.trust-strip.under-card{display:none;}}
-    .trust-strip.in-copy{display:none;}
-    @media(min-width:1024px){.trust-strip.in-copy{display:flex;}}
+    .trust-strip.in-copy{display:flex;}
 
     /* ===== Quiz Card ===== */
     .quiz-card{background:#fff;color:var(--q-ink);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 20px 20px;position:relative;}
@@ -394,6 +391,32 @@
     .marquee-track.r3{animation-duration:150s;}
     .quiz-cta{font-size:clamp(.9rem,4.3vw,1.02rem);white-space:nowrap;}
     .sticky-cta a{white-space:nowrap;}
+
+    /* ===== Hero-Umbau 15.09. (Freddy: mittig, Trust + Logos im ersten Blick, Karte eingeklappt) ===== */
+    .quiz-card{scroll-margin-top:16px;}
+    .quiz-open{display:none;width:100%;font-family:var(--font-sans);font-size:clamp(.92rem,4.2vw,1.02rem);line-height:1.3;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--green-bright),var(--green) 55%,var(--green-deep));border:none;border-radius:13px;padding:16px 14px;cursor:pointer;box-shadow:0 10px 24px -8px rgba(22,163,74,.55);text-wrap:balance;transition:transform .12s,box-shadow .2s;}
+    .quiz-open:hover{transform:translateY(-1px);box-shadow:0 14px 28px -8px rgba(22,163,74,.6);}
+    .quiz-open:active{transform:scale(.985);}
+    /* Grid-Items dürfen schmaler als ihr Inhalt werden – sonst sprengt das Logo-Laufband (max-content) die Seite */
+    .hero .container > *{min-width:0;}
+    .hero .logos{padding:0;margin:0;min-width:0;max-width:100%;overflow:hidden;}
+    .hero .logos-label{margin-bottom:14px;}
+    @media(max-width:1023px){
+      .topbar .container{justify-content:center;}
+      .hero{padding-top:84px;}
+      .hero .container{gap:24px;}
+      .hero-copy{text-align:center;}
+      .hero h1{margin:14px 0 10px;}
+      .hero-sub{margin-left:auto;margin-right:auto;}
+      .trust-strip.in-copy{justify-content:center;gap:8px 16px;margin-top:16px;}
+      .quiz-card.is-collapsed .quiz-head{padding-bottom:0;border-bottom:none;margin-bottom:14px;}
+      .quiz-card.is-collapsed .quiz-progress,.quiz-card.is-collapsed #lead-form{display:none;}
+      .quiz-card.is-collapsed .quiz-open{display:block;}
+    }
+    @media(min-width:768px) and (max-width:1023px){.topbar .container{justify-content:space-between;}}
+    @media(min-width:1024px){
+      .hero .logos{grid-column:1/-1;padding:10px 0 0;}
+    }
   </style>
 </head>
 <body>
@@ -416,7 +439,7 @@
     </div>
     <div class="container">
       <div class="hero-copy">
-        <span class="hero-badge"><span class="dot"></span> Für GaLaBau-Geschäftsführer</span>
+        <span class="hero-badge"><span class="dot"></span> Für Geschäftsführer im GaLaBau</span>
         <h1>Wechselbereite GaLaBau-Fachkräfte. <span class="ital">In ø 45 Tagen eingestellt.</span></h1>
         <p class="hero-sub">Dein <b>kostenloses Beratungsgespräch</b>: Fachkräfte aus deiner Region – <b>ohne Zeitaufwand für dich</b>.</p>
         <div class="trust-strip in-copy">
@@ -427,13 +450,14 @@
       </div>
 
       <!-- ===== QUIZ CARD ===== -->
-      <div class="quiz-card" id="quiz">
+      <div class="quiz-card is-collapsed" id="quiz">
         <div class="quiz-head">
           <div class="quiz-head-titles">
             <div class="t1">Kostenloses Beratungsgespräch</div>
             <div class="t2">60 Sekunden Anfrage · <b>Rückruf in 24–48&nbsp;h</b></div>
           </div>
         </div>
+        <button type="button" class="quiz-open" id="quiz-open">Jetzt qualifizierte Fachkräfte finden&nbsp;→</button>
 
         <div class="quiz-progress" id="quiz-progress">
           <div class="quiz-progress-top">
@@ -563,16 +587,8 @@
         </div>
       </div>
 
-      <div class="trust-strip under-card">
-        <span class="trust-item"><span class="stars">★★★★★</span> <b>4,9</b> auf Google</span>
-        <span class="trust-item"><b>600+</b>&nbsp;GaLaBau-Betriebe</span>
-        <span class="trust-item"><b>30.000+</b>&nbsp;Fachkräfte</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== LOGOS ===== -->
-  <div class="logos">
+      <!-- ===== LOGOS (im Hero, damit sie im ersten Blick sichtbar sind) ===== -->
+      <div class="logos">
     <div class="logos-label">Diese Betriebe vertrauen GreenCareers</div>
     <div class="marquee"><div class="marquee-track" id="marquee-track">
         <div class="logo-chip"><img src="assets/logos/kunden/knappmann-rheinland.webp" alt="Knappmann Rheinland" loading="lazy" decoding="async"></div>
@@ -655,7 +671,9 @@
         <div class="logo-chip"><img src="assets/logos/kunden/harms.webp" alt="Harms Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
         <div class="logo-chip"><img src="assets/logos/kunden/l-ders-l-ders.webp" alt="Lüders & Lüders" loading="lazy" decoding="async"></div>
     </div></div>
-  </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ===== ERFOLGSMELDUNGEN ===== -->
   <div class="wins">
@@ -910,18 +928,9 @@
       return out;
     })();
 
-    // Messe-Variante (Meta-Geofence GaLaBau 2026, 16.–18.09.): utm_campaign enthält "messe" → Hero spricht den Messebesucher an.
-    // Nur Texte im Hero, kein Eingriff in Quiz, Tracking oder Webhook.
+    // Messe-Erkennung (Meta-Geofence GaLaBau 2026): utm_campaign enthält "messe" → nur die Lead-Quelle wird markiert.
+    // Hero-Texte bleiben für alle gleich (Freddy 15.09.: kein Ortsbezug, kein Messe-Badge).
     var IS_MESSE = /messe/i.test(String(trackingParams.utm_campaign || ''));
-    (function(){
-      try {
-        if (!IS_MESSE) return;
-        var badge = document.querySelector('.hero-badge');
-        if (badge) badge.innerHTML = '<span class="dot"></span> Für Geschäftsführer auf der GaLaBau 2026';
-        var sub = document.querySelector('.hero-sub');
-        if (sub) sub.innerHTML = 'Du bist gerade in Nürnberg? Dein <b>kostenloses Beratungsgespräch</b>: wechselbereite Fachkräfte aus deiner Region – <b>ohne Zeitaufwand für dich</b>.';
-      } catch(e){}
-    })();
 
     function getCookie(name){
       try {
@@ -1038,8 +1047,35 @@
     }
 
     trackFunnelEvent('lp_view', null);
-    trackFunnelEvent('slide_view', '1');
-    trackPixelEvent('Quiz_Step_1_Viewed', { landingpage: LANDINGPAGE_ID });
+
+    /* ---- Eingeklappte Karte (Mobil): erst Öffnen-Button, dann Frage 1 ---- */
+    var quizOpenBtn = document.getElementById('quiz-open');
+    var quizOpened = false;
+    function quizIsCollapsed(){
+      return quizCard.classList.contains('is-collapsed') && window.matchMedia('(max-width:1023px)').matches;
+    }
+    function fireStep1Viewed(){
+      trackFunnelEvent('slide_view', '1');
+      trackPixelEvent('Quiz_Step_1_Viewed', { landingpage: LANDINGPAGE_ID });
+    }
+    function openQuiz(source){
+      if (!quizIsCollapsed()) return false;
+      quizCard.classList.remove('is-collapsed');
+      if (!quizOpened) {
+        quizOpened = true;
+        trackFunnelEvent('quiz_open', source || 'card');
+        trackPixelEvent('Quiz_Opened', { landingpage: LANDINGPAGE_ID, cta_location: source || 'card' });
+        fireStep1Viewed();
+      }
+      return true;
+    }
+    if (quizOpenBtn) {
+      quizOpenBtn.addEventListener('click', function(){
+        openQuiz('hero_card');
+        setTimeout(function(){ quizCard.scrollIntoView({ behavior:'smooth', block:'start' }); }, 60);
+      });
+    }
+    if (!quizIsCollapsed()) fireStep1Viewed();
 
     /* ---- STEP 5: PLZ (Ort-Lookup nur für Bestätigung + Sales-Kontext) ---- */
     var plzInput = document.getElementById('quiz-plz');
@@ -1281,6 +1317,7 @@
       el.addEventListener('click', function(e){
         e.preventDefault();
         trackPixelEvent(el.id === 'sticky-cta-link' ? 'Sticky_CTA_Clicked' : 'Quiz_Started', { landingpage: LANDINGPAGE_ID, cta_location: el.id || 'cta' });
+        openQuiz(el.id || 'cta');
         quizCard.scrollIntoView({ behavior:'smooth', block:'start' });
       });
     });
@@ -1289,10 +1326,9 @@
     var heroSection = document.getElementById('top');
     function updateStickyCta(){
       if (window.__gcSubmitted) { stickyCta.classList.remove('visible'); return; }
-      var heroBottom = heroSection.getBoundingClientRect().bottom;
       var quizRect = quizCard.getBoundingClientRect();
       var quizVisible = quizRect.top < window.innerHeight * .75 && quizRect.bottom > 100;
-      stickyCta.classList.toggle('visible', heroBottom < 0 && !quizVisible);
+      stickyCta.classList.toggle('visible', quizRect.bottom < 0 && !quizVisible);
     }
     window.addEventListener('scroll', updateStickyCta, { passive:true });
     updateStickyCta();
