@@ -417,6 +417,81 @@
     @media(min-width:1024px){
       .hero .logos{grid-column:1/-1;padding:10px 0 0;}
     }
+
+    /* ===== Tiefe (Freddy 16.09.: „wirkt zweidimensional“) – nur Verläufe, Schatten und Transform/Opacity-Animationen, keine Bilder, keine Skripte ===== */
+    /* Hero: Lichtquelle hinter der Headline, feine Körnung gegen flache Verläufe, zwei langsam treibende Leuchtflächen */
+    .hero-bg{background:
+      radial-gradient(60% 38% at 50% 26%,rgba(110,231,160,.16),transparent 70%),
+      radial-gradient(120% 70% at 85% -10%,rgba(34,197,94,.18),transparent 60%),
+      radial-gradient(90% 60% at -10% 40%,rgba(22,101,52,.28),transparent 60%),
+      linear-gradient(175deg,#10281B 0%,var(--bg) 60%);}
+    .hero-bg::before{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.09;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px 180px;}
+    .hero-bg .orb{position:absolute;border-radius:50%;pointer-events:none;z-index:1;will-change:transform;}
+    .hero-bg .orb-a{width:70vw;height:70vw;max-width:520px;max-height:520px;left:-22vw;top:-8vw;background:radial-gradient(circle,rgba(34,197,94,.30),rgba(34,197,94,0) 65%);animation:orbA 22s ease-in-out infinite alternate;}
+    .hero-bg .orb-b{width:62vw;height:62vw;max-width:470px;max-height:470px;right:-24vw;top:28%;background:radial-gradient(circle,rgba(110,231,160,.20),rgba(110,231,160,0) 65%);animation:orbB 27s ease-in-out infinite alternate;}
+    @keyframes orbA{to{transform:translate3d(14vw,9vh,0);}}
+    @keyframes orbB{to{transform:translate3d(-12vw,-9vh,0);}}
+    .hero h1{text-shadow:0 2px 24px rgba(0,0,0,.35);}
+    .hero h1 .ital{text-shadow:0 0 30px rgba(110,231,160,.45),0 2px 24px rgba(0,0,0,.3);}
+    .hero-badge{box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 10px 26px -14px rgba(0,0,0,.7);}
+    /* Quiz-Karte: schwebt (Lichtkante oben, tiefer Schatten, grünes Streulicht darunter) */
+    .quiz-card{box-shadow:inset 0 1px 0 #fff,0 34px 70px -28px rgba(0,0,0,.65),0 26px 50px -30px rgba(34,197,94,.45),0 0 0 1px rgba(255,255,255,.35);}
+    .quiz-option{box-shadow:inset 0 1px 0 #fff,0 1px 0 #E0DBCF,0 6px 14px -10px rgba(18,40,26,.35);}
+    .quiz-option:hover{transform:translateY(-1px);}
+    .quiz-progress-fill{box-shadow:0 0 12px rgba(34,197,94,.55);}
+    /* Buttons: Facette (Lichtkante oben, dunkle Kante unten) + Glanzlauf */
+    .quiz-open,.quiz-cta,.btn-primary,.sticky-cta a,.success-open{box-shadow:inset 0 1px 0 rgba(255,255,255,.3),inset 0 -2px 0 rgba(0,0,0,.16),0 14px 30px -10px rgba(22,163,74,.65);text-shadow:0 1px 1px rgba(0,0,0,.18);}
+    .quiz-open,.btn-primary{position:relative;overflow:hidden;}
+    .quiz-open::after,.btn-primary::after{content:'';position:absolute;top:-40%;bottom:-40%;left:-60%;width:34%;background:linear-gradient(105deg,transparent 0%,rgba(255,255,255,.30) 50%,transparent 100%);transform:skewX(-18deg);animation:shine 5.5s ease-in-out infinite;pointer-events:none;}
+    @keyframes shine{0%,70%{transform:translateX(0) skewX(-18deg);}100%{transform:translateX(560%) skewX(-18deg);}}
+    /* Logo-Wand: leicht gekipptes Förderband, hintere Reihen zurückgenommen, Chips mit Schatten */
+    .logos-belt{transform:perspective(1100px) rotateX(-7deg);transform-origin:50% 100%;}
+    .logos-belt .marquee:nth-child(1){opacity:.8;}
+    .logos-belt .marquee:nth-child(2){opacity:.9;}
+    .marquee{padding:14px 0;margin:-14px 0;}
+    .logos .marquee + .marquee{margin-top:-16px;}
+    .logo-chip{box-shadow:0 12px 26px -12px rgba(0,0,0,.75),inset 0 -2px 0 rgba(0,0,0,.05);}
+    .win-chip{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border-color:rgba(255,255,255,.13);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 14px 30px -18px rgba(0,0,0,.9);}
+    /* Helle Bänder wie eingelegte Blätter (Innenschatten oben/unten, Lichtpunkt oben) */
+    .band-light{position:relative;background:radial-gradient(120% 50% at 50% 0%,#FFFFFF 0%,#F6F4ED 55%);box-shadow:inset 0 26px 40px -34px rgba(18,40,26,.35),inset 0 -26px 40px -34px rgba(18,40,26,.25);}
+    /* Decks: gestapelte Blätter mit Tönung, Aufklappen kippt leicht aus der Tiefe */
+    .band-light .deck-item{box-shadow:inset 0 1px 0 #fff,0 24px 48px -28px rgba(18,40,26,.35),0 2px 6px -4px rgba(18,40,26,.12);}
+    .deck.is-collapsed .deck-item:nth-child(2){background:#F7F5EF;}
+    .deck.is-collapsed .deck-item:nth-child(3){background:#F1EEE6;}
+    .deck.is-collapsed .deck-item:nth-child(4){background:#EBE8DF;}
+    .deck.is-collapsed .deck-item:nth-child(n+2){box-shadow:0 -10px 26px -12px rgba(18,40,26,.22);}
+    .deck-stack{perspective:1200px;}
+    @keyframes deckIn{from{opacity:0;transform:translateY(18px) rotateX(-7deg);}to{opacity:1;transform:none;}}
+    /* Netzwerk-Karte: Streulicht oben, extrudierte Basisplatte, Verlaufsfüllung, Punkt-Glühen, sanftes Schweben; Kennzahlen als Glaskacheln */
+    #netzwerk{background:radial-gradient(90% 55% at 50% 0%,rgba(34,197,94,.10),transparent 60%);}
+    .network-map::before{content:'';position:absolute;left:8%;right:8%;bottom:-6%;height:38%;background:radial-gradient(50% 60% at 50% 100%,rgba(34,197,94,.28),transparent 70%);pointer-events:none;}
+    .network-map svg{position:relative;animation:mapFloat 7s ease-in-out infinite;}
+    @keyframes mapFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
+    .country{fill:url(#landGrad);}
+    .country-shadow{fill:#07120B;stroke:none;opacity:.92;}
+    .city-glow{fill:rgba(34,197,94,.22);}
+    .network-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    .network-stat{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px 16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 18px 36px -24px rgba(0,0,0,.9);}
+    /* Testimonials + Google-Badge */
+    .band-light .testi{box-shadow:inset 0 1px 0 #fff,0 26px 54px -30px rgba(18,40,26,.4),0 2px 6px -4px rgba(18,40,26,.12);}
+    .testi-avatar{box-shadow:0 0 0 3px #fff,0 0 0 4.5px rgba(22,163,74,.35),0 8px 18px -8px rgba(22,163,74,.7);}
+    .google-badge{display:inline-flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px 10px;padding:12px 20px;border-radius:20px;line-height:1.4;}
+    .gb-rating,.gb-meta{white-space:nowrap;}
+    .gb-stars{color:#FBBF24;letter-spacing:1px;}
+    .gb-sep{display:none;color:#B9B4A6;}
+    @media(min-width:768px){.google-badge{border-radius:999px;}.gb-sep{display:inline;}}
+    .band-light .google-badge{box-shadow:inset 0 1px 0 #fff,0 14px 32px -20px rgba(18,40,26,.35);}
+    /* Abschluss: mehr Luft nach dem hellen Band, Panel mit Streulicht und Tiefe, Button einzeilig */
+    #abschluss{padding-top:52px;}
+    @media(min-width:768px){#abschluss{padding-top:80px;}}
+    .final-cta{background:radial-gradient(70% 60% at 50% 0%,rgba(34,197,94,.22),transparent 60%),linear-gradient(160deg,#143B26,var(--bg-2) 70%);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 44px 90px -44px rgba(0,0,0,.9),0 30px 60px -40px rgba(34,197,94,.35);}
+    .final-cta::before,.final-cta::after{z-index:0;}
+    .final-cta::after{content:'';position:absolute;left:-90px;bottom:-110px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(110,231,160,.16),transparent 70%);}
+    .final-cta > *{position:relative;z-index:1;}
+    .final-cta h2{text-shadow:0 2px 20px rgba(0,0,0,.35);}
+    @media(max-width:767px){.final-cta .btn-primary{display:block;width:100%;white-space:nowrap;font-size:clamp(.86rem,3.9vw,1.05rem);padding:17px 12px;}}
+    .reveal{transform:translateY(16px) scale(.985);}
+    @media (prefers-reduced-motion: reduce){.hero-bg .orb,.network-map svg,.quiz-open::after,.btn-primary::after{animation:none;}}
   </style>
 </head>
 <body>
@@ -432,6 +507,7 @@
   <!-- ===== HERO ===== -->
   <section class="hero" id="top">
     <div class="hero-bg">
+      <span class="orb orb-a" aria-hidden="true"></span><span class="orb orb-b" aria-hidden="true"></span>
       <picture>
         <source media="(min-width: 768px)" srcset="assets/hero-desktop.jpg">
         <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" decoding="async">
@@ -590,6 +666,7 @@
       <!-- ===== LOGOS (im Hero, damit sie im ersten Blick sichtbar sind) ===== -->
       <div class="logos">
     <div class="logos-label">Diese Betriebe vertrauen GreenCareers</div>
+    <div class="logos-belt">
     <div class="marquee"><div class="marquee-track" id="marquee-track">
         <div class="logo-chip"><img src="assets/logos/kunden/knappmann-rheinland.webp" alt="Knappmann Rheinland" loading="lazy" decoding="async"></div>
         <div class="logo-chip"><img src="assets/logos/kunden/jakober-garten-landschafts-sportplatzbau.webp" alt="Jakober Garten-, Landschafts- und Sportplatzbau" loading="lazy" decoding="async"></div>
@@ -671,6 +748,7 @@
         <div class="logo-chip"><img src="assets/logos/kunden/harms.webp" alt="Harms Garten- und Landschaftsbau" loading="lazy" decoding="async"></div>
         <div class="logo-chip"><img src="assets/logos/kunden/l-ders-l-ders.webp" alt="Lüders & Lüders" loading="lazy" decoding="async"></div>
     </div></div>
+    </div>
       </div>
     </div>
   </section>
@@ -751,24 +829,26 @@
         </div>
         <div class="network-map reveal">
           <svg viewBox="0 0 460 540" role="img" aria-label="Karte von Deutschland, Österreich und der Schweiz mit aktiven Fachkräfte-Standorten">
+            <defs><linearGradient id="landGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6EE7A0" stop-opacity=".24"/><stop offset="1" stop-color="#22C55E" stop-opacity=".05"/></linearGradient></defs>
+            <g class="country-base" transform="translate(4 10)" aria-hidden="true"><path class="country-shadow" d="M156.6 17.6 157.2 39.2 193.0 52.1 192.6 71.9 228.6 61.4 248.5 46.2 288.5 68.2 305.2 85.9 313.5 114.2 303.6 129.1 316.5 148.9 325.2 178.7 322.5 197.9 337.0 233.4 321.2 239.3 311.9 232.9 303.0 243.4 277.6 254.2 264.4 268.1 238.7 280.2 244.9 296.8 248.6 320.2 266.7 333.6 286.7 357.6 274.2 383.2 261.5 390.3 266.5 426.6 263.2 436.0 252.1 424.6 235.2 422.9 209.9 432.9 178.6 430.5 173.6 445.2 155.7 429.8 145.0 432.8 107.0 415.8 99.8 427.9 69.6 427.5 74.1 387.9 92.0 349.7 41.0 339.5 24.3 324.9 26.3 300.5 19.2 287.9 23.3 250.3 17.3 192.0 38.6 191.9 47.6 171.0 56.4 120.0 49.8 101.2 56.7 89.4 86.3 86.4 92.8 98.7 116.9 71.2 108.8 50.3 107.2 18.8 133.9 26.1 156.6 17.6Z"/><path class="country-shadow" d="M406.5 399.5 403.8 422.3 383.9 422.4 390.7 434.4 379.0 470.3 372.2 479.7 341.3 481.1 323.4 493.7 294.1 489.4 243.5 475.0 235.6 455.6 200.6 465.3 196.5 475.9 175.0 468.0 157.0 466.5 140.9 456.3 146.3 442.7 145.0 432.8 155.7 429.8 173.6 445.2 178.6 430.5 209.9 432.9 235.2 422.9 252.1 424.6 263.2 436.0 266.5 426.6 261.5 390.3 274.2 383.2 286.7 357.6 313.0 375.5 332.9 352.7 345.4 348.5 372.9 365.5 389.5 362.6 405.8 373.2 403.0 380.2 406.5 399.5Z"/><path class="country-shadow" d="M145.0 432.8 146.3 442.7 140.9 456.3 157.0 466.5 175.0 468.0 172.2 490.8 156.6 500.2 130.4 493.2 122.7 515.7 105.9 517.4 99.7 508.6 79.9 527.5 62.8 530.1 47.6 518.2 35.4 493.8 18.5 502.5 19.0 477.3 44.9 446.0 43.8 431.9 59.9 437.0 69.6 427.5 99.8 427.9 107.0 415.8 145.0 432.8Z"/></g>
             <path class="country" d="M156.6 17.6 157.2 39.2 193.0 52.1 192.6 71.9 228.6 61.4 248.5 46.2 288.5 68.2 305.2 85.9 313.5 114.2 303.6 129.1 316.5 148.9 325.2 178.7 322.5 197.9 337.0 233.4 321.2 239.3 311.9 232.9 303.0 243.4 277.6 254.2 264.4 268.1 238.7 280.2 244.9 296.8 248.6 320.2 266.7 333.6 286.7 357.6 274.2 383.2 261.5 390.3 266.5 426.6 263.2 436.0 252.1 424.6 235.2 422.9 209.9 432.9 178.6 430.5 173.6 445.2 155.7 429.8 145.0 432.8 107.0 415.8 99.8 427.9 69.6 427.5 74.1 387.9 92.0 349.7 41.0 339.5 24.3 324.9 26.3 300.5 19.2 287.9 23.3 250.3 17.3 192.0 38.6 191.9 47.6 171.0 56.4 120.0 49.8 101.2 56.7 89.4 86.3 86.4 92.8 98.7 116.9 71.2 108.8 50.3 107.2 18.8 133.9 26.1 156.6 17.6Z"/>
             <path class="country" d="M406.5 399.5 403.8 422.3 383.9 422.4 390.7 434.4 379.0 470.3 372.2 479.7 341.3 481.1 323.4 493.7 294.1 489.4 243.5 475.0 235.6 455.6 200.6 465.3 196.5 475.9 175.0 468.0 157.0 466.5 140.9 456.3 146.3 442.7 145.0 432.8 155.7 429.8 173.6 445.2 178.6 430.5 209.9 432.9 235.2 422.9 252.1 424.6 263.2 436.0 266.5 426.6 261.5 390.3 274.2 383.2 286.7 357.6 313.0 375.5 332.9 352.7 345.4 348.5 372.9 365.5 389.5 362.6 405.8 373.2 403.0 380.2 406.5 399.5Z"/>
             <path class="country" d="M145.0 432.8 146.3 442.7 140.9 456.3 157.0 466.5 175.0 468.0 172.2 490.8 156.6 500.2 130.4 493.2 122.7 515.7 105.9 517.4 99.7 508.6 79.9 527.5 62.8 530.1 47.6 518.2 35.4 493.8 18.5 502.5 19.0 477.3 44.9 446.0 43.8 431.9 59.9 437.0 69.6 427.5 99.8 427.9 107.0 415.8 145.0 432.8Z"/>
             <g>
-              <circle class="city-ring" cx="159" cy="97.4" r="7" style="animation-delay:0s"/><circle class="city-dot" cx="159" cy="97.4" r="4.5"/><circle class="city-core" cx="159" cy="97.4" r="1.6"/>
-              <circle class="city-ring" cx="279.7" cy="154.8" r="7" style="animation-delay:.5s"/><circle class="city-dot" cx="279.7" cy="154.8" r="4.5"/><circle class="city-core" cx="279.7" cy="154.8" r="1.6"/>
-              <circle class="city-ring" cx="51.7" cy="242.7" r="7" style="animation-delay:1s"/><circle class="city-dot" cx="51.7" cy="242.7" r="4.5"/><circle class="city-core" cx="51.7" cy="242.7" r="1.6"/>
-              <circle class="city-ring" cx="149.8" cy="163.1" r="7" style="animation-delay:1.5s"/><circle class="city-dot" cx="149.8" cy="163.1" r="4.5"/><circle class="city-core" cx="149.8" cy="163.1" r="1.6"/>
-              <circle class="city-ring" cx="112.6" cy="288.9" r="7" style="animation-delay:2s"/><circle class="city-dot" cx="112.6" cy="288.9" r="4.5"/><circle class="city-core" cx="112.6" cy="288.9" r="1.6"/>
-              <circle class="city-ring" cx="130.3" cy="363" r="7" style="animation-delay:.8s"/><circle class="city-dot" cx="130.3" cy="363" r="4.5"/><circle class="city-core" cx="130.3" cy="363" r="1.6"/>
-              <circle class="city-ring" cx="215.3" cy="398.6" r="7" style="animation-delay:1.8s"/><circle class="city-dot" cx="215.3" cy="398.6" r="4.5"/><circle class="city-core" cx="215.3" cy="398.6" r="1.6"/>
-              <circle class="city-ring" cx="291.8" cy="236.6" r="7" style="animation-delay:2.4s"/><circle class="city-dot" cx="291.8" cy="236.6" r="4.5"/><circle class="city-core" cx="291.8" cy="236.6" r="1.6"/>
-              <circle class="city-ring" cx="197.6" cy="325.7" r="7" style="animation-delay:.3s"/><circle class="city-dot" cx="197.6" cy="325.7" r="4.5"/><circle class="city-core" cx="197.6" cy="325.7" r="1.6"/>
-              <circle class="city-ring" cx="384.9" cy="394.7" r="7" style="animation-delay:1.2s"/><circle class="city-dot" cx="384.9" cy="394.7" r="4.5"/><circle class="city-core" cx="384.9" cy="394.7" r="1.6"/>
-              <circle class="city-ring" cx="107.6" cy="441.5" r="7" style="animation-delay:2.1s"/><circle class="city-dot" cx="107.6" cy="441.5" r="4.5"/><circle class="city-core" cx="107.6" cy="441.5" r="1.6"/>
-              <circle class="city-ring" cx="75.4" cy="185.9" r="7" style="animation-delay:1.6s"/><circle class="city-dot" cx="75.4" cy="185.9" r="4.5"/><circle class="city-core" cx="75.4" cy="185.9" r="1.6"/>
-              <circle class="city-ring" cx="352" cy="458.2" r="7" style="animation-delay:2.7s"/><circle class="city-dot" cx="352" cy="458.2" r="4.5"/><circle class="city-core" cx="352" cy="458.2" r="1.6"/>
-              <circle class="city-ring" cx="69.1" cy="464.8" r="7" style="animation-delay:.9s"/><circle class="city-dot" cx="69.1" cy="464.8" r="4.5"/><circle class="city-core" cx="69.1" cy="464.8" r="1.6"/>
+              <circle class="city-glow" cx="159" cy="97.4" r="12"/><circle class="city-ring" cx="159" cy="97.4" r="7" style="animation-delay:0s"/><circle class="city-dot" cx="159" cy="97.4" r="4.5"/><circle class="city-core" cx="159" cy="97.4" r="1.6"/>
+              <circle class="city-glow" cx="279.7" cy="154.8" r="12"/><circle class="city-ring" cx="279.7" cy="154.8" r="7" style="animation-delay:.5s"/><circle class="city-dot" cx="279.7" cy="154.8" r="4.5"/><circle class="city-core" cx="279.7" cy="154.8" r="1.6"/>
+              <circle class="city-glow" cx="51.7" cy="242.7" r="12"/><circle class="city-ring" cx="51.7" cy="242.7" r="7" style="animation-delay:1s"/><circle class="city-dot" cx="51.7" cy="242.7" r="4.5"/><circle class="city-core" cx="51.7" cy="242.7" r="1.6"/>
+              <circle class="city-glow" cx="149.8" cy="163.1" r="12"/><circle class="city-ring" cx="149.8" cy="163.1" r="7" style="animation-delay:1.5s"/><circle class="city-dot" cx="149.8" cy="163.1" r="4.5"/><circle class="city-core" cx="149.8" cy="163.1" r="1.6"/>
+              <circle class="city-glow" cx="112.6" cy="288.9" r="12"/><circle class="city-ring" cx="112.6" cy="288.9" r="7" style="animation-delay:2s"/><circle class="city-dot" cx="112.6" cy="288.9" r="4.5"/><circle class="city-core" cx="112.6" cy="288.9" r="1.6"/>
+              <circle class="city-glow" cx="130.3" cy="363" r="12"/><circle class="city-ring" cx="130.3" cy="363" r="7" style="animation-delay:.8s"/><circle class="city-dot" cx="130.3" cy="363" r="4.5"/><circle class="city-core" cx="130.3" cy="363" r="1.6"/>
+              <circle class="city-glow" cx="215.3" cy="398.6" r="12"/><circle class="city-ring" cx="215.3" cy="398.6" r="7" style="animation-delay:1.8s"/><circle class="city-dot" cx="215.3" cy="398.6" r="4.5"/><circle class="city-core" cx="215.3" cy="398.6" r="1.6"/>
+              <circle class="city-glow" cx="291.8" cy="236.6" r="12"/><circle class="city-ring" cx="291.8" cy="236.6" r="7" style="animation-delay:2.4s"/><circle class="city-dot" cx="291.8" cy="236.6" r="4.5"/><circle class="city-core" cx="291.8" cy="236.6" r="1.6"/>
+              <circle class="city-glow" cx="197.6" cy="325.7" r="12"/><circle class="city-ring" cx="197.6" cy="325.7" r="7" style="animation-delay:.3s"/><circle class="city-dot" cx="197.6" cy="325.7" r="4.5"/><circle class="city-core" cx="197.6" cy="325.7" r="1.6"/>
+              <circle class="city-glow" cx="384.9" cy="394.7" r="12"/><circle class="city-ring" cx="384.9" cy="394.7" r="7" style="animation-delay:1.2s"/><circle class="city-dot" cx="384.9" cy="394.7" r="4.5"/><circle class="city-core" cx="384.9" cy="394.7" r="1.6"/>
+              <circle class="city-glow" cx="107.6" cy="441.5" r="12"/><circle class="city-ring" cx="107.6" cy="441.5" r="7" style="animation-delay:2.1s"/><circle class="city-dot" cx="107.6" cy="441.5" r="4.5"/><circle class="city-core" cx="107.6" cy="441.5" r="1.6"/>
+              <circle class="city-glow" cx="75.4" cy="185.9" r="12"/><circle class="city-ring" cx="75.4" cy="185.9" r="7" style="animation-delay:1.6s"/><circle class="city-dot" cx="75.4" cy="185.9" r="4.5"/><circle class="city-core" cx="75.4" cy="185.9" r="1.6"/>
+              <circle class="city-glow" cx="352" cy="458.2" r="12"/><circle class="city-ring" cx="352" cy="458.2" r="7" style="animation-delay:2.7s"/><circle class="city-dot" cx="352" cy="458.2" r="4.5"/><circle class="city-core" cx="352" cy="458.2" r="1.6"/>
+              <circle class="city-glow" cx="69.1" cy="464.8" r="12"/><circle class="city-ring" cx="69.1" cy="464.8" r="7" style="animation-delay:.9s"/><circle class="city-dot" cx="69.1" cy="464.8" r="4.5"/><circle class="city-core" cx="69.1" cy="464.8" r="1.6"/>
             </g>
           </svg>
         </div>
@@ -803,14 +883,14 @@
           <div class="testi-foot"><span class="testi-avatar">BD</span><div><div class="testi-name">Boas Diehl</div><div class="testi-verified">✓ Verifizierte Google-Bewertung</div></div></div>
         </div>
       </div>
-      <div style="text-align:center;"><span class="google-badge reveal">Google <b>4,9 / 5</b> <span style="color:#FBBF24;letter-spacing:1px;">★★★★★</span> · 600+ GaLaBau-Betriebe · 900+ Platzierungen</span></div>
+      <div style="text-align:center;"><span class="google-badge reveal"><span class="gb-rating">Google <b>4,9 / 5</b> <span class="gb-stars">★★★★★</span></span><span class="gb-sep">·</span><span class="gb-meta">600+ GaLaBau-Betriebe · 900+ Platzierungen</span></span></div>
     </div>
   </section>
 
   </div>
 
   <!-- ===== FINAL CTA ===== -->
-  <section id="abschluss" style="padding-top:10px;">
+  <section id="abschluss">
     <div class="container">
       <div class="final-cta reveal">
         <h2>Deine nächste Einstellung – <span class="ital">in ø 45 Tagen.</span></h2>
